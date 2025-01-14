@@ -1,0 +1,11 @@
+In raytracing, points and vectors are both essential but serve distinct purposes in 3D space, which is why we need
+x, y and z coordinates for both.
+
+Here's why each is important and how they differ:
+
+ A point is a fixed position in 3D space:
+ sphere center, camera position, light position. 3D space requires three coordinates to describe any location accurately.
+
+ A vector defines a direction, not a location.
+
+Field of View: size of the viewport and how far away they are from camera
