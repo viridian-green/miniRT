@@ -1,5 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
+/*   Updated: 2025/01/14 14:15:47 by ademarti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 #define MINIRT_H
+
+#include <fcntl.h>
+#include "minilibx-linux/mlx_int.h"
+#include "get_next_line/get_next_line.h"
+// #include "minilibx-linus/mlx.h"
 
 typedef struct s_vector
 {
@@ -66,7 +83,7 @@ typedef struct s_cy
 	t_vector axis;
 	float diameter;
 	float height;
-	t_color;
+	t_color color;
 
 } t_cy;
 
