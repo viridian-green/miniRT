@@ -70,4 +70,11 @@ typedef struct s_cy
 
 } t_cy;
 
+typedef struct s_scene
+{
+	void	*mlx_ptr;
+	void	*win;
+} t_scene;
+
+
 #endif
