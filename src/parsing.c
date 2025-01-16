@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/14 16:05:00 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:41:09 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void split_three(char **line, t_scene *scene)
 {
 	char **split_line;
-	split_line = ft_split(line, ',');
-	scene.ambient.color->r = split_line[0];
-
+	split_line = ft_split(*line, ',');
+	scene->ambient->color.r = ft_atoi(split_line[0]);
+	scene->ambient->color.b = ft_atoi(split_line[1]);
+	scene->ambient->color.g = ft_atoi(split_line[2]);
 }
 
 void parse_ambient(char *line, t_scene *scene)
@@ -25,14 +26,14 @@ void parse_ambient(char *line, t_scene *scene)
 	char **split_line;
 	split_line = ft_split(line, ' ');
 	scene->ambient->light_ratio = ft_atoi(split_line[1]);
-	split_three(split_line[2], &scene);
+	split_three(&split_line[2], scene);
 }
 
 void parse_camera(char *line, t_scene *scene)
 {
 	char **split_line;
 	split_line = ft_split(line, ' ');
-	// scene->camera->viewpoint = ft_atoi(ft_split(split_line[1], ','));
+	scene->camera->viewpoint = ft_atoi(ft_split(split_line[1], ','));
 	//scene->ambient->color = split_line[1];
 }
 
