@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:57:39 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/16 19:15:32 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:57:14 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*put_in_stash(int fd, char *buffer, char *stash)
 			break ;
 		buffer[bytesread] = '\0';
 		if (!stash)
-			stash = ft_strdup("");
+			stash = ft_strdup_gnl("");
 		temp = stash;
 		stash = ft_strjoin(temp, buffer);
 		free(temp);
@@ -75,14 +75,14 @@ char	*remove_line(char *stash, char *line)
 	if (!stash)
 		return (NULL);
 	temp = (char *)malloc(sizeof(char *) * (
-				ft_strlen(stash) - ft_strlen(line) + 1));
+				ft_strlen_gnl(stash) - ft_strlen_gnl(line) + 1));
 	if (!temp)
 	{
 		free(stash);
 		return (NULL);
 	}
 	j = 0;
-	i = ft_strlen(line);
+	i = ft_strlen_gnl(line);
 	while (stash[i] != '\0')
 		temp[j++] = stash[i++];
 	temp[j] = '\0';

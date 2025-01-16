@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 17:30:58 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/16 19:15:38 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:57:09 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	size = 0;
 	if (!dst)
 		return (0);
-	size = ft_strlen(src);
+	size = ft_strlen_gnl(src);
 	if (!dstsize)
 		return (size);
 	while (src[count] && count < dstsize - 1)
@@ -33,7 +33,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (size);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen_gnl(const char *s)
 {
 	size_t	i;
 
@@ -67,7 +67,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup_gnl(const char *s)
 {
 	char	*dup;
 	size_t	size;
@@ -75,7 +75,7 @@ char	*ft_strdup(const char *s)
 
 	if (!s)
 		return (NULL);
-	size = ft_strlen(s);
+	size = ft_strlen_gnl(s);
 	i = 0;
 	dup = (char *)malloc(sizeof(char) * (size + 1));
 	if (!dup)
@@ -96,7 +96,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	i;
 	size_t	j;
 
-	len_s1_s2 = ft_strlen(s1) + ft_strlen(s2);
+	len_s1_s2 = ft_strlen_gnl(s1) + ft_strlen_gnl(s2);
 	i = 0;
 	j = 0;
 	if (!s1 || !s2)
