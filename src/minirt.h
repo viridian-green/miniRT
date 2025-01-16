@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/16 13:37:37 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:00:02 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ int parsing(char *config_file, t_scene *scene);
 void parse_file(int fd, t_scene *scene);
 void parse_camera(char *line, t_scene *scene);
 void parse_ambient(char *line, t_scene *scene);
+void split_three(char **line, int *one, int *two, int *three);
 
 #endif

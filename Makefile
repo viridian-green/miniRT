@@ -1,6 +1,6 @@
 NAME = minirt
 
-SRCS = src/main.c src/parsing.c get_next_line/get_next_line.c
+SRCS = src/main.c src/parsing.c src/parse_A.c get_next_line/get_next_line.c
 
 OBJS = $(SRCS:.c=.o)
 CC = cc

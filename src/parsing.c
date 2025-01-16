@@ -6,36 +6,126 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/16 13:41:09 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:30:45 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void split_three(char **line, t_scene *scene)
-{
-	char **split_line;
-	split_line = ft_split(*line, ',');
-	scene->ambient->color.r = ft_atoi(split_line[0]);
-	scene->ambient->color.b = ft_atoi(split_line[1]);
-	scene->ambient->color.g = ft_atoi(split_line[2]);
+double ft_atod(const char *str) {
+    double result = 0.0;
+    double decimalPlace = 1.0;
+    int sign = 1;
+    int decimalFound = 0;
+
+    // Handle negative numbers
+    if (*str == '-') {
+        sign = -1;
+        str++;
+    }
+
+    // Process each character
+    while (*str != '\0') {
+        if (*str == '.') {
+            decimalFound = 1;  // Found the decimal point
+        } else if (ft_isdigit(*str)) {
+            int digit = *str - '0';
+
+            if (decimalFound) {
+                decimalPlace *= 0.1;
+                result += digit * decimalPlace;
+            } else {
+                result = result * 10 + digit;
+            }
+        } else {
+            // If non-numeric character, break
+            break;
+        }
+        str++;
+    }
+
+    return result * sign;
 }
 
-void parse_ambient(char *line, t_scene *scene)
+void split_three(char **line, int *one, int *two, int *three)
 {
-	char **split_line;
-	split_line = ft_split(line, ' ');
-	scene->ambient->light_ratio = ft_atoi(split_line[1]);
-	split_three(&split_line[2], scene);
+    char **split_line;
+
+    split_line = ft_split(*line, ',');
+
+	 if (!split_line || !split_line[0] || !split_line[1] || !split_line[2])
+    {
+        fprintf(stderr, "Error: Invalid split_line\n");
+        exit(EXIT_FAILURE); // Handle error appropriately
+    }
+    *one = ft_atoi(split_line[0]);
+    *two = ft_atoi(split_line[1]);
+    *three = ft_atoi(split_line[2]);
 }
+
+int	set_coordinates(char *input_coords, double *x, double *y, double *z)
+{
+	char	**coords;
+
+	coords = ft_split(input_coords, ',');
+	if (!coords)
+		return (-1);
+	*x = ft_atod(coords[0]);
+	*y = ft_atod(coords[1]);
+	*z = ft_atod(coords[2]);
+	return (0);
+}
+
+// void set_viewpoint(char **line, t_scene *scene)
+// {
+// 	printf("hey");
+// 	double x;
+// 	double y;
+// 	double z;
+
+// 	set_coordinates(&line[0], &x, &y, &z);
+// 	// split_three_(&split_line[1]);
+// 	scene->camera->viewpoint.x = 2.00;
+// 	// scene->camera->viewpoint.x = (float)x;
+// 	// printf("%d", x);
+// 	// printf("%f", scene->camera->viewpoint.x);
+// }
 
 void parse_camera(char *line, t_scene *scene)
 {
 	char **split_line;
 	split_line = ft_split(line, ' ');
-	scene->camera->viewpoint = ft_atoi(ft_split(split_line[1], ','));
+	double x;
+	double y;
+	double z;
+	set_coordinates(split_line[1], &x, &y, &z);
+	scene->camera->viewpoint.x = 2.00;
+	// set_viewpoint(&split_line[1], scene);
 	//scene->ambient->color = split_line[1];
 }
+
+// char	**split_three_(char *info)
+// {
+// 	int		i;
+// 	int		comma_count;
+// 	char	**str_arr;
+
+// 	i = -1;
+// 	comma_count = 0;
+// 	while (info[++i])
+// 	{
+// 		if (info[i] == ',')
+// 			comma_count++;
+// 	}
+// 	if (comma_count != 2)
+// 		return (NULL);
+// 	str_arr = ft_split(info, ',');
+// 	if (ft_arr_len(str_arr) != 3)
+// 		return (NULL);
+// 	return (str_arr);
+// }
+
+
 
 void parse_file(int fd, t_scene *scene)
 {
@@ -44,8 +134,8 @@ void parse_file(int fd, t_scene *scene)
 	{
 	if (ft_strncmp(line, "A", 1) == 0)
 		parse_ambient(line, scene);
-	// else if (ft_strncmp(line, "C", 1) == 0)
-	// 	parse_camera(line, scene);
+	 if (ft_strncmp(line, "C", 1) == 0)
+		parse_camera(line, scene);
 	// else if (ft_strncmp(line, "L", 1) == 0)
 	// 	parse_light(line, scene);
 	else if (ft_strncmp(line, "pl", 1) == 0)
