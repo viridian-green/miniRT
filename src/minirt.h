@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/16 15:00:02 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:13:51 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #define MINIRT_H
 
 #include <fcntl.h>
-#include "../minilibx-linux/mlx_int.h"
+#include <stdio.h>
+#include <unistd.h>
 #include "../get_next_line/get_next_line.h"
 #include "../libft/libft.h"
-// #include "minilibx-linus/mlx.h"
 
 typedef struct s_vector
 {

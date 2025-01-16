@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/16 15:30:45 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:13:22 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void split_three(char **line, int *one, int *two, int *three)
 
 	 if (!split_line || !split_line[0] || !split_line[1] || !split_line[2])
     {
-        fprintf(stderr, "Error: Invalid split_line\n");
         exit(EXIT_FAILURE); // Handle error appropriately
     }
     *one = ft_atoi(split_line[0]);
@@ -75,6 +74,18 @@ int	set_coordinates(char *input_coords, double *x, double *y, double *z)
 	*z = ft_atod(coords[2]);
 	return (0);
 }
+void parse_camera(char *line, t_scene *scene)
+{
+	char **split_line;
+	split_line = ft_split(line, ' ');
+	double x;
+	double y;
+	double z;
+	set_coordinates(split_line[1], &x, &y, &z);
+	scene->camera->viewpoint.x = 2.00;
+	// set_viewpoint(&split_line[1], scene);
+	//scene->ambient->color = split_line[1];
+}
 
 // void set_viewpoint(char **line, t_scene *scene)
 // {
@@ -91,18 +102,6 @@ int	set_coordinates(char *input_coords, double *x, double *y, double *z)
 // 	// printf("%f", scene->camera->viewpoint.x);
 // }
 
-void parse_camera(char *line, t_scene *scene)
-{
-	char **split_line;
-	split_line = ft_split(line, ' ');
-	double x;
-	double y;
-	double z;
-	set_coordinates(split_line[1], &x, &y, &z);
-	scene->camera->viewpoint.x = 2.00;
-	// set_viewpoint(&split_line[1], scene);
-	//scene->ambient->color = split_line[1];
-}
 
 // char	**split_three_(char *info)
 // {
