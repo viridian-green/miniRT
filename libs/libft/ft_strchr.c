@@ -6,12 +6,13 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:34 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/05 15:12:31 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/19 14:37:00 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
 char	*ft_strchr(const char *s, int c)
 {
 	unsigned int	i;
@@ -31,3 +32,4 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)&s[i]);
 	return (NULL);
 }
+*/
