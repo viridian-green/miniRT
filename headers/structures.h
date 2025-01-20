@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 15:19:32 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:09:09 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ typedef struct s_point
 	float	z;
 }	t_point;
 
-typedef struct s_ambient
+typedef struct s_ambience
 {
 	int		light_ratio;
 	t_color	color;
-}	t_ambient;
+}	t_ambience;
 
 //FOV: Angle of what you see.
 typedef struct s_camera
@@ -82,10 +82,10 @@ typedef struct s_scene
 {
 	void		*mlx_ptr;
 	void		*win;
-	t_ambient	ambient;
+	t_ambience	ambience;
 	t_camera	camera;
+	t_light light;
 }	t_scene;
 
 #endif
-
 

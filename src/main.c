@@ -6,18 +6,18 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 15:58:02 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:10:44 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-void init_ambience(t_ambient *ambient)
+void init_ambience(t_ambience *ambience)
 {
-	ambient->light_ratio = 0;
-	ambient->color.r = 0;
-	ambient->color.g = 0;
-	ambient->color.b = 0;
+	ambience->light_ratio = 0;
+	ambience->color.r = 0;
+	ambience->color.g = 0;
+	ambience->color.b = 0;
 }
 
 void init_camera(t_camera *camera)
@@ -38,15 +38,15 @@ void init_light(t_light *light)
 {
 	light->diameter = 0;
 	light->color.r = 0;
-	light->color.r = 0;
-	light->color.r = 0;
+	light->color.g = 0;
+	light->color.b = 0;
 }
 
 void init_scene(t_scene *scene)
 {
-	init_ambience(&scene->ambient);
+	init_ambience(&scene->ambience);
 	init_camera(&scene->camera);
-	init_light();
+	init_light(&scene->light);
 	// init_objects();
 }
 

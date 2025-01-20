@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:02:45 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 14:54:43 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:22:37 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,33 @@ void split_int(char **line, int *one, int *two, int *three)
     *three = ft_atoi(split_line[2]);
 }
 
-void set_color(char **line, t_scene *scene)
+// void set_color(char **line, t_color color)
+// {
+// 	int r;
+// 	int g;
+// 	int b;
+// 	split_int(&line[0], &r, &g, &b);
+// 	color.r = r;
+// 	color.g = g;
+// 	color.b = b;
+// }
+
+void set_color(char **line, t_color *color)
 {
-	int r;
-	int g;
-	int b;
-	split_int(&line[0], &r, &g, &b);
-	scene->ambient.color.r = r;
-	scene->ambient.color.g = g;
-	scene->ambient.color.b = b;
+    int r;
+    int g;
+    int b;
+    split_int(&line[0], &r, &g, &b);
+    color->r = r;
+    color->g = g;
+    color->b = b;
 }
 
-void parse_ambient(char *line, t_scene *scene)
+void parse_ambience(char *line, t_scene *scene)
 {
 	char **split_line;
 
 	split_line = ft_split(line, ' ');
-	scene->ambient.light_ratio = ft_atoi(split_line[1]);
-	set_color(&split_line[2], scene);
+	scene->ambience.light_ratio = ft_atoi(split_line[1]);
+	set_color(&split_line[2], &scene->ambience.color);
 }

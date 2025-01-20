@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/20 15:39:34 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:21:11 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@
 
 //Parsing
 int		parsing(char *config_file, t_scene *scene);
-void parse_ambient(char *line, t_scene *scene);
+void parse_ambience(char *line, t_scene *scene);
 void parse_camera(char *line, t_scene *scene);
+void set_color(char **line, t_color *color);
 
 //Utils
 double ft_atof(const char *str);

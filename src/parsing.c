@@ -6,12 +6,22 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 15:38:27 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:26:42 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+void parse_light(char *line, t_scene *scene)
+{
+	char **split_line;
+
+	split_line = ft_split(line, ' ');
+	scene->light.diameter = ft_atoi(split_line[2]);
+	printf("%s", split_line[2]);
+	set_color(&split_line[3], &scene->light.color);
+	printf("%d", scene->light.color.r);
+}
 
 void parse_file(int fd, t_scene *scene)
 {
@@ -20,11 +30,11 @@ void parse_file(int fd, t_scene *scene)
 	while ((line = get_next_line(fd)) != NULL)
 	{
 	if (ft_strncmp(line, "A", 1) == 0)
-		parse_ambient(line, scene);
+		parse_ambience(line, scene);
 	 if (ft_strncmp(line, "C", 1) == 0)
 		parse_camera(line, scene);
-	// else if (ft_strncmp(line, "L", 1) == 0)
-	// 	parse_light(line, scene);
+	else if (ft_strncmp(line, "L", 1) == 0)
+		parse_light(line, scene);
 	 if (ft_strncmp(line, "pl", 1) == 0)
 		printf("you");
 	else if (ft_strncmp(line, "sp", 1) == 0)

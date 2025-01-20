@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:38:17 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 15:56:24 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:32:52 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ int	split_double(char *input_coords, double *x, double *y, double *z)
 	return (0);
 }
 
-int	set_coordinates(char **line, t_scene *scene)
+int	set_coordinates(char **line, t_point *point)
 {
-	double x;
-	double y;
-	double z;
+	double x_;
+	double y_;
+	double z_;
 
-	split_double(line[1], &x, &y, &z);
-	scene->camera.viewpoint.x = x;
-	scene->camera.viewpoint.y = y;
-	scene->camera.viewpoint.z = z;
+	split_double(line[1], &x_, &y_, &z_);
+	point->x = x_;
+	point->y = y_;
+	point->z = z_;
 	return (0);
 }
 int	set_orientation(char **line, t_scene *scene)
@@ -53,7 +53,7 @@ void parse_camera(char *line, t_scene *scene)
 {
 	char **split_line;
 	split_line = ft_split(line, ' ');
-	set_coordinates(&split_line[0], scene);
+	set_coordinates(&split_line[0], &scene->camera.viewpoint);
 	set_orientation(&split_line[1], scene);
 	scene->camera.fov = ft_atoi(split_line[2]);
 }
