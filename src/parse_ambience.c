@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:02:45 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 16:22:37 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:42:41 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,6 @@ void split_int(char **line, int *one, int *two, int *three)
     *two = ft_atoi(split_line[1]);
     *three = ft_atoi(split_line[2]);
 }
-
-// void set_color(char **line, t_color color)
-// {
-// 	int r;
-// 	int g;
-// 	int b;
-// 	split_int(&line[0], &r, &g, &b);
-// 	color.r = r;
-// 	color.g = g;
-// 	color.b = b;
-// }
 
 void set_color(char **line, t_color *color)
 {

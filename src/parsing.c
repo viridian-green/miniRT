@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 16:26:42 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:42:28 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void parse_light(char *line, t_scene *scene)
 void parse_file(int fd, t_scene *scene)
 {
 	char *line;
-	(void)scene;
 	while ((line = get_next_line(fd)) != NULL)
 	{
 	if (ft_strncmp(line, "A", 1) == 0)
