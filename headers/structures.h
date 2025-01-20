@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 14:02:46 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:00:20 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_ambient
 //FOV: Angle of what you see.
 typedef struct s_camera
 {
-	t_point		viewpoint;
+	t_vector		viewpoint;
 	t_vector	orientation;
 	int			fov;
 }	t_camera;
@@ -87,3 +87,5 @@ typedef struct s_scene
 }	t_scene;
 
 #endif
+
+

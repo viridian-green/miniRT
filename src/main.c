@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 13:58:18 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 14:26:28 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void init_camera(t_camera *camera)
 	camera->viewpoint.y = 0;
 	camera->viewpoint.z = 0;
 	camera->orientation.x = 0;
-	camera->viewpoint.y = 0;
-	camera->viewpoint.z = 0;
+	camera->orientation.y = 0;
+	camera->orientation.z = 0;
 }
 
 void init_scene(t_scene *scene)
@@ -49,5 +49,4 @@ int main(int ac, char **av)
 		return 1;
 	init_scene(scene);
 	parsing(av[1], scene);
-	 free(scene);
 }

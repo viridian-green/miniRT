@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/16 18:08:01 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/20 14:50:37 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 
 //Parsing
 int		parsing(char *config_file, t_scene *scene);
-void	parse_file(int fd, t_scene *scene);
-void	parse_camera(char *line, t_scene *scene);
-void	parse_ambient(char *line, t_scene *scene);
-void	split_three(char **line, int *one, int *two, int *three);
+void parse_ambient(char *line, t_scene *scene);
+
+//Utils
+double ft_atof(const char *str);
 
 #endif
