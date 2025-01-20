@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/20 15:39:34 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:43:28 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@
 # include <stdlib.h>
 # include <string.h>
 # include <math.h>
-# include "structures.h"
 # include "../libs/get_next_line/get_next_line.h"
 # include "../libs/libft/libft.h"
-// #include "minilibx-linus/mlx.h"
+# include "structures.h"
+
+void	init_mlx(t_scene *scene);
+void 	cleanup(void);
 
 //Parsing
 int		parsing(char *config_file, t_scene *scene);

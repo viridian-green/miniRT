@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 15:58:02 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:47:08 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,38 @@ void init_scene(t_scene *scene)
 {
 	init_ambience(&scene->ambient);
 	init_camera(&scene->camera);
-	init_light();
+	//init_light();
 	// init_objects();
+}
+
+void	init_mlx(t_scene *scene)
+{
+	scene->mlx_ptr = mlx_init(WIDTH, HEIGHT, "miniRT", true);
+	if (!scene->mlx_ptr)
+		cleanup(/*scene*/);
+	scene->img = mlx_new_image(scene->mlx_ptr, WIDTH, HEIGHT);
+	if (!scene->img)
+		cleanup(/*scene*/);
+}
+
+void cleanup(void/*t_scene *scene*/)
+{
+	//free(scene->mlx_ptr);
+	//free(scene->img);
+	//free(scene);
+	exit(1);
 }
 
 int main(int ac, char **av)
 {
 	t_scene *scene;
+
 	if (ac > 2)
 		perror("Error. Please enter the config file as argument.");
-	//init_mlx(scene);
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
-		return 1;
+		cleanup();
+	init_mlx(scene);
 	init_scene(scene);
 	parsing(av[1], scene);
 }

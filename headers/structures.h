@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 15:19:32 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:18:20 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+# define WIDTH 1280
+# define HEIGHT 720
+
+# include "../libs/MLX42/include/MLX42/MLX42.h"
+
 
 typedef struct s_vector
 {
@@ -80,8 +86,8 @@ typedef struct s_cy
 
 typedef struct s_scene
 {
-	void		*mlx_ptr;
-	void		*win;
+	mlx_t		*mlx_ptr;
+	mlx_image_t	*img;
 	t_ambient	ambient;
 	t_camera	camera;
 }	t_scene;
