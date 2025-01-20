@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 11:49:01 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 14:04:38 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void split_three(char **line, int *one, int *two, int *three)
     {
         exit(EXIT_FAILURE); // Handle error appropriately
     }
-    *one = ft_atoi(split_line[0]);
-    *two = ft_atoi(split_line[1]);
-    *three = ft_atoi(split_line[2]);
+    *one = ft_atod(split_line[0]);
+    *two = ft_atod(split_line[1]);
+    *three = ft_atod(split_line[2]);
 }
 
 int	set_coordinates(char *input_coords, double *x, double *y, double *z)
@@ -70,24 +70,24 @@ int	set_coordinates(char *input_coords, double *x, double *y, double *z)
 	coords = ft_split(input_coords, ',');
 	if (!coords)
 		return (-1);
-	*x = ft_atod(coords[0]);
-	*y = ft_atod(coords[1]);
-	*z = ft_atod(coords[2]);
+	*x = atof(coords[0]);
+	*y = atof(coords[1]);
+	*z = atof(coords[2]);
 	return (0);
 }
 void parse_camera(char *line, t_scene *scene)
 {
 	char **split_line;
-	printf("test1");
 	split_line = ft_split(line, ' ');
-	// double x;
-	// double y;
-	// double z;
-	// printf("%s", split_line[0]);
-	// set_coordinates(split_line[1], &x, &y, &z);
-	scene->camera->viewpoint.x = 2.00;
+	double x;
+	double y;
+	double z;
+	set_coordinates(split_line[1], &x, &y, &z);
+	scene->camera.viewpoint.x = x;
+	scene->camera.viewpoint.y = y;
+	scene->camera.viewpoint.z = z;
+	printf("%f", scene->camera.viewpoint.z);
 	// set_viewpoint(&split_line[1], scene);
-	//scene->ambient->color = split_line[1];
 }
 
 // void set_viewpoint(char **line, t_scene *scene)
@@ -132,22 +132,16 @@ void parse_camera(char *line, t_scene *scene)
 void parse_file(int fd, t_scene *scene)
 {
 	char *line;
-	printf("test1");
+	(void)scene;
 	while ((line = get_next_line(fd)) != NULL)
 	{
 	if (ft_strncmp(line, "A", 1) == 0)
-	{
 		parse_ambient(line, scene);
-		printf("%s", line);
-	}
-	// else if (ft_strncmp(line, "C", 1) == 0)
-	//  {
-	// 	printf("%s", line);
-	// 	parse_camera(line, scene);
-	// }
+	 if (ft_strncmp(line, "C", 1) == 0)
+		parse_camera(line, scene);
 	// else if (ft_strncmp(line, "L", 1) == 0)
 	// 	parse_light(line, scene);
-	else if (ft_strncmp(line, "pl", 1) == 0)
+	 if (ft_strncmp(line, "pl", 1) == 0)
 		printf("you");
 	else if (ft_strncmp(line, "sp", 1) == 0)
 		printf("today");

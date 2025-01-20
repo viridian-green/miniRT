@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/16 16:24:56 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 14:02:28 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include "../get_next_line/get_next_line.h"
 #include "../libft/libft.h"
+
 
 typedef struct s_vector
 {
@@ -92,8 +93,8 @@ typedef struct s_scene
 {
 	void	*mlx_ptr;
 	void	*win;
-	t_ambient *ambient;
-	t_camera *camera;
+	t_ambient ambient;
+	t_camera camera;
 } t_scene;
 
 //Parsing
@@ -102,6 +103,5 @@ void parse_file(int fd, t_scene *scene);
 void parse_camera(char *line, t_scene *scene);
 void parse_ambient(char *line, t_scene *scene);
 void split_three(char **line, int *one, int *two, int *three);
-int	ft_freearray(char **arr);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/16 18:08:10 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/20 14:02:46 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ typedef struct s_scene
 {
 	void		*mlx_ptr;
 	void		*win;
-	t_ambient	*ambient;
-	t_camera	*camera;
+	t_ambient	ambient;
+	t_camera	camera;
 }	t_scene;
 
 #endif
