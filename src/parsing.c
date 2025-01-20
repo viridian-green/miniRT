@@ -6,11 +6,12 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/16 16:13:22 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:29:42 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
 
 double ft_atod(const char *str) {
     double result = 0.0;
@@ -78,10 +79,11 @@ void parse_camera(char *line, t_scene *scene)
 {
 	char **split_line;
 	split_line = ft_split(line, ' ');
-	double x;
-	double y;
-	double z;
-	set_coordinates(split_line[1], &x, &y, &z);
+	// double x;
+	// double y;
+	// double z;
+	// printf("%s", split_line[0]);
+	// set_coordinates(split_line[1], &x, &y, &z);
 	scene->camera->viewpoint.x = 2.00;
 	// set_viewpoint(&split_line[1], scene);
 	//scene->ambient->color = split_line[1];
@@ -132,9 +134,15 @@ void parse_file(int fd, t_scene *scene)
 	while ((line = get_next_line(fd)) != NULL)
 	{
 	if (ft_strncmp(line, "A", 1) == 0)
+	{
 		parse_ambient(line, scene);
-	 if (ft_strncmp(line, "C", 1) == 0)
+		printf("%s", line);
+	}
+	else if (ft_strncmp(line, "C", 1) == 0)
+	 {
+		printf("%s", line);
 		parse_camera(line, scene);
+	}
 	// else if (ft_strncmp(line, "L", 1) == 0)
 	// 	parse_light(line, scene);
 	else if (ft_strncmp(line, "pl", 1) == 0)
