@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/16 16:29:42 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:49:01 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	set_coordinates(char *input_coords, double *x, double *y, double *z)
 void parse_camera(char *line, t_scene *scene)
 {
 	char **split_line;
+	printf("test1");
 	split_line = ft_split(line, ' ');
 	// double x;
 	// double y;
@@ -131,6 +132,7 @@ void parse_camera(char *line, t_scene *scene)
 void parse_file(int fd, t_scene *scene)
 {
 	char *line;
+	printf("test1");
 	while ((line = get_next_line(fd)) != NULL)
 	{
 	if (ft_strncmp(line, "A", 1) == 0)
@@ -138,11 +140,11 @@ void parse_file(int fd, t_scene *scene)
 		parse_ambient(line, scene);
 		printf("%s", line);
 	}
-	else if (ft_strncmp(line, "C", 1) == 0)
-	 {
-		printf("%s", line);
-		parse_camera(line, scene);
-	}
+	// else if (ft_strncmp(line, "C", 1) == 0)
+	//  {
+	// 	printf("%s", line);
+	// 	parse_camera(line, scene);
+	// }
 	// else if (ft_strncmp(line, "L", 1) == 0)
 	// 	parse_light(line, scene);
 	else if (ft_strncmp(line, "pl", 1) == 0)

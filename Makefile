@@ -1,7 +1,7 @@
 NAME = minirt
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 CFLAGS += -Iheaders -Iinclude -Isrc -O3 -Wunreachable-code -Ofast
 
 # Paths

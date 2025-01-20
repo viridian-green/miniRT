@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:02:45 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/16 16:29:19 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:51:56 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ void parse_ambient(char *line, t_scene *scene)
 {
 	char **split_line;
 
+	(void)scene;
 	split_line = ft_split(line, ' ');
+	printf("%s", split_line[1]);
 	scene->ambient->light_ratio = ft_atoi(split_line[1]);
-	set_color(&split_line[2], scene);
+	// set_color(&split_line[2], scene);
 	// ft_freearray(&line);
 }
