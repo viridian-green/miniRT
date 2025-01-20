@@ -6,48 +6,12 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 15:09:33 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:38:27 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	split_double(char *input_coords, double *x, double *y, double *z)
-{
-	char	**coords;
-
-	coords = ft_split(input_coords, ',');
-	if (!coords)
-		return (-1);
-	*x = ft_atof(coords[0]);
-	*y = ft_atof(coords[1]);
-	*z = ft_atof(coords[2]);
-	return (0);
-}
-
-int	set_coordinates(char *line, t_vector *vector)
-{
-	double x;
-	double y;
-	double z;
-
-	split_double(line, &x, &y, &z);
-	vector->x = x;
-	vector->y = y;
-	vector->z = z;
-	return (0);
-}
-void parse_camera(char *line, t_scene *scene)
-{
-	char **split_line;
-	split_line = ft_split(line, ' ');
-	set_coordinates(split_line[1], scene->camera.viewpoint);
-	printf("%f", scene->camera.viewpoint.x);
-	set_coordinates(split_line[2], scene->camera.orientation);
-	printf("%f", scene->camera.orientation.x);
-}
-
-// scene->camera.fov = ft_atoi(split_line[3]);
 
 void parse_file(int fd, t_scene *scene)
 {

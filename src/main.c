@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 14:26:28 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:58:02 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,23 @@ void init_camera(t_camera *camera)
 	camera->orientation.z = 0;
 }
 
+	t_point	light_point;
+	int		diameter;
+	t_color	color;
+
+void init_light(t_light *light)
+{
+	light->diameter = 0;
+	light->color.r = 0;
+	light->color.r = 0;
+	light->color.r = 0;
+}
+
 void init_scene(t_scene *scene)
 {
 	init_ambience(&scene->ambient);
 	init_camera(&scene->camera);
-	// init_light();
+	init_light();
 	// init_objects();
 }
 
