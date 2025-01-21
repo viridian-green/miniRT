@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/21 13:10:56 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:30:21 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ typedef struct s_scene
 	t_ambience	ambience;
 	t_camera	camera;
 	t_light light;
+	t_sp sp;
+	t_pl pl;
+	t_cy cy;
 }	t_scene;
 
 #endif

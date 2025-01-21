@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:38:17 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/21 12:38:01 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:10:36 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,36 @@ int	split_double(char *input_coords, double *x, double *y, double *z)
 
 int	set_coordinates(char **line, t_point *point)
 {
-	double x_;
-	double y_;
-	double z_;
+	double x;
+	double y;
+	double z;
 
-	split_double(line[1], &x_, &y_, &z_);
-	point->x = x_;
-	point->y = y_;
-	point->z = z_;
+	split_double(line[1], &x, &y, &z);
+	point->x = x;
+	point->y = y;
+	point->z = z;
 	return (0);
 }
-int	set_orientation(char **line, t_scene *scene)
+
+int	set_orientation(char **line, t_vector *vector)
 {
 	double x;
 	double y;
 	double z;
 
 	split_double(line[1], &x, &y, &z);
-	scene->camera.orientation.y = y;
-	scene->camera.orientation.y = y;
-	scene->camera.orientation.z = z;
+	vector->x = x;
+	vector->y = y;
+	vector->z = z;
 	return (0);
 }
+
 void parse_camera(char *line, t_scene *scene)
 {
 	char **split_line;
 	split_line = ft_split(line, ' ');
 	set_coordinates(&split_line[0], &scene->camera.viewpoint);
-	set_orientation(&split_line[1], scene);
+	set_orientation(&split_line[1], &scene->camera.orientation);
 	scene->camera.fov = ft_atoi(split_line[3]);
 	//printf("%f     ", scene->camera.viewpoint.x);
 }
