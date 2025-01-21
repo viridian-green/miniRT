@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 17:47:08 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:04:56 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,28 @@ void cleanup(void/*t_scene *scene*/)
 	exit(1);
 }
 
+void	key_board(mlx_key_data_t key, t_scene *scene)
+{
+	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
+	{
+		mlx_close_window(scene->mlx_ptr);
+		return ;
+	}
+}
+
 int main(int ac, char **av)
 {
 	t_scene *scene;
 
 	if (ac > 2)
 		perror("Error. Please enter the config file as argument.");
-	scene = ft_calloc(1, sizeof(t_scene));
+	scene = ft_calloc(0, sizeof(t_scene));
 	if (!scene)
 		cleanup();
 	init_mlx(scene);
 	init_scene(scene);
 	parsing(av[1], scene);
+	mlx_key_hook(scene->mlx_ptr, (t_keyfunc)key_board, scene);
+	mlx_loop(scene->mlx_ptr);
+	return (0);
 }

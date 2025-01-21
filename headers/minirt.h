@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/20 17:43:28 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:04:48 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@
 # include "../libs/libft/libft.h"
 # include "structures.h"
 
+typedef void	(*t_keyfunc)(mlx_key_data_t kay, void* param);
+
 void	init_mlx(t_scene *scene);
 void 	cleanup(void);
+void	key_board(mlx_key_data_t key, t_scene *scene);
 
 //Parsing
 int		parsing(char *config_file, t_scene *scene);
