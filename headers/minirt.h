@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/20 16:21:11 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:12:51 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		parsing(char *config_file, t_scene *scene);
 void parse_ambience(char *line, t_scene *scene);
 void parse_camera(char *line, t_scene *scene);
 void set_color(char **line, t_color *color);
+int	set_coordinates(char **line, t_point *point);
 
 //Utils
 double ft_atof(const char *str);

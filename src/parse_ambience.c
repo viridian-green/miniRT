@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ambience.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:02:45 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 16:42:41 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:36:19 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void parse_ambience(char *line, t_scene *scene)
 	char **split_line;
 
 	split_line = ft_split(line, ' ');
-	scene->ambience.light_ratio = ft_atoi(split_line[1]);
+	scene->ambience.light_ratio = ft_atof(split_line[1]);
 	set_color(&split_line[2], &scene->ambience.color);
 }

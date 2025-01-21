@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 16:09:09 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:10:56 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 typedef struct s_vector
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_vector;
 
 typedef struct s_color
@@ -29,14 +29,14 @@ typedef struct s_color
 
 typedef struct s_point
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_point;
 
 typedef struct s_ambience
 {
-	int		light_ratio;
+	float		light_ratio;
 	t_color	color;
 }	t_ambience;
 
@@ -51,14 +51,14 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_point	light_point;
-	int		diameter;
+	double	diameter;
 	t_color	color;
 }	t_light;
 
 typedef struct s_sp
 {
 	t_point	center;
-	float	diameter;
+	double	diameter;
 	t_color	color;
 }	t_sp;
 
@@ -73,8 +73,8 @@ typedef struct s_cy
 {
 	t_point		center;
 	t_vector	axis;
-	float		diameter;
-	float		height;
+	double		diameter;
+	double		height;
 	t_color		color;
 }	t_cy;
 

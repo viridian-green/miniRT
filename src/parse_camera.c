@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:38:17 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 16:32:52 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:38:01 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void parse_camera(char *line, t_scene *scene)
 	split_line = ft_split(line, ' ');
 	set_coordinates(&split_line[0], &scene->camera.viewpoint);
 	set_orientation(&split_line[1], scene);
-	scene->camera.fov = ft_atoi(split_line[2]);
+	scene->camera.fov = ft_atoi(split_line[3]);
+	//printf("%f     ", scene->camera.viewpoint.x);
 }

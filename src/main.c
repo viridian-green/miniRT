@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/20 16:10:44 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:43:24 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ void init_camera(t_camera *camera)
 	camera->orientation.z = 0;
 }
 
-	t_point	light_point;
-	int		diameter;
-	t_color	color;
-
 void init_light(t_light *light)
 {
+	light->light_point.x = 0;
+	light->light_point.y = 0;
+	light->light_point.z = 0;
 	light->diameter = 0;
 	light->color.r = 0;
 	light->color.g = 0;
