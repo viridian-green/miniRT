@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/22 17:13:48 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:19:53 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int main(int ac, char **av)
 {
 	t_scene *scene;
 
-	if (ac > 2)
+	if (ac != 2)
 		perror("Error. Please enter the config file as argument.");
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
-		cleanup();
+		free_exit("Memory allocation error.", scene);
 	init_mlx(scene);
 	init_scene(scene);
 	parsing(av[1], scene);

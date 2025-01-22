@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/22 17:14:16 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:16:02 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ typedef void	(*mlx_keyfunc)(mlx_key_data_t kay, void* param);
 void	init_mlx(t_scene *scene);
 void 	cleanup(void);
 void	key_board(mlx_key_data_t key, t_scene *scene);
+
+//Error handlign & mmemory
+int free_exit(char *message, t_scene *scene);
 
 //Init
 void init_scene(t_scene *scene);
