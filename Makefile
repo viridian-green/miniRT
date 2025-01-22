@@ -22,7 +22,8 @@ SRCS = 	src/main.c \
 		src/parsing.c \
 		src/parse_ambience.c \
 		src/utils.c \
-		src/parse_camera.c
+		src/parse_camera.c \
+		src/init.c
 
 OBJS = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 HDRS = $(addprefix $(HEADERS_DIR), minirt.h structures.h)
