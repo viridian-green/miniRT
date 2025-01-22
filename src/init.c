@@ -53,9 +53,9 @@ void init_cylinder(t_cy *cy) {
     cy->axis.z = 0;
     cy->diameter = 0;
     cy->height = 0;
-    cy->color.r = 0;
-    cy->color.g = 0;
-    cy->color.b = 0;
+    cy->color.r = 1;
+    cy->color.g = 1;
+    cy->color.b = 1;
 }
 
 void init_scene(t_scene *scene)

@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/22 15:32:17 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:23:52 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void parse_sphere(char *line, t_scene *scene)
     set_coordinates(&split_line[0], &scene->sp.center);
     scene->sp.diameter = ft_atof(split_line[2]);
     set_color(&split_line[3], &scene->sp.color);
-    //printf("%d", scene->sp.color.r);
+    //printf("Color: (%d, %d, %d)\n", scene->pl.color.r, scene->pl.color.g, scene->pl.color.b);
 }
 
 void parse_cylinder(char *line, t_scene *scene)
@@ -53,14 +53,7 @@ void parse_cylinder(char *line, t_scene *scene)
     set_orientation(&split_line[1], &scene->cy.axis);
     scene->cy.diameter = ft_atof(split_line[3]);
     scene->cy.height = ft_atof(split_line[4]);
-    set_color(&split_line[5], &scene->sp.color);
-    /*
-    printf("Coordinates: (%f, %f, %f)\n", scene->cy.center.x, scene->cy.center.y, scene->cy.center.z);
-    printf("Orientation: (%f, %f, %f)\n", scene->cy.axis.x, scene->cy.axis.y, scene->cy.axis.z);
-    printf("Diameter: %f\n", scene->cy.diameter);
-    printf("Height: %f\n", scene->cy.height);
-    printf("Color: (%d, %d, %d)\n", scene->cy.color.r, scene->cy.color.g, scene->cy.color.b);
-    */
+    set_color(&split_line[5], &scene->cy.color);
 }
 
 char *normalize_whitespace(char *line)
