@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/21 14:56:49 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:32:17 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ void parse_cylinder(char *line, t_scene *scene)
     scene->cy.diameter = ft_atof(split_line[3]);
     scene->cy.height = ft_atof(split_line[4]);
     set_color(&split_line[5], &scene->sp.color);
+    /*
     printf("Coordinates: (%f, %f, %f)\n", scene->cy.center.x, scene->cy.center.y, scene->cy.center.z);
     printf("Orientation: (%f, %f, %f)\n", scene->cy.axis.x, scene->cy.axis.y, scene->cy.axis.z);
     printf("Diameter: %f\n", scene->cy.diameter);
     printf("Height: %f\n", scene->cy.height);
     printf("Color: (%d, %d, %d)\n", scene->cy.color.r, scene->cy.color.g, scene->cy.color.b);
+    */
 }
 
 char *normalize_whitespace(char *line)
