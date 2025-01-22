@@ -6,49 +6,11 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/22 15:37:37 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:53:18 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
-
-void init_ambience(t_ambience *ambience)
-{
-	ambience->light_ratio = 0;
-	ambience->color.r = 0;
-	ambience->color.g = 0;
-	ambience->color.b = 0;
-}
-
-void init_camera(t_camera *camera)
-{
-	camera->viewpoint.x = 0;
-	camera->viewpoint.y = 0;
-	camera->viewpoint.z = 0;
-	camera->orientation.x = 0;
-	camera->orientation.y = 0;
-	camera->orientation.z = 0;
-}
-
-	t_point	light_point;
-	int		diameter;
-	t_color	color;
-
-void init_light(t_light *light)
-{
-	light->diameter = 0;
-	light->color.r = 0;
-	light->color.r = 0;
-	light->color.r = 0;
-}
-
-void init_scene(t_scene *scene)
-{
-	init_ambience(&scene->ambient);
-	init_camera(&scene->camera);
-	//init_light();
-	// init_objects();
-}
 
 void	init_mlx(t_scene *scene)
 {
