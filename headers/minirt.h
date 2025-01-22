@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/22 15:34:00 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:14:16 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "../libs/libft/libft.h"
 # include "structures.h"
 
-typedef void	(*t_keyfunc)(mlx_key_data_t kay, void* param);
+typedef void	(*mlx_keyfunc)(mlx_key_data_t kay, void* param);
 
 void	init_mlx(t_scene *scene);
 void 	cleanup(void);

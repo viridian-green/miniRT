@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/22 16:08:06 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:13:48 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	key_board(mlx_key_data_t key, t_scene *scene)
 		mlx_close_window(scene->mlx_ptr);
 		return ;
 	}
+	//translation(key, scene);
+	//rotation(key, scene);
+	//zoom(key, scene);
+	//update(scene);
 }
 
 int main(int ac, char **av)
@@ -51,7 +55,7 @@ int main(int ac, char **av)
 	init_mlx(scene);
 	init_scene(scene);
 	parsing(av[1], scene);
-	mlx_key_hook(scene->mlx_ptr, (t_keyfunc)key_board, scene);
+	mlx_key_hook(scene->mlx_ptr, (mlx_keyfunc)key_board, scene);
 	mlx_loop(scene->mlx_ptr);
 	return (0);
 }
