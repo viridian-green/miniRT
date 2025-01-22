@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/22 15:53:18 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:08:06 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(int ac, char **av)
 
 	if (ac > 2)
 		perror("Error. Please enter the config file as argument.");
-	scene = ft_calloc(0, sizeof(t_scene));
+	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
 		cleanup();
 	init_mlx(scene);
