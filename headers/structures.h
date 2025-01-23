@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/22 15:53:30 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:52:12 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ typedef struct s_camera
 	int			fov;
 }	t_camera;
 
+typedef struct s_viewport
+{
+    t_point lower_left_corner;
+    t_vector horizontal;
+    t_vector vertical;
+} t_viewport;
+
 typedef struct s_light
 {
 	t_point	light_point;
@@ -90,10 +97,13 @@ typedef struct s_scene
 	mlx_image_t	*img;
 	t_ambience	ambience;
 	t_camera	camera;
+	t_viewport viewport;
 	t_light light;
 	t_sp sp;
 	t_pl pl;
 	t_cy cy;
+	double canvas_width;
+	double canvas_height;
 }	t_scene;
 
 #endif

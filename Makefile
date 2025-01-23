@@ -24,7 +24,8 @@ SRCS = 	src/main.c \
 		src/utils.c \
 		src/parse_camera.c \
 		src/init.c \
-		src/error_handling.c
+		src/error_handling.c \
+		src/viewport.c
 
 OBJS = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 HDRS = $(addprefix $(HEADERS_DIR), minirt.h structures.h)

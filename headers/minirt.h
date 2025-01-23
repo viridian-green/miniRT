@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/22 19:16:02 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:46:01 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+
+#define M_PI 3.14159265358979323846
+#define FOCAL_LENGTH 1.0
 
 # include <fcntl.h>
 # include <unistd.h>
