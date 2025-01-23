@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:38:17 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/21 14:10:36 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:07:44 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	split_double(char *input_coords, double *x, double *y, double *z)
 
 int	set_coordinates(char **line, t_point *point)
 {
-	double x;
-	double y;
-	double z;
+	double	x;
+	double	y;
+	double	z;
 
 	split_double(line[1], &x, &y, &z);
 	point->x = x;
@@ -40,9 +40,9 @@ int	set_coordinates(char **line, t_point *point)
 
 int	set_orientation(char **line, t_vector *vector)
 {
-	double x;
-	double y;
-	double z;
+	double	x;
+	double	y;
+	double	z;
 
 	split_double(line[1], &x, &y, &z);
 	vector->x = x;
@@ -51,12 +51,16 @@ int	set_orientation(char **line, t_vector *vector)
 	return (0);
 }
 
-void parse_camera(char *line, t_scene *scene)
+void	parse_camera(char *line, t_scene *scene)
 {
-	char **split_line;
+	char	**split_line;
+
 	split_line = ft_split(line, ' ');
 	set_coordinates(&split_line[0], &scene->camera.viewpoint);
 	set_orientation(&split_line[1], &scene->camera.orientation);
 	scene->camera.fov = ft_atoi(split_line[3]);
 	//printf("%f     ", scene->camera.viewpoint.x);
+	if (validate_coordinates(&scene->camera.viewpoint) || \
+		validate_fov(scene->camera.fov))
+		free_exit("Error: Invalid camera coordinates or FOV", scene);
 }

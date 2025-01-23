@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/22 19:16:02 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:22:01 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,37 @@
 typedef void	(*mlx_keyfunc)(mlx_key_data_t kay, void* param);
 
 void	init_mlx(t_scene *scene);
-void 	cleanup(void);
+void	cleanup(void);
 void	key_board(mlx_key_data_t key, t_scene *scene);
 
+int		validate_coordinates(t_point *point);
+int		validate_color(t_color *color);
+int		validate_diameter(double diameter);
+int		validate_height(double height);
+int		validate_fov(int fov);
+
 //Error handlign & mmemory
-int free_exit(char *message, t_scene *scene);
+int		free_exit(char *message, t_scene *scene);
 
 //Init
-void init_scene(t_scene *scene);
+void	init_scene(t_scene *scene);
 
 //Parsing
 int		parsing(char *config_file, t_scene *scene);
-void parse_ambience(char *line, t_scene *scene);
-void parse_camera(char *line, t_scene *scene);
-void set_color(char **line, t_color *color);
-int	set_coordinates(char **line, t_point *point);
-int	set_orientation(char **line, t_vector *vector);
+void	set_color(char **line, t_color *color);
+int		set_coordinates(char **line, t_point *point);
+int		set_orientation(char **line, t_vector *vector);
+
+void	parse_ambience(char *line, t_scene *scene);
+void	parse_camera(char *line, t_scene *scene);
+void	parse_light(char *line, t_scene *scene);
+void	parse_plane(char *line, t_scene *scene);
+void	parse_sphere(char *line, t_scene *scene);
+void	parse_cylinder(char *line, t_scene *scene);
 
 //Utils
-double ft_atof(const char *str);
-char *ft_strcat(char *dest, const char *src);
-char *ft_strtok(char *str, const char *delim);
+double	ft_atof(const char *str);
+char	*ft_strcat(char *dest, const char *src);
+char	*ft_strtok(char *str, const char *delim);
 
 #endif

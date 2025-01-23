@@ -21,8 +21,11 @@ INCLUDES = -I$(HEADERS_DIR) -I$(LIBMLX)/include -I$(LIBFT_DIR)
 SRCS = 	src/main.c \
 		src/parsing.c \
 		src/parse_ambience.c \
-		src/utils.c \
 		src/parse_camera.c \
+		src/parse_light.c \
+		src/parse_objects.c \
+		src/utils.c \
+		src/checks.c \
 		src/init.c \
 		src/error_handling.c
 
