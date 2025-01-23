@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/22 19:19:53 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/23 15:16:51 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,28 @@ void	key_board(mlx_key_data_t key, t_scene *scene)
 	//update(scene);
 }
 
+void render_image(t_scene *scene)
+{
+{
+	unsigned int		color;
+	unsigned int	pixel_x;
+	unsigned int	pixel_y;
+
+	pixel_x = 0;
+	while (pixel_x < scene->img->width)
+	{
+		pixel_y = 0;
+		while (pixel_y < scene->img->height)
+		{
+			color = 255;
+			mlx_put_pixel(scene->img, pixel_x, pixel_y, color);
+			pixel_y++;
+		}
+		pixel_x++;
+	}
+}
+}
+
 int main(int ac, char **av)
 {
 	t_scene *scene;
@@ -55,6 +77,7 @@ int main(int ac, char **av)
 	init_mlx(scene);
 	init_scene(scene);
 	parsing(av[1], scene);
+	render_image(scene);
 	mlx_key_hook(scene->mlx_ptr, (mlx_keyfunc)key_board, scene);
 	mlx_loop(scene->mlx_ptr);
 	return (0);
