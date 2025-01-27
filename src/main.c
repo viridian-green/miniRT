@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/23 15:16:51 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:15:28 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,10 @@ void	init_mlx(t_scene *scene)
 {
 	scene->mlx_ptr = mlx_init(WIDTH, HEIGHT, "miniRT", true);
 	if (!scene->mlx_ptr)
-		cleanup(/*scene*/);
+		free_exit("Error initializing mlx.", scene);
 	scene->img = mlx_new_image(scene->mlx_ptr, WIDTH, HEIGHT);
 	if (!scene->img)
-		cleanup(/*scene*/);
-}
-
-void cleanup(void/*t_scene *scene*/)
-{
-	//free(scene->mlx_ptr);
-	//free(scene->img);
-	//free(scene);
-	exit(1);
+		free_exit("Error initializing mlx image.", scene);
 }
 
 void	key_board(mlx_key_data_t key, t_scene *scene)
@@ -65,9 +57,9 @@ void render_image(t_scene *scene)
 }
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_scene *scene;
+	t_scene	*scene;
 
 	if (ac != 2)
 		perror("Error. Please enter the config file as argument.");
@@ -78,7 +70,7 @@ int main(int ac, char **av)
 	init_scene(scene);
 	parsing(av[1], scene);
 	render_image(scene);
-	mlx_key_hook(scene->mlx_ptr, (mlx_keyfunc)key_board, scene);
+	mlx_key_hook(scene->mlx_ptr, (t_mlx_keyfunc)key_board, scene);
 	mlx_loop(scene->mlx_ptr);
 	return (0);
 }

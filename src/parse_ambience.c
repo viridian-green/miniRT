@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:02:45 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/23 18:11:18 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:20:52 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	parse_ambience(char *line, t_scene *scene)
 	split_line = ft_split(line, ' ');
 	scene->ambience.light_ratio = ft_atof(split_line[1]);
 	set_color(&split_line[2], &scene->ambience.color);
-	if (scene->ambience.light_ratio < 0 || scene->ambience.light_ratio > 1 || \
+	if (validate_light_ratio(scene->ambience.light_ratio) || \
 		validate_color(&scene->ambience.color))
 		free_exit("Error. Invalid ambience parameters.", scene);
 }

@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/23 18:22:01 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:25:30 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@
 # include "../libs/libft/libft.h"
 # include "structures.h"
 
-typedef void	(*mlx_keyfunc)(mlx_key_data_t kay, void* param);
+typedef void	(*t_mlx_keyfunc)(mlx_key_data_t kay, void* param);
 
 void	init_mlx(t_scene *scene);
-void	cleanup(void);
 void	key_board(mlx_key_data_t key, t_scene *scene);
 
-int		validate_coordinates(t_point *point);
+int		validate_orientation(t_vector *vector);
+int		validate_light_ratio(double ratio);
 int		validate_color(t_color *color);
 int		validate_diameter(double diameter);
 int		validate_height(double height);
@@ -42,9 +42,11 @@ int		free_exit(char *message, t_scene *scene);
 void	init_scene(t_scene *scene);
 
 //Parsing
+char	*normalize_whitespace(char *line);
+void	parse_file(int fd, t_scene *scene);
 int		parsing(char *config_file, t_scene *scene);
 void	set_color(char **line, t_color *color);
-int		set_coordinates(char **line, t_point *point);
+int		set_coordinates(char **line, t_coord *point);
 int		set_orientation(char **line, t_vector *vector);
 
 void	parse_ambience(char *line, t_scene *scene);

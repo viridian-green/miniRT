@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:38:17 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/23 18:07:44 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:20:28 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	split_double(char *input_coords, double *x, double *y, double *z)
 	return (0);
 }
 
-int	set_coordinates(char **line, t_point *point)
+int	set_coordinates(char **line, t_coord *point)
 {
 	double	x;
 	double	y;
@@ -56,11 +56,11 @@ void	parse_camera(char *line, t_scene *scene)
 	char	**split_line;
 
 	split_line = ft_split(line, ' ');
-	set_coordinates(&split_line[0], &scene->camera.viewpoint);
+	set_coordinates(&split_line[0], &scene->camera.view_point);
 	set_orientation(&split_line[1], &scene->camera.orientation);
 	scene->camera.fov = ft_atoi(split_line[3]);
 	//printf("%f     ", scene->camera.viewpoint.x);
-	if (validate_coordinates(&scene->camera.viewpoint) || \
+	if (validate_orientation(&scene->camera.orientation) || \
 		validate_fov(scene->camera.fov))
 		free_exit("Error: Invalid camera coordinates or FOV", scene);
 }

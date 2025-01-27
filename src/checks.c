@@ -6,16 +6,17 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:54:31 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/23 18:22:42 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:12:30 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	validate_coordinates(t_point *point)
+int	validate_orientation(t_vector *vector)
 {
-	(void)point;
-	// Add specific validation logic for coordinates if needed
+	if (vector->x < -1 || vector->x > 1 || vector->y < -1 || \
+		vector->y > 1 || vector->z < -1 || vector->z > 1)
+		return (1);
 	return (0);
 }
 
