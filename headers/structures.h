@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/23 18:52:12 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:06:12 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,19 @@ typedef struct s_cy
 	t_color		color;
 }	t_cy;
 
+typedef struct s_viewp
+{
+	double width;
+	double height;
+}	t_viewp;
+
 typedef struct s_scene
 {
 	mlx_t		*mlx_ptr;
 	mlx_image_t	*img;
 	t_ambience	ambience;
 	t_camera	camera;
-	t_viewport viewport;
+	t_viewp vp;
 	t_light light;
 	t_sp sp;
 	t_pl pl;

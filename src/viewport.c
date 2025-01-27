@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:09:23 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/23 19:27:46 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:08:52 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void create_viewport(t_scene *scene)
 void create_viewport(t_scene *scene)
 {
     double theta = scene->camera.fov * M_PI / 180.0;
-    double viewport_width = 2.0 * FOCAL_LENGTH * tan(theta / 2.0);
-    double viewport_height = viewport_width / (scene->canvas_width / scene->canvas_height);
+    scene->vp.width = 2.0 * tan(theta / 2.0);
+    scene->vp.height = scene->vp.width / (scene->canvas_width / scene->canvas_height);
 
     t_vector world_up = {0.0, 1.0, 0.0};
     if (fabs(scene->camera.orientation.y - 1) < EPSILON || fabs(scene->camera.orientation.y + 1) < EPSILON)
@@ -67,8 +67,6 @@ void create_viewport(t_scene *scene)
     t_vector u = normalize(cross_product(world_up, w));
     t_vector v = cross_product(w, u);
 
-    scene->viewport.width = viewport_width;
-    scene->viewport.height = viewport_height;
     scene->viewport.horizontal = scalar_multiply(u, viewport_width);
     scene->viewport.vertical = scalar_multiply(v, viewport_height);
 
@@ -78,16 +76,20 @@ void create_viewport(t_scene *scene)
         vector_subtract(scene->viewport.center, scalar_multiply(scene->viewport.horizontal, 0.5)),
         scalar_multiply(scene->viewport.vertical, 0.5));
 
-    scene->viewport.pixel_x = scalar_multiply(u, viewport_width / scene->canvas_width);
-    scene->viewport.pixel_y = scalar_multiply(v, -(viewport_height / scene->canvas_height));
-
-    scene->viewport.pixel00 = vector_add(scene->viewport.up_left,
-        scalar_multiply(vector_add(scene->viewport.pixel_x, scene->viewport.pixel_y), 0.5));
-
     scene->camera.right = u;
     scene->camera.up = v;
 }
 
+/*
+TODO: Add the pixel calculations later 
+scene->viewport.pixel_x = scalar_multiply(u, viewport_width / scene->canvas_width);
+    scene->viewport.pixel_y = scalar_multiply(v, -(viewport_height / scene->canvas_height));
+
+    scene->viewport.pixel00 = vector_add(scene->viewport.up_left,
+        scalar_multiply(vector_add(scene->viewport.pixel_x, scene->viewport.pixel_y), 0.5));
+*/
+
+/*
 What to ask Chatgpt -- why do we normalize the camera orientation and what does it mean?
 what are the w, u and v vectors and what are they for?
 Why i should implement the world up vectors,Try and figure out thanks to the different projects of the github and you
@@ -95,4 +97,5 @@ move around and what it means?
 
 
 TODO: Add a world up definition and see in what ways we need it in translating
-read this article https://medium.com/@iremoztimur/building-a-minirt-42-project-part-1-ae7a00aebdb9 before doing anything else!!!
+read this article https://medium.com/@iremoztimur/building-a-minirt-42-project-part-1-ae7a00aebdb9 before doing anything else!!!-
+*/
