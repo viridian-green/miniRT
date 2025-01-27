@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:15:12 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/27 14:19:46 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:58:20 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,22 @@ char	*ft_strcat(char *dest, const char *src)
 	// Null-terminate the resulting string
 	*ptr = '\0';
 	return (dest);
+}
+
+int	validate_numeric_value(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[strlen(str) - 1] == '\n')
+		str[strlen(str) - 1] = '\0';
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]) && str[i] != '.')
+			return (1);
+		i++;
+	}
+	return (0);
 }

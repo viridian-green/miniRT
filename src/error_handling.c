@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:12:40 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/27 14:12:54 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:42:11 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ int	free_exit(char *message, t_scene *scene)
 	if (scene)
 		free(scene);
 	perror(message);
-	return (EXIT_FAILURE);
+	exit (EXIT_FAILURE);
 }
