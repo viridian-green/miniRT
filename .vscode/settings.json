@@ -3,10 +3,14 @@
 		"minirt.h": "c",
 		"get_next_line.h": "c",
 		"libft.h": "c",
+<<<<<<< HEAD
 		"*.tcc": "cpp",
 		"vector": "cpp",
 		"functional": "cpp",
 		"random": "cpp",
 		"structures.h": "c"
+=======
+		"string_view": "c"
+>>>>>>> viewport
 	}
 }
