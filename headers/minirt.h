@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/30 17:48:12 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:24:20 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ char	*ft_strtok(char *str, const char *delim);
 int		validate_numeric_value(char *str);
 double	process_integer_part(const char **str);
 
-
+void create_viewport(t_scene *s);
 #endif

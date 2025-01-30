@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/28 13:43:36 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:24:03 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main(int ac, char **av)
 	init_scene(scene);
 	parsing(av[1], scene);
 	render_image(scene);
+	create_viewport(scene);
 	mlx_key_hook(scene->mlx_ptr, (t_mlx_keyfunc)key_board, scene);
 	mlx_loop(scene->mlx_ptr);
 	return (0);
