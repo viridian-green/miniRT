@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:09:23 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/30 17:52:31 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:54:20 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ t_vector	normalize(t_vector v)
 	norm.y = v.y / len;
 	norm.z = v.z / len;
 	return (norm);
+}
+
+t_vector cross_product(t_vector v1, t_vector v2)
+{
+	t_vector	res;
+
+	res.x = v1.y * v2.z - v1.z * v2.y;
+	res.y = v1.z * v2.x - v1.x * v2.z;
+	res.z = v1.x * v2.y - v1.y * v2.x;
+	return (res);
 }
 
 /*
