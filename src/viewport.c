@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:09:23 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/27 15:08:52 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:52:31 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,35 +53,26 @@ void create_viewport(t_scene *scene)
 }
 
 //CHATGPT SUGGESTED FUNCTION HERE
-void create_viewport(t_scene *scene)
+void create_viewport(t_scene *s)
 {
-    double theta = scene->camera.fov * M_PI / 180.0;
-    scene->vp.width = 2.0 * tan(theta / 2.0);
-    scene->vp.height = scene->vp.width / (scene->canvas_width / scene->canvas_height);
+    double fov_to_radians;
+	double d_camera_viewport;
+	t_vector worldup_v;
 
-    t_vector world_up = {0.0, 1.0, 0.0};
-    if (fabs(scene->camera.orientation.y - 1) < EPSILON || fabs(scene->camera.orientation.y + 1) < EPSILON)
-        world_up = (t_vector){0.0, 0.0, 1.0};
-
-    t_vector w = normalize(scene->camera.orientation);
-    t_vector u = normalize(cross_product(world_up, w));
-    t_vector v = cross_product(w, u);
-
-    scene->viewport.horizontal = scalar_multiply(u, viewport_width);
-    scene->viewport.vertical = scalar_multiply(v, viewport_height);
-
-    scene->viewport.center = vector_add(scene->camera.viewpoint, scalar_multiply(w, FOCAL_LENGTH));
-
-    scene->viewport.up_left = vector_add(
-        vector_subtract(scene->viewport.center, scalar_multiply(scene->viewport.horizontal, 0.5)),
-        scalar_multiply(scene->viewport.vertical, 0.5));
-
-    scene->camera.right = u;
-    scene->camera.up = v;
+	d_camera_viewport = 1.0;
+	worldup_v = (t_vector){0.0, 1.0, 0.0};
+	fov_to_radians = s->camera.fov * M_PI / 180.0;
+    s->viewport.height = 2.0 * d_camera_viewport * tan(fov_to_radians / 2.0);
+    s->viewport.width = s->viewport.height * (s->canvas_width / s->canvas_height);
+	if (!is_aligned_with_up_vector(s->camera.forward_v))
+		s->camera.right_v = normalize(cross_product(worldup_v, s->camera.forward_v));
+	else
+		s->camera.right_v = normalize(cross_product((t_vector){0.0, 0.0, 1.0}, s->camera.forward_v));
+    s->camera.up_v = cross_product(s->camera.forward_v, s->camera.right_v);
 }
 
 /*
-TODO: Add the pixel calculations later 
+TODO: Add the pixel calculations later
 scene->viewport.pixel_x = scalar_multiply(u, viewport_width / scene->canvas_width);
     scene->viewport.pixel_y = scalar_multiply(v, -(viewport_height / scene->canvas_height));
 
