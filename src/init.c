@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:07 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/27 14:08:35 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:20:27 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	init_ambience_camera(t_ambience *ambience, t_camera *camera)
 	ambience->color.r = 0;
 	ambience->color.g = 0;
 	ambience->color.b = 0;
-	camera->view_point.x = 0;
-	camera->view_point.y = 0;
-	camera->view_point.z = 0;
-	camera->orientation.x = 0;
-	camera->orientation.y = 0;
-	camera->orientation.z = 0;
+	camera->viewpoint.x = 0;
+	camera->viewpoint.y = 0;
+	camera->viewpoint.z = 0;
+	camera->forward_v.x = 0;
+	camera->forward_v.y = 0;
+	camera->forward_v.z = 0;
 }
 
 void	init_light_sphere(t_light *light, t_sp *sp)

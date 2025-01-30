@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/30 17:48:48 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:20:18 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
+#define EPSILON 1e-6
 
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 
@@ -48,8 +49,10 @@ typedef struct s_ambience
 //FOV: Angle of what you see.
 typedef struct s_camera
 {
-	t_coord		view_point;
-	t_vector	orientation;
+	t_point		viewpoint;
+	t_vector	forward_v;
+	t_vector right_v;
+	t_vector up_v;
 	int			fov;
 }	t_camera;
 
@@ -58,6 +61,8 @@ typedef struct s_viewport
     t_point lower_left_corner;
     t_vector horizontal;
     t_vector vertical;
+	double height;
+	double width;
 } t_viewport;
 
 typedef struct s_light
@@ -101,6 +106,7 @@ typedef struct s_scene
 	mlx_t		*mlx_ptr;
 	mlx_image_t	*img;
 	t_ambience	ambience;
+	t_viewport viewport;
 	t_camera	camera;
 	t_viewp vp;
 	t_light light;
