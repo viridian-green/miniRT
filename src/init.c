@@ -9,9 +9,9 @@ void init_ambience_camera(t_ambience *ambience, t_camera *camera)
 	camera->viewpoint.x = 0;
 	camera->viewpoint.y = 0;
 	camera->viewpoint.z = 0;
-	camera->orientation.x = 0;
-	camera->orientation.y = 0;
-	camera->orientation.z = 0;
+	camera->forward_v.x = 0;
+	camera->forward_v.y = 0;
+	camera->forward_v.z = 0;
 }
 
 void init_light_sphere(t_light *light, t_sp *sp)
