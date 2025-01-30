@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:38:17 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/30 19:20:38 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:22:37 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	parse_camera(char *line, t_scene *scene)
 	set_orientation(&split_line[1], &scene->camera.forward_v);
 	scene->camera.fov = ft_atoi(split_line[3]);
 	//printf("Parsed FOV: %d\n", scene->camera.fov);
-	if (validate_orientation(&scene->camera.orientation) || \
+	if (validate_orientation(&scene->camera.forward_v) || \
 		validate_fov(scene->camera.fov))
 		free_exit("Error: Invalid camera coordinates or FOV", scene);
 }
