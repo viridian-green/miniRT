@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:54:31 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/27 18:19:47 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:51:03 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	validate_orientation(t_vector *vector)
 
 	magnitude = sqrt(vector->x * vector->x + vector->y * \
 						vector->y + vector->z * vector->z);
-	if (fabs(magnitude - 1.0) > 1e-6)
+	if (fabs(magnitude - 1.0) > EPSILON)
 		return (1);
 	return (0);
 }

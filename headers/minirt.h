@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/30 19:24:20 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:03:53 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#define M_PI 3.14159265358979323846
-#define FOCAL_LENGTH 1.0
+# define M_PI 3.14159265358979323846
+# define FOCAL_LENGTH 1.0
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -83,5 +83,5 @@ char	*ft_strtok(char *str, const char *delim);
 int		validate_numeric_value(char *str);
 double	process_integer_part(const char **str);
 
-void create_viewport(t_scene *s);
+void	create_viewport(t_scene *s);
 #endif
