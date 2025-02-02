@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/30 19:22:20 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/02 20:36:29 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
-#define EPSILON 1e-6
+# define EPSILON 1e-6
 
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 
@@ -51,8 +51,8 @@ typedef struct s_camera
 {
 	t_coord		viewpoint;
 	t_vector	forward_v;
-	t_vector right_v;
-	t_vector up_v;
+	t_vector	right_v;
+	t_vector	up_v;
 	int			fov;
 }	t_camera;
 
@@ -88,8 +88,8 @@ typedef struct s_cy
 
 typedef struct s_viewp
 {
-	double width;
-	double height;
+	double	width;
+	double	height;
 }	t_viewp;
 
 typedef struct s_scene
@@ -98,13 +98,13 @@ typedef struct s_scene
 	mlx_image_t	*img;
 	t_ambience	ambience;
 	t_camera	camera;
-	t_viewp vp;
-	t_light light;
-	t_sp sp;
-	t_pl pl;
-	t_cy cy;
-	double canvas_width;
-	double canvas_height;
+	t_light		light;
+	t_viewp		vp;
+	t_sp		sp;
+	t_pl		pl;
+	t_cy		cy;
+	double		canvas_width;
+	double		canvas_height;
 }	t_scene;
 
 #endif

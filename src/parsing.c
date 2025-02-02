@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/27 18:28:08 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/02 20:39:57 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,6 @@ char	*normalize_whitespace(char *line)
 	free(temp);
 	return (normalized);
 }
-
-/* void	parse_file(int fd, t_scene *scene)
-{
-	char	*line;
-	char	*normalized_line;
-
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		normalized_line = normalize_whitespace(line);
-		if (ft_strncmp(normalized_line, "A", 1) == 0)
-			parse_ambience(normalized_line, scene);
-		else if (ft_strncmp(normalized_line, "C", 1) == 0)
-			parse_camera(normalized_line, scene);
-		else if (ft_strncmp(normalized_line, "L", 1) == 0)
-			parse_light(normalized_line, scene);
-		else if (ft_strncmp(normalized_line, "pl", 2) == 0)
-			parse_plane(normalized_line, scene);
-		else if (ft_strncmp(normalized_line, "sp", 2) == 0)
-			parse_sphere(normalized_line, scene);
-		else if (ft_strncmp(normalized_line, "cy", 2) == 0)
-			parse_cylinder(normalized_line, scene);
-		else
-			free_exit("Error. Incorrect file.", scene);
-		free(normalized_line);
-		free(line);
-		line = get_next_line(fd);
-	}
-} */
 
 void	parse_file(int fd, t_scene *scene)
 {
