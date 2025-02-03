@@ -25,8 +25,10 @@ SRCS = 	src/main.c \
 		src/parse_light.c \
 		src/parse_objects.c \
 		src/utils.c \
+		src/math.c \
 		src/checks.c \
 		src/init.c \
+		src/init_objects.c \
 		src/error_handling.c \
 		src/viewport.c
 
