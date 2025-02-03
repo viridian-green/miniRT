@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:38:17 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/31 16:35:02 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/03 23:57:45 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	split_double(char *input_coords, double *x, double *y, double *z)
 	return (0);
 }
 
-int	set_coordinates(char **line, t_coord *point)
+int	set_coordinates(char **line, t_vector *point)
 {
 	double	x;
 	double	y;
