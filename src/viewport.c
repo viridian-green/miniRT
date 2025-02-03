@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:09:23 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/03 13:20:36 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/04 00:10:14 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void create_viewport(t_scene *s)
 	worldup_v = (t_vector){0.0, 1.0, 0.0};
 	fov_to_radians = s->camera.fov * M_PI / 180.0;
     s->vp.height = 2.0 * d_camera_viewport * tan(fov_to_radians / 2.0);
-    s->vp.width = s->vp.height * (s->viewpoint.width / s->viewpoint.height);
+    s->vp.width = s->vp.height * (s->vp.width / s->vp.height);
 	if (!is_aligned_with_up_vector(s->camera.forward_v))
 		s->camera.right_v = normalize(cross_product(worldup_v, s->camera.forward_v));
 	else
