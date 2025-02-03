@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/02 20:36:29 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:07:58 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct s_coord
 	double	y;
 	double	z;
 }	t_coord;
+
+typedef struct s_ray
+{
+	t_coord		origin;
+	t_vector	direction;
+}	t_ray;
 
 typedef struct s_ambience
 {
@@ -86,6 +92,16 @@ typedef struct s_cy
 	t_color		color;
 }	t_cy;
 
+//type 1 = sphere, type 2 = plane, type 3 = cylinder
+typedef struct s_object
+{
+	int				type;
+	t_sp			sp;
+	t_pl			pl;
+	t_cy			cy;
+	struct s_object	*next;
+}	t_object;
+
 typedef struct s_viewp
 {
 	double	width;
@@ -100,11 +116,8 @@ typedef struct s_scene
 	t_camera	camera;
 	t_light		light;
 	t_viewp		vp;
-	t_sp		sp;
-	t_pl		pl;
-	t_cy		cy;
-	double		canvas_width;
-	double		canvas_height;
+	t_object	*objects;
+	t_viewp		viewpoint;
 }	t_scene;
 
 #endif
