@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/02 20:38:40 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/04 00:33:43 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,36 @@ void	key_board(mlx_key_data_t key, t_scene *scene)
 	//zoom(key, scene);
 	//update(scene);
 }
- // not correct yet
+//need to understand better
+t_ray	create_ray(double pixel_x, double pixel_y, t_vector vp, t_scene *scene)
+{
+	t_ray		ray;
+	t_vector	center;
+	t_vector	p_x_sc;
+	t_vector	p_y_sc;
+
+	p_x_sc = vector_multiply(scene->vp.pixel_x, pixel_x);
+	p_y_sc = vector_multiply(scene->vp.pixel_y, pixel_y);
+	center = vector_add(vector_add(scene->vp.pixel_init, p_x_sc), p_y_sc);
+	ray.origin = vp;
+	ray.direction = vector_subtract(center, vp);
+	return (ray);
+}
+//need to implement
+void	put_color_to_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
+{
+	(void)p_x;
+	(void)p_y;
+	(void)scene;
+	(void)ray;
+}
+
+ //not correct yet
 void	render_image(t_scene *scene)
 {
-	unsigned int		color;
-	unsigned int		pixel_x;
-	unsigned int		pixel_y;
+	double		pixel_x;
+	double		pixel_y;
+	t_ray		ray;
 
 	pixel_x = 0;
 	while (pixel_x < scene->img->width)
@@ -47,8 +71,8 @@ void	render_image(t_scene *scene)
 		pixel_y = 0;
 		while (pixel_y < scene->img->height)
 		{
-			color = 255;
-			mlx_put_pixel(scene->img, pixel_x, pixel_y, color);
+			ray = create_ray(pixel_x, pixel_y, scene->camera.viewpoint, scene);
+			put_color_to_pixel(pixel_x, pixel_y, scene, ray);
 			pixel_y++;
 		}
 		pixel_x++;
@@ -65,7 +89,7 @@ int	main(int ac, char **av)
 	if (!scene)
 		free_exit("Memory allocation error.", scene);
 	init_mlx(scene);
-	init_scene(scene);
+	//init_scene(scene);
 	parsing(av[1], scene);
 	create_viewport(scene);
 	//mlx_loop_hook(scene->mlx_ptr, render_image, scene);

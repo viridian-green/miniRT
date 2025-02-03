@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:07 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/03 19:12:05 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/04 00:35:27 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init_light(t_light *light)
 	light->color.b = 0;
 }
 
+//not sure if it is correct
 void	init_scene(t_scene *scene)
 {
 	t_object	*obj;
