@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/03 16:07:58 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/04 00:20:06 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,9 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
-typedef struct s_coord
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_coord;
-
 typedef struct s_ray
 {
-	t_coord		origin;
+	t_vector	origin;
 	t_vector	direction;
 }	t_ray;
 
@@ -55,7 +48,7 @@ typedef struct s_ambience
 //FOV: Angle of what you see.
 typedef struct s_camera
 {
-	t_coord		viewpoint;
+	t_vector	viewpoint;
 	t_vector	forward_v;
 	t_vector	right_v;
 	t_vector	up_v;
@@ -64,28 +57,28 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	t_coord	light_point;
-	double	ratio;
-	t_color	color;
+	t_vector	light_point;
+	double		ratio;
+	t_color		color;
 }	t_light;
 
 typedef struct s_sp
 {
-	t_coord	center;
-	double	diameter;
-	t_color	color;
+	t_vector	center;
+	double		diameter;
+	t_color		color;
 }	t_sp;
 
 typedef struct s_pl
 {
-	t_coord		plane_point;
+	t_vector	plane_point;
 	t_vector	orientation;
 	t_color		color;
 }	t_pl;
 
 typedef struct s_cy
 {
-	t_coord		center;
+	t_vector	center;
 	t_vector	orientation;
 	double		diameter;
 	double		height;
@@ -102,10 +95,16 @@ typedef struct s_object
 	struct s_object	*next;
 }	t_object;
 
+//understand the atributtes of the viewport
 typedef struct s_viewp
 {
-	double	width;
-	double	height;
+	double		width;
+	double		height;
+	t_vector	center;
+	t_vector	up_left;
+	t_vector	pixel_init;
+	t_vector	pixel_x;
+	t_vector	pixel_y;
 }	t_viewp;
 
 typedef struct s_scene
@@ -117,7 +116,6 @@ typedef struct s_scene
 	t_light		light;
 	t_viewp		vp;
 	t_object	*objects;
-	t_viewp		viewpoint;
 }	t_scene;
 
 #endif

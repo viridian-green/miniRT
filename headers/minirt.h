@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/01/31 17:03:53 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/04 00:26:22 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,26 @@ int		validate_fov(int fov);
 
 //error handling
 int		free_exit(char *message, t_scene *scene);
+void	free_split(char **split);
+void	handle_parse_error(char **split_line, t_scene *scene, char *message);
 
 //init
+void	init_ambience(t_ambience *ambience);
+void	init_camera(t_camera *camera);
+void	init_light(t_light *light);
 void	init_scene(t_scene *scene);
-void	init_ambience_camera(t_ambience *ambience, t_camera *camera);
-void	init_light_sphere(t_light *light, t_sp *sp);
+
+//init_objects
+void	init_sphere(t_sp *sp);
 void	init_plane(t_pl *pl);
 void	init_cylinder(t_cy *cy);
+void	init_object(t_object *obj);
 
 //main
 void	init_mlx(t_scene *scene);
 void	key_board(mlx_key_data_t key, t_scene *scene);
-//void	render_image(t_scene *scene);
+void	render_image(t_scene *scene);
+t_ray	create_ray(double pixel_x, double pixel_y, t_vector vp, t_scene *scene);
 
 //parse_ambience
 void	split_int(char **line, int *one, int *two, int *three);
@@ -57,7 +65,7 @@ void	parse_ambience(char *line, t_scene *scene);
 
 //parse_camera
 int		split_double(char *input_coords, double *x, double *y, double *z);
-int		set_coordinates(char **line, t_coord *point);
+int		set_coordinates(char **line, t_vector *point);
 int		set_orientation(char **line, t_vector *vector);
 void	parse_camera(char *line, t_scene *scene);
 
@@ -82,6 +90,12 @@ char	*ft_strcat(char *dest, const char *src);
 char	*ft_strtok(char *str, const char *delim);
 int		validate_numeric_value(char *str);
 double	process_integer_part(const char **str);
+
+//math
+t_vector	vector_add(t_vector v1, t_vector v2);
+t_vector	vector_subtract(t_vector v1, t_vector v2);
+t_vector	vector_multiply(t_vector v, double scalar);
+double		vec_length(t_vector v);
 
 void	create_viewport(t_scene *s);
 #endif
