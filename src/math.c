@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 23:45:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/05 16:13:35 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:28:53 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-t_vector	vector_add(t_vector v1, t_vector v2)
+t_vector	vc_add(t_vector v1, t_vector v2)
 {
 	t_vector	result;
 
@@ -22,7 +22,7 @@ t_vector	vector_add(t_vector v1, t_vector v2)
 	return (result);
 }
 
-t_vector	vector_subtract(t_vector v1, t_vector v2)
+t_vector	vc_subtract(t_vector v1, t_vector v2)
 {
 	t_vector	result;
 
@@ -32,7 +32,7 @@ t_vector	vector_subtract(t_vector v1, t_vector v2)
 	return (result);
 }
 
-t_vector	vector_multiply(t_vector v, double scalar)
+t_vector	vc_multiply(t_vector v, double scalar)
 {
 	t_vector	result;
 
@@ -60,7 +60,9 @@ t_vector	cross_product(t_vector v1, t_vector v2)
 	return (res);
 }
 
-double	vector_length(t_vector v)
+//why float? could it be double?
+
+float	vc_length(t_vector v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
