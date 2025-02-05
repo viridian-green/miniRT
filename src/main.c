@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/05 18:00:51 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:14:07 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ void render_image(t_scene *scene)
     color = (red << 16) | (green << 8) | blue;
 
     pixel_x = 0;
-    while (pixel_x < scene->img->width)
+    while (pixel_x < scene->canvas_height)
     {
         pixel_y = 0;
-        while (pixel_y < scene->img->height)
+        while (pixel_y < scene->canvas_width)
         {
             ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
             //put_color_to_pixel(pixel_x, pixel_y, scene, ray);
-            mlx_put_pixel(scene->img, pixel_x, pixel_y, 0x000000);
+            mlx_put_pixel(scene->img, pixel_x, pixel_y, color);
             pixel_y++;
         }
         pixel_x++;
