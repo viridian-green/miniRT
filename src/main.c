@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/05 17:29:38 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:00:51 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,28 @@ void	key_board(mlx_key_data_t key, t_scene *scene)
 	//update(scene);
 }
 
+/*
+void	my_mlx_pixel_put(int x, int y, t_fractal *fractal, int color)
+{
+	int	offset;
 
+	offset = (y * fractal->image.size_line) + ((fractal->image.bpp / 8) * x);
+	*(unsigned int *)(fractal->image.pixel + offset) = color;
+}
+*/
+
+/*
 void	render_image(t_scene *scene)
 {
 	double		pixel_x;
 	double		pixel_y;
 	t_ray		ray;
+	uint8_t red = 255;
+	uint8_t green = 0;
+	uint8_t blue = 0;
+
+// Combine the components into a single uint32_t
+	uint8_t color = (red << 16) | (green << 8) | blue;
 
 	pixel_x = 0;
 	while (pixel_x < scene->img->width)
@@ -39,11 +55,41 @@ void	render_image(t_scene *scene)
 		while (pixel_y < scene->img->height)
 		{
 			ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
-			put_color_to_pixel(pixel_x, pixel_y, scene, ray);
+			//put_color_to_pixel(pixel_x, pixel_y, scene, ray);
+			mlx_put_pixel(scene->img, pixel_x, pixel_y, color);
 			pixel_y++;
 		}
 		pixel_x++;
 	}
+}
+*/
+
+void render_image(t_scene *scene)
+{
+    double pixel_x;
+    double pixel_y;
+    t_ray ray;
+    uint32_t color;
+
+    uint8_t red = 255;
+    uint8_t green = 0;
+    uint8_t blue = 0;
+
+    color = (red << 16) | (green << 8) | blue;
+
+    pixel_x = 0;
+    while (pixel_x < scene->img->width)
+    {
+        pixel_y = 0;
+        while (pixel_y < scene->img->height)
+        {
+            ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
+            //put_color_to_pixel(pixel_x, pixel_y, scene, ray);
+            mlx_put_pixel(scene->img, pixel_x, pixel_y, 0x000000);
+            pixel_y++;
+        }
+        pixel_x++;
+    }
 }
 
 int	main(int ac, char **av)

@@ -6,14 +6,12 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/05 17:24:00 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:33:22 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-
-//isn't vp supposed to be the camera origin?
 t_ray	create_ray(double p_x, double p_y, t_vector origin, t_scene *scene)
 {
 	t_ray		ray;
