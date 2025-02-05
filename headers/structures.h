@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/05 16:01:52 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:36:59 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_ambience
 //FOV: Angle of what you see.
 typedef struct s_camera
 {
-	t_vector	viewpoint;
+	t_vector	origin;
 	t_vector	forward_v;
 	t_vector	right_v;
 	t_vector	up_v;

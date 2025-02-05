@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/05 16:33:39 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:36:54 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	render_image(t_scene *scene)
 		pixel_y = 0;
 		while (pixel_y < scene->img->height)
 		{
-			ray = create_ray(pixel_x, pixel_y, scene->camera.viewpoint, scene);
+			ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
 			put_color_to_pixel(pixel_x, pixel_y, scene, ray);
 			pixel_y++;
 		}
