@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 23:45:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/05 14:12:03 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:13:35 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,18 @@ t_vector	cross_product(t_vector v1, t_vector v2)
 	return (res);
 }
 
-//why float? could it be double?
-float	vector_length(t_vector v)
+double	vector_length(t_vector v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
+t_vector scalar_multiply(t_vector v, double scalar)
+{
+    t_vector result;
+
+    result.x = v.x * scalar;
+    result.y = v.y * scalar;
+    result.z = v.z * scalar;
+
+    return result;
 }

@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/05 15:34:59 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:01:52 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ typedef struct s_scene
 	t_ambience	ambience;
 	t_camera	camera;
 	t_light		light;
-	double		image_height;
-	double		image_width;
+	double		canvas_height;
+	double		canvas_width;
 	t_viewp		vp;
 	t_object	*objects;
 }	t_scene;
