@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/05 16:14:34 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:25:20 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ t_vector	cross_product(t_vector v1, t_vector v2);
 t_vector scalar_multiply(t_vector v, double scalar);
 
 float		vc_length(t_vector v);
+
+void	put_color_to_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
 
 void		create_viewport(t_scene *s);
 #endif

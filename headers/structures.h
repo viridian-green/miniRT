@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/05 16:36:59 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:54:54 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ typedef struct s_object
 	struct s_object	*next;
 }	t_object;
 
-//understand the atributees of the viewport
+//understand the attributes of the viewport
 typedef struct s_viewp
 {
 	double		width;

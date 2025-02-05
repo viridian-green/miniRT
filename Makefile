@@ -30,7 +30,9 @@ SRCS = 	src/main.c \
 		src/init.c \
 		src/init_objects.c \
 		src/error_handling.c \
-		src/viewport.c
+		src/viewport.c \
+		src/color.c \
+		src/ray.c
 
 OBJS = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 HDRS = $(addprefix $(HEADERS_DIR), minirt.h structures.h)

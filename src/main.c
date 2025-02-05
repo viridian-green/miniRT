@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/05 16:36:54 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:29:38 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	main(int ac, char **av)
 	if (!scene)
 		free_exit("Memory allocation error.", scene);
 	init_mlx(scene);
-	//init_scene(scene);
 	parsing(av[1], scene);
 	create_viewport(scene);
 	//mlx_loop_hook(scene->mlx_ptr, render_image, scene);
