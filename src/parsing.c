@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/03 14:09:56 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:17:29 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,7 @@ void	parse_file(int fd, t_scene *scene)
 {
 	char	*line;
 	char	*normalized_line;
-	int		camera_count;
-	int		light_count;
-	int		ambient_count;
 
-	camera_count = 0;
-	light_count = 0;
-	ambient_count = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -80,20 +74,11 @@ void	parse_file(int fd, t_scene *scene)
 			continue;
 		}
 		if (ft_strncmp(normalized_line, "A", 1) == 0)
-		{
-			ambient_count++;
 			parse_ambience(normalized_line, scene);
-		}
 		else if (ft_strncmp(normalized_line, "C", 1) == 0)
-		{
-			camera_count++;
 			parse_camera(normalized_line, scene);
-		}
 		else if (ft_strncmp(normalized_line, "L", 1) == 0)
-		{
-			light_count++;
 			parse_light(normalized_line, scene);
-		}
 		else if (ft_strncmp(normalized_line, "pl", 2) == 0)
 			parse_plane(normalized_line, scene);
 		else if (ft_strncmp(normalized_line, "sp", 2) == 0)
@@ -106,12 +91,6 @@ void	parse_file(int fd, t_scene *scene)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (camera_count != 1)
-		free_exit("Error. There must be one camera.", scene);
-	if (light_count != 1)
-		free_exit("Error. There must be one light.", scene);
-	if (ambient_count != 1)
-		free_exit("Error. There must be one ambient light.", scene);
 }
 
 int	parsing(char *config_file, t_scene *scene)
