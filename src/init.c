@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:07 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/04 00:35:27 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:32:09 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,14 @@ void	init_light(t_light *light)
 }
 
 //not sure if it is correct
+//We only need to init the objects
 void	init_scene(t_scene *scene)
 {
-	t_object	*obj;
+	// t_object *new_object = malloc(sizeof(t_object));
+	// if (!new_object)
+	// return; // Handle allocation failure
 
-	init_ambience(&scene->ambience);
-	init_camera(&scene->camera);
-	init_light(&scene->light);
-	obj = scene->objects;
-	while (obj)
-	{
-		init_object(obj);
-		obj = obj->next;
-	}
+	// init_object(new_object);
+	// new_object->next = scene->objects;
+	// scene->objects = new_object;
 }

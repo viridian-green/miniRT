@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/04 00:20:06 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:34:59 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ typedef struct s_object
 	struct s_object	*next;
 }	t_object;
 
-//understand the atributtes of the viewport
+//understand the atributees of the viewport
 typedef struct s_viewp
 {
 	double		width;
@@ -114,6 +114,8 @@ typedef struct s_scene
 	t_ambience	ambience;
 	t_camera	camera;
 	t_light		light;
+	double		image_height;
+	double		image_width;
 	t_viewp		vp;
 	t_object	*objects;
 }	t_scene;
