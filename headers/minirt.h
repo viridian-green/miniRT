@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/04 00:26:22 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:17:43 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ double	process_integer_part(const char **str);
 t_vector	vector_add(t_vector v1, t_vector v2);
 t_vector	vector_subtract(t_vector v1, t_vector v2);
 t_vector	vector_multiply(t_vector v, double scalar);
-double		vec_length(t_vector v);
+t_vector	cross_product(t_vector v1, t_vector v2);
+float		vector_length(t_vector v);
 
 void	create_viewport(t_scene *s);
 #endif
