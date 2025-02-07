@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/07 17:49:42 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:55:46 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
     while (temp)
 	{
         double t;
+		printf("yeah");
 		if (object_intersects(*temp, ray, &t))
 		{
 		printf("yeah");
@@ -109,10 +110,11 @@ int	main(int ac, char **av)
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
 		free_exit("Memory allocation error.", scene);
+	printf("yeah");
 	init_mlx(scene);
 	parsing(av[1], scene);
 	create_viewport(scene);
-	//mlx_loop_hook(scene->mlx_ptr, render_image, scene);
+	mlx_loop_hook(scene->mlx_ptr, (t_hookfunc)render_image, scene);
 	mlx_key_hook(scene->mlx_ptr, (t_mlx_keyfunc)key_board, scene);
 	mlx_loop(scene->mlx_ptr);
 	return (0);
