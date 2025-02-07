@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/05 17:25:20 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:30:32 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # define M_PI 3.14159265358979323846
 # define FOCAL_LENGTH 1.0
+# define WIDTH 1280
+# define HEIGHT 720
+# define EPSILON 1e-6
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -27,6 +30,7 @@
 # include "structures.h"
 
 typedef void	(*t_mlx_keyfunc)(mlx_key_data_t kay, void* param);
+typedef void	(*t_hookfunc)(void* param);
 
 //checks
 int			validate_orientation(t_vector *vector);
@@ -96,11 +100,11 @@ t_vector	vc_add(t_vector v1, t_vector v2);
 t_vector	vc_subtract(t_vector v1, t_vector v2);
 t_vector	vc_multiply(t_vector v, double scalar);
 t_vector	cross_product(t_vector v1, t_vector v2);
-t_vector scalar_multiply(t_vector v, double scalar);
+t_vector	scalar_multiply(t_vector v, double scalar);
 
 float		vc_length(t_vector v);
 
-void	put_color_to_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
+void		put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
 
 void		create_viewport(t_scene *s);
 #endif
