@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/07 16:23:01 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:49:42 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	key_board(mlx_key_data_t key, t_scene *scene)
 	//update(scene);
 }
 
+/*
 void render_hit(t_ray ray, double t, t_object *object) {
     t_vector hit_point = vc_add(ray.origin, vc_multiply(ray.direction, t));
 
@@ -37,49 +38,46 @@ void render_hit(t_ray ray, double t, t_object *object) {
         set_pixel_color(hit_point, plane->color);
     }
 }
+*/
 
-void find_closest_intersection(t_ray ray, t_scene *s)
+int object_intersects(t_object object, t_ray ray, double *t)
+{
+	if (ray_intersects_sp(ray, object, t))
+		return (1);
+	if (ray_intersects_plane(ray, object, t))
+		return (1);
+	else if (ray_intersects_cylinder(ray, object, t))
+		return (1);
+	return (0);
+}
+
+void find_nearest_intersection(t_ray ray, t_scene *s)
 {
     double closest_t = INT_MAX;
-    t_object *closest_obj = NULL;
+    //t_object *closest_obj;
     int hit = 0;
 	t_object *temp;
-	temp = s->objects;
+	temp = s->object;
     while (temp)
 	{
         double t;
+		if (object_intersects(*temp, ray, &t))
+		{
+		printf("yeah");
         if (t < closest_t)
 		{
             closest_t = t;
-            closest_obj = &scene->objects[i];
+            //closest_obj = s->object;
             hit = 1;
-        }
-		temp = s->objects->next;
+		}
+		}
+		temp = s->object->next;
     }
     if (hit)
-        render_hit(ray, closest_t, closest_obj);
-	else
-        render_background();  // No hit: draw background color
-}
-
-t_intersec	*intersection(t_data *data, t_ray ray)
-{
-	t_object	*object;
-	t_intersec	*closest;
-	t_intersec	*temp;
-
-	object = data->scene->objects;
-	closest = NULL;
-	while (object)
 	{
-		temp = NULL;
-		temp = obj_intersection(data, ray, object);
-		closest = compare_distance(temp, closest, ray.origin);
-		object = object->next;
+		printf("ok");
+        //render_hit(ray, closest_t, closest_obj);
 	}
-	if (closest)
-		return (closest);
-	return (NULL);
 }
 
 void	render_image(t_scene *scene)
@@ -95,8 +93,7 @@ void	render_image(t_scene *scene)
 		while (pixel_y < scene->canvas_height)
 		{
 			ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
-			//check_ray_intersection();
-			//put_color_to_pixel(pixel_x, pixel_y, scene, ray);
+			put_color_to_pixel(pixel_x, pixel_y, scene, ray);
 			pixel_y++;
 		}
 		pixel_x++;

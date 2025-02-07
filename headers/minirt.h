@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/07 14:31:14 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:47:40 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,14 @@ t_vector	vc_add(t_vector v1, t_vector v2);
 t_vector	vc_subtract(t_vector v1, t_vector v2);
 t_vector	vc_multiply(t_vector v, double scalar);
 t_vector	cross_product(t_vector v1, t_vector v2);
-t_vector scalar_multiply(t_vector v, double scalar);
+t_vector vc_scale(t_vector v, double s);
+double vec_dot(t_vector v1, t_vector v2);
+
+
+//Intersections
+int ray_intersects_sp(t_ray ray, t_object object, double *t);
+int ray_intersects_plane(t_ray ray, t_object object, double *t);
+int ray_intersects_cylinder(t_ray ray, t_object object, double *t);
 
 float		vc_length(t_vector v);
 

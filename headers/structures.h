@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/07 15:37:06 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:15:40 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct s_scene
 	double		canvas_height;
 	double		canvas_width;
 	t_viewp		vp;
-	t_object	*objects;
+	t_object	*object;
 }	t_scene;
 
 #endif

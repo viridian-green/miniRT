@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:04:37 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/03 18:54:44 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:46:34 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	parse_sphere(char *line, t_scene *scene)
 	node = new_object_node();
 	if (!node)
 		handle_parse_error(split_line, scene, "Error. Memory allocation failed.");
-	add_node_to_object(&scene->objects, node);
+	add_node_to_object(&scene->object, node);
 	set_coordinates(&split_line[0], &node->sp.center);
 	if (validate_numeric_value(split_line[2]))
 		handle_parse_error(split_line, scene, "Error. Invalid sphere diameter.");
@@ -76,7 +76,7 @@ void	parse_plane(char *line, t_scene *scene)
 	node = new_object_node();
 	if (!node)
 		handle_parse_error(split_line, scene, "Error. Memory allocation failed.");
-	add_node_to_object(&scene->objects, node);
+	add_node_to_object(&scene->object, node);
 	set_coordinates(&split_line[0], &node->pl.plane_point);
 	set_orientation(&split_line[1], &node->pl.orientation);
 	set_color(&split_line[3], &node->pl.color);
@@ -98,7 +98,7 @@ void	parse_cylinder(char *line, t_scene *scene)
 	node = new_object_node();
 	if (!node)
 		handle_parse_error(split_line, scene, "Error. Memory allocation failed.");
-	add_node_to_object(&scene->objects, node);
+	add_node_to_object(&scene->object, node);
 	set_coordinates(&split_line[0], &node->cy.center);
 	set_orientation(&split_line[1], &node->cy.orientation);
 	if (validate_numeric_value(split_line[3]) || \
