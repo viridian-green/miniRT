@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/07 15:33:48 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:06:56 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,46 @@ t_ray	create_ray(double p_x, double p_y, t_vector origin, t_scene *scene)
 	return (ray);
 }
 
-bool intersect_sphere(t_ray ray, t_object object, double *t_out)
+double	calculate_discriminant(double a, double b, double c)
 {
-    t_vector oc = vc_subtract(ray.origin, sphere.center);
-    double a = vc_dot(ray.direction, ray.direction); // Assuming direction is normalized, a = 1
-    double b = 2.0 * vc_dot(oc, ray.direction);
-    double c = vc_dot(oc, oc) - sphere.radius * sphere.radius;
-    double discriminant = b * b - 4 * a * c;
+	double	discriminant;
 
-    if (discriminant < 0)
-        return false; // No intersection
-	else
-	{
-        double sqrt_disc = sqrt(discriminant);
-        double t1 = (-b - sqrt_disc) / (2 * a);
-        double t2 = (-b + sqrt_disc) / (2 * a);
+	discriminant = (b * b) - (4.0 * a * c);
+	return (discriminant);
+}
 
-        if (t1 > 0.001) {  // Small epsilon to avoid floating-point errors
-            *t_out = t1;
-            return true;  // Intersection at t1 (closest hit)
-        } else if (t2 > 0.001) {
-            *t_out = t2;
-            return true;  // Intersection at t2 (if ray started inside sphere)
-        }
-        return false; // Both intersections are behind the ray
-    }
+double	calculate_entry_distance(double a, double b, double discriminant)
+{
+	double	t1;
+
+	t1 = (-b - sqrt(discriminant)) / (2.0 * a);
+	return (t1);
+}
+
+double	calculate_exit_distance(double a, double b, double discriminant)
+{
+	double	t2;
+
+	t2 = (-b + sqrt(discriminant)) / (2.0 * a);
+	return (t2);
+}
+
+int	ray_intersect_sphere(t_vector ray, t_object object, double *t)
+{
+	double	b;
+	double	discriminant;
+
+	b = 2.0 * vec3_dot(sphere->ixd.oc, ray_dir);
+	discriminant = calculate_discriminant(1.0, b, sphere->ixd.c);
+	if (discriminant < 0.0)
+		return (0);
+	*t = calculate_entry_distance(1.0, b, discriminant);
+	if (*t >= 0.0)
+		return (1);
+	*t = calculate_exit_distance(1.0, b, discriminant);
+	if (*t >= 0.0)
+		return (1);
+	return (0);
 }
 
 
