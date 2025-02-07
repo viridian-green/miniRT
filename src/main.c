@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/07 15:37:47 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:23:01 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void render_hit(t_ray ray, double t, t_object *object) {
     }
 }
 
-void find_closest_intersection(t_ray ray, t_scene *s) {
+void find_closest_intersection(t_ray ray, t_scene *s)
+{
     double closest_t = INT_MAX;
     t_object *closest_obj = NULL;
     int hit = 0;

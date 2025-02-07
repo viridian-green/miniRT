@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 23:45:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/05 16:28:53 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:48:47 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ t_vector	vc_multiply(t_vector v, double scalar)
 	return (result);
 }
 
+double vec3_dot(t_vector v1, t_vector v2)
+{
+    return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
+}
+
 /*
 This step ensures the right_v is always perpendicular to forward_v, no matter
 where the camera is looking. Finally, we compute  v, the true "up" direction
@@ -61,7 +66,6 @@ t_vector	cross_product(t_vector v1, t_vector v2)
 }
 
 //why float? could it be double?
-
 float	vc_length(t_vector v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
