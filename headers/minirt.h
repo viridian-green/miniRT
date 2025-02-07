@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/07 17:47:40 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:57:15 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # define M_PI 3.14159265358979323846
 # define FOCAL_LENGTH 1.0
+# define WIDTH 1280
+# define HEIGHT 720
+# define EPSILON 1e-6
 
 # include <fcntl.h>
 # include <limits.h>
@@ -28,6 +31,7 @@
 # include "structures.h"
 
 typedef void	(*t_mlx_keyfunc)(mlx_key_data_t kay, void* param);
+typedef void	(*t_hookfunc)(void* param);
 
 //checks
 int			validate_orientation(t_vector *vector);
@@ -97,6 +101,7 @@ t_vector	vc_add(t_vector v1, t_vector v2);
 t_vector	vc_subtract(t_vector v1, t_vector v2);
 t_vector	vc_multiply(t_vector v, double scalar);
 t_vector	cross_product(t_vector v1, t_vector v2);
+<<<<<<< HEAD
 t_vector vc_scale(t_vector v, double s);
 double vec_dot(t_vector v1, t_vector v2);
 
@@ -105,10 +110,13 @@ double vec_dot(t_vector v1, t_vector v2);
 int ray_intersects_sp(t_ray ray, t_object object, double *t);
 int ray_intersects_plane(t_ray ray, t_object object, double *t);
 int ray_intersects_cylinder(t_ray ray, t_object object, double *t);
+=======
+t_vector	scalar_multiply(t_vector v, double scalar);
+>>>>>>> 4f6155cadd3d5f4de8c26ab31e5a685430709abd
 
 float		vc_length(t_vector v);
 
-void	put_color_to_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
+void		put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
 
 void		create_viewport(t_scene *s);
 #endif

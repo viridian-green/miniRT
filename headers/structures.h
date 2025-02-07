@@ -6,16 +6,12 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/07 17:15:40 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:03:17 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-
-# define WIDTH 1280
-# define HEIGHT 720
-# define EPSILON 1e-6
 
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 
