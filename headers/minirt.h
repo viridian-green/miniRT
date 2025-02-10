@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/10 13:17:54 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:27:41 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_vector	scalar_multiply(t_vector v, double scalar);
 
 float		vc_length(t_vector v);
 
-void		put_color_to_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
+void		put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
 
 void		create_viewport(t_scene *s);
 #endif

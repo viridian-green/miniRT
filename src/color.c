@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/07 18:17:04 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:27:51 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_color	gradient(t_ray ray, t_scene *scene)
 	
 }
 
-void	put_color_to_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
+void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
 {
 	int			color;
 	t_color		rgb;
