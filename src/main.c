@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/07 15:38:41 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:03:03 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,50 +56,24 @@ int	main(int ac, char **av)
 		free_exit("Memory allocation error.", scene);
 	init_mlx(scene);
 	parsing(av[1], scene);
-	printf("ambience color r: %d\n", scene->ambience.color.r);
-	printf("ambience color g: %d\n", scene->ambience.color.g);
-	printf("ambience color b: %d\n", scene->ambience.color.b);
-	printf("ambience light ratio: %f\n", scene->ambience.light_ratio);
-	printf("camera origin x: %f\n", scene->camera.origin.x);
-	printf("camera origin y: %f\n", scene->camera.origin.y);
-	printf("camera origin z: %f\n", scene->camera.origin.z);
-	printf("camera forward_v x: %f\n", scene->camera.forward_v.x);
-	printf("camera forward_v y: %f\n", scene->camera.forward_v.y);
-	printf("camera forward_v z: %f\n", scene->camera.forward_v.z);
-	printf("camera right_v x: %f\n", scene->camera.right_v.x);
-	printf("camera right_v y: %f\n", scene->camera.right_v.y);
-	printf("camera right_v z: %f\n", scene->camera.right_v.z);
-	printf("camera up_v x: %f\n", scene->camera.up_v.x);
-	printf("camera up_v y: %f\n", scene->camera.up_v.y);
-	printf("camera up_v z: %f\n", scene->camera.up_v.z);
-	printf("camera fov: %d\n", scene->camera.fov);
-	printf("light point x: %f\n", scene->light.light_point.x);
-	printf("light point y: %f\n", scene->light.light_point.y);
-	printf("light point z: %f\n", scene->light.light_point.z);
-	printf("light ratio: %f\n", scene->light.ratio);
-	printf("light color r: %d\n", scene->light.color.r);
-	printf("light color g: %d\n", scene->light.color.g);
-	printf("light color b: %d\n", scene->light.color.b);
-	printf("canvas width: %f\n", scene->canvas_width);
-	printf("canvas height: %f\n", scene->canvas_height);
-	t_object	*current = scene->objects;
-	while (current)
-	{
-		printf("Object type: %d\n", current->type);
-		if (current->type == 1)
-		{
-			printf("Sphere center x: %f\n", current->sp.center.x);
-			printf("Sphere center y: %f\n", current->sp.center.y);
-			printf("Sphere center z: %f\n", current->sp.center.z);
-			printf("Sphere diameter: %f\n", current->sp.diameter);
-			printf("Sphere color r: %d\n", current->sp.color.r);
-			printf("Sphere color g: %d\n", current->sp.color.g);
-			printf("Sphere color b: %d\n", current->sp.color.b);
-		}
-		current = current->next;
-	}
-	
 	create_viewport(scene);
+	// printf("viewport width: %f\n", scene->vp.width);
+	// printf("viewport height: %f\n", scene->vp.height);
+	// printf("viewport center x: %f\n", scene->vp.center.x);
+	// printf("viewport center y: %f\n", scene->vp.center.y);
+	// printf("viewport center z: %f\n", scene->vp.center.z);
+	// printf("viewport up_left x: %f\n", scene->vp.up_left.x);
+	// printf("viewport up_left y: %f\n", scene->vp.up_left.y);
+	// printf("viewport up_left z: %f\n", scene->vp.up_left.z);
+	// printf("viewport pixel_init x: %f\n", scene->vp.pixel_init.x);
+	// printf("viewport pixel_init y: %f\n", scene->vp.pixel_init.y);
+	// printf("viewport pixel_init z: %f\n", scene->vp.pixel_init.z);
+	// printf("viewport pixel_x x: %f\n", scene->vp.pixel_x.x);
+	// printf("viewport pixel_x y: %f\n", scene->vp.pixel_x.y);
+	// printf("viewport pixel_x z: %f\n", scene->vp.pixel_x.z);
+	// printf("viewport pixel_y x: %f\n", scene->vp.pixel_y.x);
+	// printf("viewport pixel_y y: %f\n", scene->vp.pixel_y.y);
+	// printf("viewport pixel_y z: %f\n", scene->vp.pixel_y.z);
 	mlx_loop_hook(scene->mlx_ptr, (t_hookfunc)render_image, scene);
 	mlx_key_hook(scene->mlx_ptr, (t_mlx_keyfunc)key_board, scene);
 	mlx_loop(scene->mlx_ptr);

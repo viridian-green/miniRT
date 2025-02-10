@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/07 15:30:32 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:17:54 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ void		free_split(char **split);
 void		handle_parse_error(char **split_line, t_scene *scene, char *message);
 
 //init
-void		init_ambience(t_ambience *ambience);
-void		init_camera(t_camera *camera);
-void		init_light(t_light *light);
-void		init_scene(t_scene *scene);
+void		init_mlx(t_scene *scene);
 
 //init_objects
 void		init_sphere(t_sp *sp);
@@ -104,7 +101,7 @@ t_vector	scalar_multiply(t_vector v, double scalar);
 
 float		vc_length(t_vector v);
 
-void		put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
+void		put_color_to_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
 
 void		create_viewport(t_scene *s);
 #endif
