@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/10 13:49:43 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:17:39 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,46 +40,6 @@ void render_hit(t_ray ray, double t, t_object *object) {
 }
 */
 
-int object_intersects(t_object object, t_ray ray, double *t)
-{
-	if (ray_intersects_sp(ray, object, t))
-		return (1);
-	if (ray_intersects_plane(ray, object, t))
-		return (1);
-	else if (ray_intersects_cylinder(ray, object, t))
-		return (1);
-	return (0);
-}
-
-void find_nearest_intersection(t_ray ray, t_scene *s)
-{
-    // double closest_t = INT_MAX;
-    //t_object *closest_obj;
-    int hit = 0;
-	t_object *temp;
-	temp = s->object;
-    while (temp != NULL)
-	{
-        double t;
-		if (object_intersects(*temp, ray, &t))
-		{
-		printf("ok");
-        // if (t < closest_t)
-		// {
-        //     closest_t = t;
-        //     //closest_obj = s->object;
-        //     hit = 1;
-		// }
-		}
-		temp = temp->next;
-    }
-    if (hit)
-	{
-		// printf("ok");
-        //render_hit(ray, closest_t, closest_obj);
-	}
-}
-
 void	render_image(t_scene *scene)
 {
 	double		pixel_x;
@@ -93,7 +53,6 @@ void	render_image(t_scene *scene)
 		while (pixel_y < scene->canvas_height)
 		{
 			ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
-			find_nearest_intersection(ray, scene);
 			put_color_pixel(pixel_x, pixel_y, scene, ray);
 			pixel_y++;
 		}
@@ -112,6 +71,24 @@ int	main(int ac, char **av)
 		free_exit("Memory allocation error.", scene);
 	init_mlx(scene);
 	parsing(av[1], scene);
+	// t_object	*current = scene->object;
+	// while (current)
+	// {
+	// 	printf("Object type: %d\n", current->type);
+	// 	if (current->type == 1)
+	// 	{
+	// 		printf("Sphere color r: %d\n", current->sp.color.r);
+	// 	}
+	// 	if (current->type == 2)
+	// 	{
+	// 		printf("Sphere color g: %d\n", current->pl.color.g);
+	// 	}
+	// 	if (current->type == 3)
+	// 	{
+	// 		printf("Sphere color g: %d\n", current->cy.color.g);
+	// 	}
+	// 	current = current->next;
+	// }
 	create_viewport(scene);
 	mlx_loop_hook(scene->mlx_ptr, (t_hookfunc)render_image, scene);
 	mlx_key_hook(scene->mlx_ptr, (t_mlx_keyfunc)key_board, scene);
