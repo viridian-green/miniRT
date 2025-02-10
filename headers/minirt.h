@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/10 14:33:26 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:46:39 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,9 @@ double		process_integer_part(const char **str);
 //math
 t_vector	vc_add(t_vector v1, t_vector v2);
 t_vector	vc_subtract(t_vector v1, t_vector v2);
-t_vector	vc_multiply(t_vector v, double scalar);
+t_vector	vc_mult_scalar(t_vector v, double scalar);
 t_vector	cross_product(t_vector v1, t_vector v2);
-t_vector vc_scale(t_vector v, double s);
-double vec_dot(t_vector v1, t_vector v2);
+double		vec_dot(t_vector v1, t_vector v2);
 
 
 //Intersections

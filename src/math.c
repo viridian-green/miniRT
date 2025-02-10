@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 23:45:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/07 17:48:00 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:43:58 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_vector	vc_subtract(t_vector v1, t_vector v2)
 	return (result);
 }
 
-t_vector	vc_multiply(t_vector v, double scalar)
+t_vector	vc_mult_scalar(t_vector v, double scalar)
 {
 	t_vector	result;
 
@@ -70,13 +70,3 @@ float	vc_length(t_vector v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
-
-t_vector vc_scale(t_vector v, double s)
-{
-    t_vector result;
-    result.x = v.x * s;
-    result.y = v.y * s;
-    result.z = v.z * s;
-    return result;
-}
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/07 17:48:37 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:42:48 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_ray	create_ray(double p_x, double p_y, t_vector origin, t_scene *scene)
 	t_vector	p_x_sc;
 	t_vector	p_y_sc;
 
-	p_x_sc = vc_multiply(scene->vp.pixel_x, p_x);
-	p_y_sc = vc_multiply(scene->vp.pixel_y, p_y);
+	p_x_sc = vc_mult_scalar(scene->vp.pixel_x, p_x);
+	p_y_sc = vc_mult_scalar(scene->vp.pixel_y, p_y);
 	p_center = vc_add(vc_add(scene->vp.pixel_init, p_x_sc), p_y_sc);
 	ray.origin = origin;
 	ray.direction = vc_subtract(p_center, origin);
@@ -88,8 +88,8 @@ int ray_intersects_cylinder(t_ray ray, t_object object, double *t)
     double dot_oc_axis = vec_dot(oc, axis);
 
     // We now form the quadratic equation to solve for intersection t
-    t_vector oc_perp = vc_subtract(oc, vc_scale(axis, dot_oc_axis));  // Vector perpendicular to axis
-    t_vector dir_perp = vc_subtract(direction, vc_scale(axis, dot_dir_axis));  // Ray direction perpendicular to axis
+    t_vector oc_perp = vc_subtract(oc, vc_mult_scalar(axis, dot_oc_axis));  // Vector perpendicular to axis
+    t_vector dir_perp = vc_subtract(direction, vc_mult_scalar(axis, dot_dir_axis));  // Ray direction perpendicular to axis
 
     double a = vec_dot(dir_perp, dir_perp);  // Coefficient for quadratic equation
     double b = 2.0 * vec_dot(oc_perp, dir_perp);
@@ -110,7 +110,7 @@ int ray_intersects_cylinder(t_ray ray, t_object object, double *t)
     if (t1 >= 0.0)
     {
         // Now, we need to check if the intersection is within the cylinder's height
-        t_vector intersection1 = vc_add(ray.origin, vc_scale(ray.direction, t1));
+        t_vector intersection1 = vc_add(ray.origin, vc_mult_scalar(ray.direction, t1));
         double height1 = vec_dot(vc_subtract(intersection1, object.cy.center), axis);
         if (height1 >= 0.0 && height1 <= object.cy.height)
         {
@@ -121,7 +121,7 @@ int ray_intersects_cylinder(t_ray ray, t_object object, double *t)
 
     if (t2 >= 0.0)
     {
-        t_vector intersection2 = vc_add(ray.origin, vc_scale(ray.direction, t2));
+        t_vector intersection2 = vc_add(ray.origin, vc_mult_scalar(ray.direction, t2));
         double height2 = vec_dot(vc_subtract(intersection2, object.cy.center), axis);
         if (height2 >= 0.0 && height2 <= object.cy.height)
         {
