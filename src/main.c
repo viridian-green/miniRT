@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/02/07 17:55:46 by ademarti         ###   ########.fr       */
-=======
-/*   Updated: 2025/02/07 15:38:41 by mrabelo-         ###   ########.fr       */
->>>>>>> 4f6155cadd3d5f4de8c26ab31e5a685430709abd
+/*   Updated: 2025/02/10 13:49:43 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +53,29 @@ int object_intersects(t_object object, t_ray ray, double *t)
 
 void find_nearest_intersection(t_ray ray, t_scene *s)
 {
-    double closest_t = INT_MAX;
+    // double closest_t = INT_MAX;
     //t_object *closest_obj;
     int hit = 0;
 	t_object *temp;
 	temp = s->object;
-    while (temp)
+    while (temp != NULL)
 	{
         double t;
-		printf("yeah");
 		if (object_intersects(*temp, ray, &t))
 		{
-		printf("yeah");
-        if (t < closest_t)
-		{
-            closest_t = t;
-            //closest_obj = s->object;
-            hit = 1;
+		printf("ok");
+        // if (t < closest_t)
+		// {
+        //     closest_t = t;
+        //     //closest_obj = s->object;
+        //     hit = 1;
+		// }
 		}
-		}
-		temp = s->object->next;
+		temp = temp->next;
     }
     if (hit)
 	{
-		printf("ok");
+		// printf("ok");
         //render_hit(ray, closest_t, closest_obj);
 	}
 }
@@ -98,6 +93,7 @@ void	render_image(t_scene *scene)
 		while (pixel_y < scene->canvas_height)
 		{
 			ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
+			find_nearest_intersection(ray, scene);
 			put_color_pixel(pixel_x, pixel_y, scene, ray);
 			pixel_y++;
 		}
@@ -114,52 +110,8 @@ int	main(int ac, char **av)
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
 		free_exit("Memory allocation error.", scene);
-	printf("yeah");
 	init_mlx(scene);
 	parsing(av[1], scene);
-	printf("ambience color r: %d\n", scene->ambience.color.r);
-	printf("ambience color g: %d\n", scene->ambience.color.g);
-	printf("ambience color b: %d\n", scene->ambience.color.b);
-	printf("ambience light ratio: %f\n", scene->ambience.light_ratio);
-	printf("camera origin x: %f\n", scene->camera.origin.x);
-	printf("camera origin y: %f\n", scene->camera.origin.y);
-	printf("camera origin z: %f\n", scene->camera.origin.z);
-	printf("camera forward_v x: %f\n", scene->camera.forward_v.x);
-	printf("camera forward_v y: %f\n", scene->camera.forward_v.y);
-	printf("camera forward_v z: %f\n", scene->camera.forward_v.z);
-	printf("camera right_v x: %f\n", scene->camera.right_v.x);
-	printf("camera right_v y: %f\n", scene->camera.right_v.y);
-	printf("camera right_v z: %f\n", scene->camera.right_v.z);
-	printf("camera up_v x: %f\n", scene->camera.up_v.x);
-	printf("camera up_v y: %f\n", scene->camera.up_v.y);
-	printf("camera up_v z: %f\n", scene->camera.up_v.z);
-	printf("camera fov: %d\n", scene->camera.fov);
-	printf("light point x: %f\n", scene->light.light_point.x);
-	printf("light point y: %f\n", scene->light.light_point.y);
-	printf("light point z: %f\n", scene->light.light_point.z);
-	printf("light ratio: %f\n", scene->light.ratio);
-	printf("light color r: %d\n", scene->light.color.r);
-	printf("light color g: %d\n", scene->light.color.g);
-	printf("light color b: %d\n", scene->light.color.b);
-	printf("canvas width: %f\n", scene->canvas_width);
-	printf("canvas height: %f\n", scene->canvas_height);
-	t_object	*current = scene->objects;
-	while (current)
-	{
-		printf("Object type: %d\n", current->type);
-		if (current->type == 1)
-		{
-			printf("Sphere center x: %f\n", current->sp.center.x);
-			printf("Sphere center y: %f\n", current->sp.center.y);
-			printf("Sphere center z: %f\n", current->sp.center.z);
-			printf("Sphere diameter: %f\n", current->sp.diameter);
-			printf("Sphere color r: %d\n", current->sp.color.r);
-			printf("Sphere color g: %d\n", current->sp.color.g);
-			printf("Sphere color b: %d\n", current->sp.color.b);
-		}
-		current = current->next;
-	}
-
 	create_viewport(scene);
 	mlx_loop_hook(scene->mlx_ptr, (t_hookfunc)render_image, scene);
 	mlx_key_hook(scene->mlx_ptr, (t_mlx_keyfunc)key_board, scene);

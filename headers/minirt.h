@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/07 17:57:15 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:28:04 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ t_vector	vc_add(t_vector v1, t_vector v2);
 t_vector	vc_subtract(t_vector v1, t_vector v2);
 t_vector	vc_multiply(t_vector v, double scalar);
 t_vector	cross_product(t_vector v1, t_vector v2);
-<<<<<<< HEAD
 t_vector vc_scale(t_vector v, double s);
 double vec_dot(t_vector v1, t_vector v2);
 
@@ -110,9 +109,7 @@ double vec_dot(t_vector v1, t_vector v2);
 int ray_intersects_sp(t_ray ray, t_object object, double *t);
 int ray_intersects_plane(t_ray ray, t_object object, double *t);
 int ray_intersects_cylinder(t_ray ray, t_object object, double *t);
-=======
 t_vector	scalar_multiply(t_vector v, double scalar);
->>>>>>> 4f6155cadd3d5f4de8c26ab31e5a685430709abd
 
 float		vc_length(t_vector v);
 
