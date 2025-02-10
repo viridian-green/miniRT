@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/10 13:27:41 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:33:26 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define EPSILON 1e-6
 
 # include <fcntl.h>
+# include <limits.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -97,6 +98,14 @@ t_vector	vc_add(t_vector v1, t_vector v2);
 t_vector	vc_subtract(t_vector v1, t_vector v2);
 t_vector	vc_multiply(t_vector v, double scalar);
 t_vector	cross_product(t_vector v1, t_vector v2);
+t_vector vc_scale(t_vector v, double s);
+double vec_dot(t_vector v1, t_vector v2);
+
+
+//Intersections
+int ray_intersects_sp(t_ray ray, t_object object, double *t);
+int ray_intersects_plane(t_ray ray, t_object object, double *t);
+int ray_intersects_cylinder(t_ray ray, t_object object, double *t);
 t_vector	scalar_multiply(t_vector v, double scalar);
 
 float		vc_length(t_vector v);

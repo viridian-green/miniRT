@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/07 15:30:28 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:20:23 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,16 @@ typedef struct s_cy
 	t_color		color;
 }	t_cy;
 
+typedef struct s_intersec
+{
+	double			t;
+	t_vector			point;
+	t_vector			normal;
+	t_color			color;
+	char			type;
+	struct s_object	*self;
+}	t_intersec;
+
 //type 1 = sphere, type 2 = plane, type 3 = cylinder
 typedef struct s_object
 {
@@ -113,7 +123,8 @@ typedef struct s_scene
 	double		canvas_height;
 	double		canvas_width;
 	t_viewp		vp;
-	t_object	*objects;
+	t_object	*object;
+	t_intersec intersec;
 }	t_scene;
 
 #endif

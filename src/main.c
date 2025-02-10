@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/10 13:27:53 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:34:49 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@ void	key_board(mlx_key_data_t key, t_scene *scene)
 	//zoom(key, scene);
 	//update(scene);
 }
+
+/*
+void render_hit(t_ray ray, double t, t_object *object) {
+    t_vector hit_point = vc_add(ray.origin, vc_multiply(ray.direction, t));
+
+    // For now, just set the color based on the object's type
+    if (object->type == SPHERE) {
+        t_sp *sphere = (t_sp *)object->obj_data;
+        set_pixel_color(hit_point, sphere->color);
+    } else if (object->type == PLANE) {
+        t_pl *plane = (t_pl *)object->obj_data;
+        set_pixel_color(hit_point, plane->color);
+    }
+}
+*/
 
 void	render_image(t_scene *scene)
 {

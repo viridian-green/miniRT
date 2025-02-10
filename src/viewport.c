@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:09:23 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/05 16:19:27 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:03:45 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	is_aligned_with_up_vector(t_vector orientation)
 
 void scalarize_pixels(t_scene *s)
 {
-	s->vp.pixel_x = scalar_multiply(s->camera.right_v, s->vp.width / s->canvas_width);
-    s->vp.pixel_y = scalar_multiply(s->camera.up_v, -(s->vp.height / s->canvas_height));
+	s->vp.pixel_x = vc_scale(s->camera.right_v, s->vp.width / s->canvas_width);
+    s->vp.pixel_y = vc_scale(s->camera.up_v, -(s->vp.height / s->canvas_height));
 }
 
 
