@@ -6,24 +6,11 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:09:23 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/10 15:42:51 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:51:01 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-//We make the vecor's magnitude (size) equal to 1.
-t_vector	normalize(t_vector v)
-{
-	t_vector	norm;
-	float		len;
-
-	len = vc_length(v);
-	norm.x = v.x / len;
-	norm.y = v.y / len;
-	norm.z = v.z / len;
-	return (norm);
-}
 
 /*
 Check if the camera orientation is aligned with world-up or its negative

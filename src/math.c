@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 23:45:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/10 15:43:58 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:50:56 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,17 @@ t_vector	cross_product(t_vector v1, t_vector v2)
 float	vc_length(t_vector v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
+//We make the vecor's magnitude (size) equal to 1.
+t_vector	normalize(t_vector v)
+{
+	t_vector	norm;
+	float		len;
+
+	len = vc_length(v);
+	norm.x = v.x / len;
+	norm.y = v.y / len;
+	norm.z = v.z / len;
+	return (norm);
 }
