@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/11 12:46:50 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:31:03 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,22 @@ int	convert_color(t_color color)
 	return (rgb);
 }
 
-double object_intersects(t_object object, t_ray ray)
+double object_intersects(t_object object, t_ray ray, double t, t_scene *s)
 {
-	double t;
-	t = ray_intersects_sp(object, &ray);
-	//t = ray_intersects_sp(object, &ray, &t);
-	//t = ray_intersects_sp(object, &ray, &t);
+	//double t;
+	if (hit_sp(ray, object, &t))
+	{
+		t = ray_intersects_sp(&object, &ray, s);
+	}
+	if (ray_intersects_plane(ray, object, &t))
+	{
+		t = ray_intersects_sp(&object, &ray, s);
+	}
+	if (ray_intersects_cylinder(ray, object, &t))
+	{
+		printf("ok");
+		t = ray_intersects_sp(&object, &ray, s);
+	}
 	return (t);
 }
 
@@ -41,7 +51,7 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
     s->intersec.self = NULL;  // Reset intersection before finding
     while (current)
     {
-        temp_t = object_intersects(*current, ray);
+        temp_t = object_intersects(*current, ray, temp_t, s);
         {
             if ((t < 0 && temp_t > 0) || ((temp_t > 0 && temp_t < t)))
             {
@@ -66,15 +76,19 @@ void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
         if (scene->intersec.self->type == 1) // Sphere
 		{
 			printf("yes");
-            rgb = scene->intersec.self->sp.color;
+            rgb = scene->object->sp.color;
 		}
         else if (scene->intersec.self->type == 2) // Plane
         {
-			printf("yes");
-            rgb = scene->intersec.self->sp.color;
+			printf("no");
+            rgb = scene->object->pl.color;
 		}
         else if (scene->intersec.self->type == 3) // Cylinder
-            rgb = scene->intersec.self->cy.color;
+		{
+			printf("why not");
+            //rgb = scene->intersec.self->cy.color;
+			rgb = scene->object->cy.color;
+		}
         else
             rgb = scene->ambience.color;  // Default to black if type is unknown
     }
