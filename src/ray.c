@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/11 13:13:12 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:03:38 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,28 @@ int hit_sp(t_ray ray, t_object object, double *t)
             s->intersec.self = object;
            return ((-half_b - sqrt(discriminant)) / a);
        }
+   }
+
+   double hit_plane(t_ray ray, t_object object, double *t)
+   {
+       // Plane normal vector
+       t_vector normal = object.pl.orientation;
+       // Dot product of ray direction and plane normal
+       double denom = vec_dot(ray.direction, normal);
+
+       // Check if ray is parallel to the plane
+       if (fabs(denom) > 1e-6)  // A small threshold to avoid floating-point issues
+       {
+           // Compute the t value
+           t_vector oc = vc_subtract(ray.origin, object.pl.plane_point);
+           *t = -vec_dot(oc, normal) / denom;
+
+           // Check if intersection is in the positive direction
+           if (*t >= 0.0)
+               return *t;  // Return the t value (intersection occurs)
+       }
+
+       return -1.0;  // Return -1.0 to indicate no intersection
    }
 
 int ray_intersects_plane(t_ray ray, t_object object, double *t)
