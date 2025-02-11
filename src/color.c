@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/10 14:34:25 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:15:19 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@ int	convert_color(t_color color)
 	return (rgb);
 }
 
-t_color	gradient(t_ray ray, t_scene *scene)
-{
-	t_vector	normal;
-	t_color		color;
-
 int object_intersects(t_object object, t_ray ray, double *t)
 {
 	if (ray_intersects_sp(ray, object, t))
@@ -42,18 +37,21 @@ int object_intersects(t_object object, t_ray ray, double *t)
 void find_nearest_intersection(t_ray ray, t_scene *s)
 {
     double closest_t = INT_MAX;
-    while (s->object)
-	{
+    t_object *current = s->object;  // Temporary pointer to iterate
+
+    s->intersec.self = NULL;  // Reset intersection before finding
+    while (current)
+    {
         double t;
-		if (object_intersects(*s->object, ray, &t))
-		{
-        if (t < closest_t)
-		{
-            closest_t = t;
-            s->intersec.self = s->object;
-		}
-		}
-		s->object = s->object->next;
+        if (object_intersects(*current, ray, &t))
+        {
+            if (t < closest_t)
+            {
+                closest_t = t;
+                s->intersec.self = current;
+            }
+        }
+        current = current->next;  // Move to the next object
     }
 }
 
@@ -61,17 +59,15 @@ void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
 {
 	int			color;
 	t_color		rgb;
-	//t_intersec	obj_intersec;
 
 	(void)ray;
-	//obj_intersec = intersect(ray, scene);
 	find_nearest_intersection(ray, scene);
         if (scene->intersec.self->type == 1) // Sphere
             rgb = scene->intersec.self->sp.color;
         else if (scene->intersec.self->type == 2) // Plane
-            rgb = scene->intersec.self->pl.color;
+			rgb = scene->intersec.self->pl.color;
         else if (scene->intersec.self->type == 3) // Cylinder
-            rgb = scene->intersec.self->cy.color;
+			rgb = scene->intersec.self->cy.color;
         else
             rgb = (t_color){0, 0, 0};
 	// rgb = scene->intersec.self->color;

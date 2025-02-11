@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/10 15:46:39 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:06:36 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ char		*ft_strcat(char *dest, const char *src);
 char		*ft_strtok(char *str, const char *delim);
 int			validate_numeric_value(char *str);
 double		process_integer_part(const char **str);
+t_vector	normalize(t_vector v);
 
 //math
 t_vector	vc_add(t_vector v1, t_vector v2);
