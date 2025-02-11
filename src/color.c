@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/11 14:04:01 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:09:22 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
         {
             if ((t < 0 && temp_t > 0) || ((temp_t > 0 && temp_t < t)))
             {
-				printf("%f", temp_t);
                 t = temp_t;
+				printf("%f \n", temp_t);
                 //s->intersec.self = current;
             }
         }
