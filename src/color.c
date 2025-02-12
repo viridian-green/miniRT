@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/11 14:09:22 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:55:20 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,50 @@ int	convert_color(t_color color)
 	return (rgb);
 }
 
+
+// int hit_sp(t_ray ray, t_object object, double *t)
+// {
+// 	t_vector	oc;
+//        double	a;
+//        double	half_b;
+//        double	c;
+//        double	discriminant;
+
+//        //s->intersec.self = NULL;
+
+//        oc = vc_subtract(ray.origin, object.sp.center);
+//        a = vec_dot(ray.direction, ray.direction);
+//        half_b = vec_dot(oc, ray.direction);
+//        c = vec_dot(oc, oc) - object.sp.diameter * object.sp.diameter / 4;
+//        discriminant = half_b * half_b - a * c;
+//        if (discriminant < 0)
+//        {
+//            return (0);
+//        }
+//        else
+//        {
+//         	// s->intersec.self = object;
+//         	*t = ((-half_b - sqrt(discriminant)) / a);
+// 			return (1);
+//        }
+// 	   return (0);
+// }
+
+
 double object_intersects(t_object object, t_ray ray, double t, t_scene *s)
 {
-	if (hit_sp(ray, object, &t))
+	(void)s;
+	if (ray_intersects_sp(ray, object, &t, s))
 	{
-		t = ray_intersects_sp(&object, &ray, s);
+		printf("%fsp\n", t);
 	}
 	if (ray_intersects_plane(ray, object, &t))
 	{
-		t = hit_plane(ray, object, &t);
+		printf("%fp\n", t);
 	}
 	if (ray_intersects_cylinder(ray, object, &t))
 	{
-		t = ray_intersects_sp(&object, &ray, s);
+		printf("%fc\n", t);
 	}
 	return (t);
 }
@@ -45,8 +76,8 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
     //double closest_t = INT_MAX;
     t_object *current = s->object;  // Temporary pointer to iterate
 	double t = -1;
-	double temp_t;
-    s->intersec.self = NULL;  // Reset intersection before finding
+	double temp_t = -1;
+	s->intersec.self = NULL;
     while (current)
     {
         temp_t = object_intersects(*current, ray, temp_t, s);
@@ -54,8 +85,9 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
             if ((t < 0 && temp_t > 0) || ((temp_t > 0 && temp_t < t)))
             {
                 t = temp_t;
-				printf("%f \n", temp_t);
-                //s->intersec.self = current;
+				// printf("%f \n", t);
+				s->intersec.self = current;
+				printf("%d", s->intersec.self->type);
             }
         }
         current = current->next;  // Move to the next object
@@ -74,28 +106,24 @@ void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
 		printf("%d", scene->intersec.self->type);
         if (scene->intersec.self->type == 1) // Sphere
 		{
-			printf("yes");
+			printf("sphere");
             rgb = scene->object->sp.color;
 		}
         if (scene->intersec.self->type == 2) // Plane
         {
-			printf("no");
+			printf("plane");
             rgb = scene->object->pl.color;
 		}
         if (scene->intersec.self->type == 3) // Cylinder
 		{
-			printf("why not");
-            //rgb = scene->intersec.self->cy.color;
+			printf("cylinder");
 			rgb = scene->object->cy.color;
 		}
-        else
-            rgb = scene->ambience.color;  // Default to black if type is unknown
     }
     else
     {
-		rgb = scene->ambience.color;  //// No intersection, set to background color
+		rgb = scene->ambience.color;
     }
-	// rgb = scene->intersec.self->color;
 	color = convert_color(rgb);
 	mlx_put_pixel(scene->img, p_x, p_y, color);
 }

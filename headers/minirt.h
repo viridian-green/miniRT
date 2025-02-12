@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/11 14:02:21 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:55:37 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		init_mlx(t_scene *scene);
 void		key_board(mlx_key_data_t key, t_scene *scene);
 void		render_image(t_scene *scene);
 t_ray		create_ray(double p_x, double p_y, t_vector vp, t_scene *scene);
-int hit_sp(t_ray ray, t_object object, double *t);
+int hit_sp(t_ray ray, t_object object, double *t, t_scene *s);
 
 //parse_ambience
 void		split_int(char **line, int *one, int *two, int *three);
@@ -104,12 +104,12 @@ double		vec_dot(t_vector v1, t_vector v2);
 
 
 //Intersections
-double	ray_intersects_sp(t_object *object, t_ray *ray, t_scene *s);
+double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s);
 int ray_intersects_cylinder(t_ray ray, t_object object, double *t);
-double hit_plane(t_ray ray, t_object object, double *t);
 int ray_intersects_plane(t_ray ray, t_object object, double *t);
 //int ray_intersects_cylinder(t_ray ray, t_object object);
 t_vector	scalar_multiply(t_vector v, double scalar);
+double hit_plane(t_ray ray, t_object object, double *t, t_scene *s);
 
 float		vc_length(t_vector v);
 
