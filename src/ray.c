@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/12 13:02:33 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:35:15 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,34 +31,40 @@ t_ray	create_ray(double p_x, double p_y, t_vector origin, t_scene *scene)
 	return (ray);
 }
 
-int hit_sp(t_ray ray, t_object object, double *t, t_scene *s)
-{
-    t_vector oc = vc_subtract(ray.origin, object.sp.center);  // Vector from ray origin to sphere center
-    double a = vec_dot(ray.direction, ray.direction);  // Dot product of ray direction with itself
-    double b = 2.0 * vec_dot(ray.direction, oc);  // Dot product of ray direction and oc
-    double c = vec_dot(oc, oc) - (object.sp.diameter * object.sp.diameter);  // (oc . oc) - r^2
-    double discriminant = b * b - 4.0 * a * c;  // Calculate discriminant
-	// s->intersec.self = NULL;
-	(void)s;
+// int hit_sp(t_ray ray, t_object object, double *t, t_scene *s)
+// {
+//     t_vector oc = vc_subtract(ray.origin, object.sp.center);  // Vector from ray origin to sphere center
+//     double a = vec_dot(ray.direction, ray.direction);  // Dot product of ray direction with itself
+//     double b = 2.0 * vec_dot(ray.direction, oc);  // Dot product of ray direction and oc
+//     double c = vec_dot(oc, oc) - (object.sp.diameter * object.sp.diameter);  // (oc . oc) - r^2
+//     double discriminant = b * b - 4.0 * a * c;  // Calculate discriminant
+// 	// s->intersec.self = NULL;
+// 	(void)s;
 
-    if (discriminant < 0.0)
-        return 0;  // No intersection, return false
+// 	// printf("Normaln: (%f, %f, %f)\n", ray.direction.x, ray.direction.y, ray.direction.z);
+// 	// if (vc_length(ray.direction) < EPSILON)
+// 	// {
+//     // 	printf("Invalid ray direction: (%f, %f, %f)\n", ray.direction.x, ray.direction.y, ray.direction.z);
+//     // 	return 0;  // Skip this ray or handle it differently
+// 	// }
+//     if (discriminant < 0.0)
+//         return 0;  // No intersection, return false
 
-    // Calculate the entry and exit distances
-    *t = (-b - sqrt(discriminant)) / (2.0 * a);  // Entry point
-    if (*t >= 0.0)
-        return 1;  // Intersection occurs at the entry point
+//     // Calculate the entry and exit distances
+//     *t = (-b - sqrt(discriminant)) / (2.0 * a);  // Entry point
+//     if (*t >= 0.0)
+//         return 1;  // Intersection occurs at the entry point
 
-    *t = (-b + sqrt(discriminant)) / (2.0 * a);  // Exit point
-    if (*t >= 0.0)
-	{
-		// s->intersec.self = &object;
-		return 1;  // Intersection occurs at the exit point
-	}
+//     *t = (-b + sqrt(discriminant)) / (2.0 * a);  // Exit point
+//     if (*t >= 0.0)
+// 	{
+// 		// s->intersec.self = &object;
+// 		return 1;  // Intersection occurs at the exit point
+// 	}
 
 
-    return 0;  // No valid intersection
-}
+//     return 0;  // No valid intersection
+// }
    double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s)
    {
        t_vector	oc;

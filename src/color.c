@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/12 12:55:20 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:43:34 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,27 +71,66 @@ double object_intersects(t_object object, t_ray ray, double t, t_scene *s)
 	return (t);
 }
 
+// double object_intersects(t_object object, t_ray ray, double t, t_scene *s)
+// {
+//     (void)s;
+//     printf("Checking intersections with object type: %d\n", object.type);
+
+//     if (hit_sp(ray, object, &t, s))
+//     {
+//         printf("Sphere intersection at t = %f\n", t);
+//     }
+//     if (ray_intersects_plane(ray, object, &t))
+//     {
+//         printf("Plane intersection at t = %f\n", t);
+//     }
+//     if (ray_intersects_cylinder(ray, object, &t))
+//     {
+//         printf("Cylinder intersection at t = %f\n", t);
+//     }
+//     return t;
+// }
+
 void find_nearest_intersection(t_ray ray, t_scene *s)
 {
     //double closest_t = INT_MAX;
-    t_object *current = s->object;  // Temporary pointer to iterate
-	double t = -1;
-	double temp_t = -1;
+    // t_object *current = s->object;  // Temporary pointer to iterate
+	// double t = -1;
+	// double temp_t = -1;
+	// s->intersec.self = NULL;
+    // while (current)
+    // {
+    //     temp_t = object_intersects(*current, ray, temp_t, s);
+	// 	printf("%f \n", temp_t);
+    //     {
+    //         if ((t < 0 && temp_t > 0) || ((temp_t > 0 && temp_t < t)))
+    //         {
+    //             t = temp_t;
+	// 			// printf("%f \n", t);
+	// 			s->intersec.self = current;
+	// 			// printf("%d", s->intersec.self->type);
+    //         }
+    //     }
+    //     current = current->next;  // Move to the next object
+    // }
+
+	double closest_t = INFINITY;
 	s->intersec.self = NULL;
-    while (current)
-    {
-        temp_t = object_intersects(*current, ray, temp_t, s);
-        {
-            if ((t < 0 && temp_t > 0) || ((temp_t > 0 && temp_t < t)))
-            {
-                t = temp_t;
-				// printf("%f \n", t);
-				s->intersec.self = current;
-				printf("%d", s->intersec.self->type);
-            }
-        }
-        current = current->next;  // Move to the next object
+	double t = -1;
+	t_object *current = s->object;  // Start from the head of the linked list
+	while (current)
+	{
+    t = object_intersects(*current, ray, t, s);  // Check intersection with the current object
+
+    if (t > 0.001 && t < closest_t)
+	{
+		printf("New closest object at t = %f\n", t);
+        closest_t = t;
+        s->intersec.self = current;
     }
+
+    current = current->next; 
+}
 }
 
 void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
