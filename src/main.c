@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/12 14:27:15 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:26:40 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,40 @@ void render_hit(t_ray ray, double t, t_object *object) {
 
 void	render_image(t_scene *scene)
 {
-	double		pixel_x;
-	double		pixel_y;
-	t_ray		ray;
+    double		pixel_x;
+    double		pixel_y;
+    t_ray		ray;
 
-	pixel_x = 0;
-	while (pixel_x < scene->canvas_width)
-	{
-		pixel_y = 0;
-		while (pixel_y < scene->canvas_height)
-		{
-			ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
-			put_color_pixel(pixel_x, pixel_y, scene, ray);
-			pixel_y++;
-		}
-		pixel_x++;
-	}
+    // Set pixel_x and pixel_y to target the center of the canvas
+    pixel_x = scene->canvas_width / 2;
+    pixel_y = scene->canvas_height / 2;
+
+    // Create a ray for the center pixel
+    ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
+
+    // Put the color of the pixel at the center
+    put_color_pixel(pixel_x, pixel_y, scene, ray);
 }
+
+// void	render_image(t_scene *scene)
+// {
+// 	double		pixel_x;
+// 	double		pixel_y;
+// 	t_ray		ray;
+
+// 	pixel_x = 0;
+// 	while (pixel_x < scene->canvas_width)
+// 	{
+// 		pixel_y = 0;
+// 		while (pixel_y < scene->canvas_height)
+// 		{
+// 			ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
+// 			put_color_pixel(pixel_x, pixel_y, scene, ray);
+// 			pixel_y++;
+// 		}
+// 		pixel_x++;
+// 	}
+// }
 
 int	main(int ac, char **av)
 {
@@ -72,23 +89,6 @@ int	main(int ac, char **av)
 	init_mlx(scene);
 	parsing(av[1], scene);
 	create_viewport(scene);
-	// printf("viewport width: %f\n", scene->vp.width);
-	// printf("viewport height: %f\n", scene->vp.height);
-	// printf("viewport center x: %f\n", scene->vp.center.x);
-	// printf("viewport center y: %f\n", scene->vp.center.y);
-	// printf("viewport center z: %f\n", scene->vp.center.z);
-	// printf("viewport up_left x: %f\n", scene->vp.up_left.x);
-	// printf("viewport up_left y: %f\n", scene->vp.up_left.y);
-	// printf("viewport up_left z: %f\n", scene->vp.up_left.z);
-	// printf("viewport pixel_init x: %f\n", scene->vp.pixel_init.x);
-	// printf("viewport pixel_init y: %f\n", scene->vp.pixel_init.y);
-	// printf("viewport pixel_init z: %f\n", scene->vp.pixel_init.z);
-	// printf("viewport pixel_x x: %f\n", scene->vp.pixel_x.x);
-	// printf("viewport pixel_x y: %f\n", scene->vp.pixel_x.y);
-	// printf("viewport pixel_x z: %f\n", scene->vp.pixel_x.z);
-	// printf("viewport pixel_y x: %f\n", scene->vp.pixel_y.x);
-	// printf("viewport pixel_y y: %f\n", scene->vp.pixel_y.y);
-	// printf("viewport pixel_y z: %f\n", scene->vp.pixel_y.z);
 	mlx_loop_hook(scene->mlx_ptr, (t_hookfunc)render_image, scene);
 	mlx_key_hook(scene->mlx_ptr, (t_mlx_keyfunc)key_board, scene);
 	mlx_loop(scene->mlx_ptr);

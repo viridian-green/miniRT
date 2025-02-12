@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/12 14:58:34 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:16:51 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	convert_color(t_color color)
 double object_intersects(t_object object, t_ray ray, double t, t_scene *s)
 {
 	(void)s;
-	if (ray_intersects_sp(ray, object, &t, s))
+	if (hit_sp(ray, object, &t, s))
 	{
 		// printf("%fsp\n", t);
 	}
