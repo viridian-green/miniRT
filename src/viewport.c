@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:09:23 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/12 17:34:15 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:47:53 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	is_aligned_with_up_vector(t_vector orientation)
 
 void scalarize_pixels(t_scene *s)
 {
+	// s->vp.pixel_x = vc_mult_scalar(s->camera.right_v, s->vp.width / s->canvas_width);
+    // s->vp.pixel_y = vc_mult_scalar(s->camera.up_v, -(s->vp.height / s->canvas_height));
 	s->vp.pixel_x = vc_mult_scalar(s->camera.right_v, s->vp.width / s->canvas_width);
     s->vp.pixel_y = vc_mult_scalar(s->camera.up_v, -(s->vp.height / s->canvas_height));
 }

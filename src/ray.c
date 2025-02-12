@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/12 17:39:45 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:48:17 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,51 @@
 
 /*In this function the pixels are scaled both vertically and horizontally
 The variable p_center (pixel center) marks the exact spot on the window in 3D space for a given pixel (from 2D to 3D)
-*/
-t_ray	create_ray(double p_x, double p_y, t_vector origin, t_scene *scene)
+// */
+// t_ray	create_ray(double p_x, double p_y, t_vector origin, t_scene *scene)
+// {
+// 	t_ray		ray;
+// 	t_vector	p_center;
+// 	t_vector	p_x_sc;
+// 	t_vector	p_y_sc;
+
+// 	p_x_sc = vc_mult_scalar(scene->vp.pixel_x, p_x);
+// 	p_y_sc = vc_mult_scalar(scene->vp.pixel_y, p_y);
+// 	p_center = vc_add(vc_add(scene->vp.pixel_init, p_x_sc), p_y_sc);
+// 	// p_center = scene->camera.origin + scene->camera.forward_v
+//     //        + (scene->camera.right_v * viewport_offset_x)
+//     //        + (scene->camera.up_v * viewport_offset_y);
+
+// 	ray.origin = origin;
+// 	ray.direction = vc_subtract(p_center, origin);
+// 	printf("Ray Origin: (%f, %f, %f)\n", ray.origin.x, ray.origin.y, ray.origin.z);
+// 	printf("Ray Direction: (%f, %f, %f)\n", ray.direction.x, ray.direction.y, ray.direction.z);
+// 	return (ray);
+// }
+
+t_ray create_ray(double pixel_x, double pixel_y, t_vector camera_origin, t_scene *scene)
 {
-	t_ray		ray;
-	t_vector	p_center;
-	t_vector	p_x_sc;
-	t_vector	p_y_sc;
+    t_vector viewport_point;
+    t_ray ray;
 
-	p_x_sc = vc_mult_scalar(scene->vp.pixel_x, p_x);
-	p_y_sc = vc_mult_scalar(scene->vp.pixel_y, p_y);
-	// p_center = vc_add(vc_add(scene->vp.pixel_init, p_x_sc), p_y_sc);
-	p_center = scene->camera.origin + scene->camera.forward_v
-           + (scene->camera.right_v * viewport_offset_x)
-           + (scene->camera.up_v * viewport_offset_y);
+    // Calculate offsets
+    double viewport_x = ((pixel_x + 0.5) / scene->canvas_width - 0.5) * scene->vp.width;
+    double viewport_y = (0.5 - (pixel_y + 0.5) / scene->canvas_height) * scene->vp.height;
 
-	ray.origin = origin;
-	ray.direction = vc_subtract(p_center, origin);
-	printf("Ray Origin: (%f, %f, %f)\n", ray.origin.x, ray.origin.y, ray.origin.z);
-	printf("Ray Direction: (%f, %f, %f)\n", ray.direction.x, ray.direction.y, ray.direction.z);
-	return (ray);
+    // Compute point on the viewport
+    viewport_point = vc_add(
+                        vc_add(
+                            vc_add(camera_origin, scene->camera.forward_v),
+                            vc_mult_scalar(scene->camera.right_v, viewport_x)
+                        ),
+                        vc_mult_scalar(scene->camera.up_v, viewport_y)
+                    );
+
+    // Ray from camera to viewport point
+    ray.origin = camera_origin;
+    ray.direction = normalize(vc_subtract(viewport_point, camera_origin));
+
+    return ray;
 }
 
 // int hit_sp(t_ray ray, t_object object, double *t, t_scene *s)
