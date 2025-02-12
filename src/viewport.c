@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:09:23 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/11 13:34:48 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:34:15 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	create_viewport(t_scene *s)
 	d_camera_viewport = 1.0;
 	worldup_v = (t_vector){0.0, 1.0, 0.0};
 	fov_to_radians = s->camera.fov * M_PI / 180.0;
-	s->vp.width = 2.0 * d_camera_viewport * tan(fov_to_radians / 2.0);
+	s->vp.width = 2.0 * tan(fov_to_radians / 2.0);
 	s->vp.height = s->vp.width * (s->canvas_width / s->canvas_height);
 	if (!is_aligned_with_up_vector(s->camera.forward_v))
 		s->camera.right_v = normalize(cross_product(worldup_v, s->camera.forward_v));

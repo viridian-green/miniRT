@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/12 14:58:24 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:39:45 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,40 +25,53 @@ t_ray	create_ray(double p_x, double p_y, t_vector origin, t_scene *scene)
 
 	p_x_sc = vc_mult_scalar(scene->vp.pixel_x, p_x);
 	p_y_sc = vc_mult_scalar(scene->vp.pixel_y, p_y);
-	p_center = vc_add(vc_add(scene->vp.pixel_init, p_x_sc), p_y_sc);
+	// p_center = vc_add(vc_add(scene->vp.pixel_init, p_x_sc), p_y_sc);
+	p_center = scene->camera.origin + scene->camera.forward_v
+           + (scene->camera.right_v * viewport_offset_x)
+           + (scene->camera.up_v * viewport_offset_y);
+
 	ray.origin = origin;
 	ray.direction = vc_subtract(p_center, origin);
+	printf("Ray Origin: (%f, %f, %f)\n", ray.origin.x, ray.origin.y, ray.origin.z);
+	printf("Ray Direction: (%f, %f, %f)\n", ray.direction.x, ray.direction.y, ray.direction.z);
 	return (ray);
 }
 
-int hit_sp(t_ray ray, t_object object, double *t, t_scene *s)
-{
-    t_vector oc = vc_subtract(ray.origin, object.sp.center);  // Vector from ray origin to sphere center
-    double a = vec_dot(ray.direction, ray.direction);  // Dot product of ray direction with itself
-    double b = 2.0 * vec_dot(ray.direction, oc);  // Dot product of ray direction and oc
-    double c = vec_dot(oc, oc) - (object.sp.diameter * object.sp.diameter);  // (oc . oc) - r^2
-    double discriminant = b * b - 4.0 * a * c;  // Calculate discriminant
-	// s->intersec.self = NULL;
-	(void)s;
+// int hit_sp(t_ray ray, t_object object, double *t, t_scene *s)
+// {
+//     t_vector oc = vc_subtract(ray.origin, object.sp.center);  // Vector from ray origin to sphere center
+//     double a = vec_dot(ray.direction, ray.direction);  // Dot product of ray direction with itself
+//     double b = 2.0 * vec_dot(ray.direction, oc);  // Dot product of ray direction and oc
+//     double c = vec_dot(oc, oc) - (object.sp.diameter * object.sp.diameter);  // (oc . oc) - r^2
+//     double discriminant = b * b - 4.0 * a * c;  // Calculate discriminant
+// 	// s->intersec.self = NULL;
+// 	(void)s;
 
-    if (discriminant < 0.0)
-        return 0;  // No intersection, return false
+//     if (discriminant < 0.0)
+// 	{
+// 		printf("disc neg!\n");
+//         return 0;  // No intersection, return false
+// 	}
 
-    // Calculate the entry and exit distances
-    *t = (-b - sqrt(discriminant)) / (2.0 * a);  // Entry point
-    if (*t >= 0.0)
-        return 1;  // Intersection occurs at the entry point
+//     // Calculate the entry and exit distances
+//     *t = (-b - sqrt(discriminant)) / (2.0 * a);  // Entry point
+//     if (*t >= 0.0)
+// 	{
+// 		printf("HIT!\n");
+//         return 1;  // Intersection occurs at the entry point
+// 	}
 
-    *t = (-b + sqrt(discriminant)) / (2.0 * a);  // Exit point
-    if (*t >= 0.0)
-	{
-		// s->intersec.self = &object;
-		return 1;  // Intersection occurs at the exit point
-	}
+//     *t = (-b + sqrt(discriminant)) / (2.0 * a);  // Exit point
+//     if (*t >= 0.0)
+// 	{
+// 		// s->intersec.self = &object;
+// 		printf("HIT EXIT!\n");
+// 		return 1;  // Intersection occurs at the exit point
+// 	}
 
-
-    return 0;  // No valid intersection
-}
+// 	printf("NO HIT!\n");
+//     return 0;  // No valid intersection
+// }
 
    double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s)
    {
@@ -68,20 +81,23 @@ int hit_sp(t_ray ray, t_object object, double *t, t_scene *s)
        double	c;
        double	discriminant;
 	(void)s;
-    //    s->intersec.self = NULL;
 
        oc = vc_subtract(ray.origin, object.sp.center);
        a = vec_dot(ray.direction, ray.direction);
        half_b = vec_dot(oc, ray.direction);
        c = vec_dot(oc, oc) - object.sp.diameter * object.sp.diameter / 4;
        discriminant = half_b * half_b - a * c;
+	   printf("Sphere Center: (%f, %f, %f), Radius: %f\n", object.sp.center.x, object.sp.center.y, object.sp.center.z, object.sp.diameter / 2);
+	   printf("a: %f, half_b: %f, c: %f, discriminant: %f\n", a, half_b, c, discriminant);
+	//    printf("Ray Direction Magnitude: %d\n", vec_magnitude(ray.direction));
+	   printf("Viewport Width: %f, Height: %f\n", s->vp.width, s->vp.height);
        if (discriminant < 0)
        {
+			printf("disc neg!\n");
            return (0);
        }
        else
        {
-        	// s->intersec.self = object;
         	*t = ((-half_b - sqrt(discriminant)) / a);
 			return 1;
        }

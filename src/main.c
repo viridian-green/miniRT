@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/12 15:26:40 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:35:13 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,7 @@ void render_hit(t_ray ray, double t, t_object *object) {
 }
 */
 
-void	render_image(t_scene *scene)
-{
-    double		pixel_x;
-    double		pixel_y;
-    t_ray		ray;
 
-    // Set pixel_x and pixel_y to target the center of the canvas
-    pixel_x = scene->canvas_width / 2;
-    pixel_y = scene->canvas_height / 2;
-
-    // Create a ray for the center pixel
-    ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
-
-    // Put the color of the pixel at the center
-    put_color_pixel(pixel_x, pixel_y, scene, ray);
-}
 
 // void	render_image(t_scene *scene)
 // {
@@ -71,11 +56,22 @@ void	render_image(t_scene *scene)
 // 		{
 // 			ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
 // 			put_color_pixel(pixel_x, pixel_y, scene, ray);
+
 // 			pixel_y++;
 // 		}
 // 		pixel_x++;
 // 	}
 // }
+
+void render_image(t_scene *scene)
+{
+    double pixel_x = scene->canvas_width / 2;
+    double pixel_y = scene->canvas_height / 2;
+    t_ray ray;
+
+    ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
+    put_color_pixel(pixel_x, pixel_y, scene, ray);
+}
 
 int	main(int ac, char **av)
 {

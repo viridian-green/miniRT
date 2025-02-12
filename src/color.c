@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/12 15:16:51 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:09:18 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,19 @@ int	convert_color(t_color color)
 double object_intersects(t_object object, t_ray ray, double t, t_scene *s)
 {
 	(void)s;
-	if (hit_sp(ray, object, &t, s))
+	// printf("%fsp\n", t);
+	if (ray_intersects_sp(ray, object, &t, s))
 	{
 		// printf("%fsp\n", t);
 	}
-	if (ray_intersects_plane(ray, object, &t))
-	{
-		// printf("%fp\n", t);
-	}
-	if (ray_intersects_cylinder(ray, object, &t))
-	{
-		printf("%fc\n", t);
-	}
+	// if (ray_intersects_plane(ray, object, &t))
+	// {
+	// 	// printf("%fp\n", t);
+	// }
+	// if (ray_intersects_cylinder(ray, object, &t))
+	// {
+	// 	printf("%fc\n", t);
+	// }
 	return (t);
 }
 
@@ -79,10 +80,11 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
 	t_object *current = s->object;  // Start from the head of the linked list
 	while (current)
 	{
-	t = object_intersects(*current, ray, t, s);  // Check intersection with the current object
+	t = object_intersects(*current, ray, t, s);
+	s->intersec.t = t; // Check intersection with the current object
 	if (t > 0.001 && t < closest_t)
 	{
-		printf("New closest object at t = %f\n", t);
+		// printf("New closest object at t = %f\n", t);
 		closest_t = t;
 		s->intersec.self = current;
 	}
