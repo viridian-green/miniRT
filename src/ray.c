@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/12 12:55:12 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:02:33 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int hit_sp(t_ray ray, t_object object, double *t, t_scene *s)
 			return 1;
        }
 	   return 0;
+
    }
 
    double hit_plane(t_ray ray, t_object object, double *t, t_scene *s)
