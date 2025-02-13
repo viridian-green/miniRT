@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:09:23 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/12 17:47:53 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:48:26 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	is_aligned_with_up_vector(t_vector orientation)
 
 void scalarize_pixels(t_scene *s)
 {
-	// s->vp.pixel_x = vc_mult_scalar(s->camera.right_v, s->vp.width / s->canvas_width);
-    // s->vp.pixel_y = vc_mult_scalar(s->camera.up_v, -(s->vp.height / s->canvas_height));
 	s->vp.pixel_x = vc_mult_scalar(s->camera.right_v, s->vp.width / s->canvas_width);
     s->vp.pixel_y = vc_mult_scalar(s->camera.up_v, -(s->vp.height / s->canvas_height));
 }
@@ -60,10 +58,7 @@ void	create_viewport(t_scene *s)
 /*
 TODO: Add the pixel calculations later
     // s->vp.pixel00 = vector_add(s->vp.up_left,
-    // scalar_multiply(vector_add(s->vp.pixel_x, s->vp.pixel_y), 0.5));
-
-Why are we using the focal length const variable? Using a constant focal length allows for consistent control
-over the camera's
+    // scalar_multiply(vector_add(s->vp.pixel_x, s->vp.pixel_y), 0.5))
 TODO: Add a world up definition and see in what ways we need it in translating
 read this article https://medium.com/@iremoztimur/building-a-minirt-42-project-part-1-ae7a00aebdb9 before doing anything else!!!-
 */

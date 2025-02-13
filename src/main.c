@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/12 17:35:13 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:51:50 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,36 +42,27 @@ void render_hit(t_ray ray, double t, t_object *object) {
 
 
 
-// void	render_image(t_scene *scene)
-// {
-// 	double		pixel_x;
-// 	double		pixel_y;
-// 	t_ray		ray;
-
-// 	pixel_x = 0;
-// 	while (pixel_x < scene->canvas_width)
-// 	{
-// 		pixel_y = 0;
-// 		while (pixel_y < scene->canvas_height)
-// 		{
-// 			ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
-// 			put_color_pixel(pixel_x, pixel_y, scene, ray);
-
-// 			pixel_y++;
-// 		}
-// 		pixel_x++;
-// 	}
-// }
-
-void render_image(t_scene *scene)
+void	render_image(t_scene *scene)
 {
-    double pixel_x = scene->canvas_width / 2;
-    double pixel_y = scene->canvas_height / 2;
-    t_ray ray;
+	double		pixel_x;
+	double		pixel_y;
+	t_ray		ray;
 
-    ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
-    put_color_pixel(pixel_x, pixel_y, scene, ray);
+	pixel_x = 0;
+	while (pixel_x < scene->canvas_width)
+	{
+		pixel_y = 0;
+		while (pixel_y < scene->canvas_height)
+		{
+			ray = create_ray(pixel_x, pixel_y, scene->camera.origin, scene);
+			put_color_pixel(pixel_x, pixel_y, scene, ray);
+
+			pixel_y++;
+		}
+		pixel_x++;
+	}
 }
+
 
 int	main(int ac, char **av)
 {
