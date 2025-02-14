@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/12 14:36:04 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:44:39 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define M_PI 3.14159265358979323846
 # define FOCAL_LENGTH 1.0
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 1200
+# define HEIGHT 675
 # define EPSILON 1e-6
 
 # include <fcntl.h>

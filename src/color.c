@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/12 17:09:18 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:35:36 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,20 +101,20 @@ void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
 	find_nearest_intersection(ray, scene);
 	if (scene->intersec.self != NULL)
     {
-		printf("%d", scene->intersec.self->type);
+		//printf("%d", scene->intersec.self->type);
         if (scene->intersec.self->type == 1) // Sphere
 		{
-			printf("sphere");
+			//printf("sphere");
             rgb = scene->object->sp.color;
 		}
         if (scene->intersec.self->type == 2) // Plane
         {
-			printf("plane");
+			//printf("plane");
             rgb = scene->object->pl.color;
 		}
         if (scene->intersec.self->type == 3) // Cylinder
 		{
-			printf("cylinder");
+			//printf("cylinder");
 			rgb = scene->object->cy.color;
 		}
     }

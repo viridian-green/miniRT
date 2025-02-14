@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:09:23 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/13 17:48:26 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:59:18 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void scalarize_pixels(t_scene *s)
 {
 	s->vp.pixel_x = vc_mult_scalar(s->camera.right_v, s->vp.width / s->canvas_width);
     s->vp.pixel_y = vc_mult_scalar(s->camera.up_v, -(s->vp.height / s->canvas_height));
+	s->vp.pixel_init = vc_add(s->vp.up_left, vc_mult_scalar(vc_add(s->vp.pixel_x, s->vp.pixel_y), 0.5));
 }
 
 
@@ -39,20 +40,26 @@ Difference between viewport and canvas/image
 void	create_viewport(t_scene *s)
 {
 	double		fov_to_radians;
-	double		d_camera_viewport;
+	//double		d_camera_viewport;
 	t_vector	worldup_v;
 
-	d_camera_viewport = 1.0;
+	//d_camera_viewport = 1.0;
 	worldup_v = (t_vector){0.0, 1.0, 0.0};
 	fov_to_radians = s->camera.fov * M_PI / 180.0;
 	s->vp.width = 2.0 * tan(fov_to_radians / 2.0);
-	s->vp.height = s->vp.width * (s->canvas_width / s->canvas_height);
-	if (!is_aligned_with_up_vector(s->camera.forward_v))
-		s->camera.right_v = normalize(cross_product(worldup_v, s->camera.forward_v));
-	else
-		s->camera.right_v = normalize(cross_product((t_vector){0.0, 0.0, 1.0}, s->camera.forward_v));
-	s->camera.up_v = cross_product(s->camera.forward_v, s->camera.right_v);
+	s->vp.height = s->vp.width / (s->canvas_width / s->canvas_height);
+	s->camera.right_v = normalize(cross_product(s->camera.forward_v, worldup_v));
+	s->camera.up_v = normalize(cross_product(s->camera.right_v, s->camera.forward_v));
+	s->vp.center = vc_add(s->camera.origin, vc_mult_scalar(s->camera.forward_v, FOCAL_LENGTH));
+	s->vp.up_left = vc_add(vc_subtract(s->vp.center, vc_mult_scalar(s->camera.right_v, s->vp.width / 2.0)), vc_mult_scalar(s->camera.up_v, s->vp.height / 2.0));
+	// if (!is_aligned_with_up_vector(s->camera.forward_v))
+	// 	s->camera.right_v = normalize(cross_product(worldup_v, s->camera.forward_v));
+	// else
+	// 	s->camera.right_v = normalize(cross_product((t_vector){0.0, 0.0, 1.0}, s->camera.forward_v));
+	// s->camera.up_v = cross_product(s->camera.forward_v, s->camera.right_v);
 	scalarize_pixels(s);
+	//s->camera.up_v = s->camera.up_v;
+	//s->camera.right_v = s->camera.right_v;
 }
 
 /*

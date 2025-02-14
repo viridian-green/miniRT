@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/13 17:51:50 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:42:20 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,45 @@ int	main(int ac, char **av)
 		free_exit("Memory allocation error.", scene);
 	init_mlx(scene);
 	parsing(av[1], scene);
+	printf("=== CAMERA ORIENTATION BEFORE VIEWPORT SETUP ===\n");
+	printf("Camera orientation X: %f\n", scene->camera.forward_v.x);
+	printf("Camera orientation Y: %f\n", scene->camera.forward_v.y);
+	printf("Camera orientation Z: %f\n", scene->camera.forward_v.z);
+	printf("======================\n");
 	create_viewport(scene);
+	printf("=== VIEWPORT INFO ===\n\n");
+	printf("=== CAMERA ORIENTATION AFTER VIEWPORT SETUP ===\n");
+	printf("Camera orientation X: %f\n", scene->camera.forward_v.x);
+	printf("Camera orientation Y: %f\n", scene->camera.forward_v.y);
+	printf("Camera orientation Z: %f\n", scene->camera.forward_v.z);
+	printf("=== CAMERA RIGHT ===\n");
+	printf("Camera right X:  %f\n", scene->camera.right_v.x);
+	printf("Camera right Y:  %f\n", scene->camera.right_v.y);
+	printf("Camera right Z:  %f\n", scene->camera.right_v.z);
+	printf("=== CAMERA UP ===\n");
+	printf("Camera up X:  %f\n", scene->camera.up_v.x);
+	printf("Camera up Y:  %f\n", scene->camera.up_v.y);
+	printf("Camera up Z:  %f\n", scene->camera.up_v.z);
+	printf("Camera FOV:  %d\n", scene->camera.fov);
+	printf("=== VIEWPORT ===\n");
+	printf("Viewport width: %f\n", scene->vp.width);
+	printf("Viewport height: %f\n", scene->vp.height);
+	printf("Viewport CENTER X:  %f\n", scene->vp.center.x);
+	printf("Viewport CENTER Y:  %f\n", scene->vp.center.y);
+	printf("Viewport CENTER Z:  %f\n", scene->vp.center.z);
+	printf("Viewport UP_LEFT X:  %f\n", scene->vp.up_left.x);
+	printf("Viewport UP_LEFT Y:  %f\n", scene->vp.up_left.y);
+	printf("Viewport UP_LEFT Z:  %f\n", scene->vp.up_left.z);
+	printf("Viewport PIXEL_X X:  %f\n", scene->vp.pixel_x.x);
+	printf("Viewport PIXEL_X Y:  %f\n", scene->vp.pixel_x.y);
+	printf("Viewport PIXEL_X Z:  %f\n", scene->vp.pixel_x.z);
+	printf("Viewport PIXEL_Y X:  %f\n", scene->vp.pixel_y.x);
+	printf("Viewport PIXEL_Y Y:  %f\n", scene->vp.pixel_y.y);
+	printf("Viewport PIXEL_Y Z:  %f\n", scene->vp.pixel_y.z);
+	printf("Viewport PIXEL INIT X:  %f\n", scene->vp.pixel_init.x);
+	printf("Viewport PIXEL INIT Y:  %f\n", scene->vp.pixel_init.y);
+	printf("Viewport PIXEL INIT Z:  %f\n", scene->vp.pixel_init.z);
+	printf("======================\n");
 	mlx_loop_hook(scene->mlx_ptr, (t_hookfunc)render_image, scene);
 	mlx_key_hook(scene->mlx_ptr, (t_mlx_keyfunc)key_board, scene);
 	mlx_loop(scene->mlx_ptr);
