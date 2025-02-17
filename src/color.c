@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/17 16:53:24 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:24:02 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	convert_color(t_color color)
 	return (rgb);
 }
 
-void object_intersects(t_object object, t_ray ray, double t, t_scene *s)
+double object_intersects(t_object object, t_ray ray, double t, t_scene *s)
 {
 	if (s->object->type == 1)
     	ray_intersects_sp(ray, object, &t, s);
@@ -31,7 +31,9 @@ void object_intersects(t_object object, t_ray ray, double t, t_scene *s)
 		ray_intersects_plane(ray, object, &t);
     if (s->object->type == 3)
 		ray_intersects_cylinder(ray, object, &t);
-	s->intersec.t = t;
+	// printf("my_t %f\n", s->intersec.t);
+	// printf("t: %f\n", t);
+	return (t);
 }
 
 void find_nearest_intersection(t_ray ray, t_scene *s)
@@ -42,8 +44,8 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
 	t_object *current = s->object;
 	while (current)
 	{
-	object_intersects(*current, ray, t, s);
-	t = s->intersec.t;
+	t = object_intersects(*current, ray, t, s);
+	// t = s->intersec.t;
 	if (t > 0.001 && t < closest_t)
 	{
 		closest_t = t;

@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/17 16:51:38 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:24:17 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void store_data(t_scene *s, t_object object)
        double	c;
        double	discriminant;
 
-	(void)s;
        oc = vc_subtract(ray.origin, object.sp.center);
        a = vec_dot(ray.direction, ray.direction);
        half_b = vec_dot(oc, ray.direction);
@@ -54,10 +53,10 @@ void store_data(t_scene *s, t_object object)
            return (0);
        else
        {
-			// store_data(s, object);
+			store_data(s, object);
         	*t = ((-half_b - sqrt(discriminant)) / a);
-			// s->intersec.t = *t;
-			// s->intersec.point = vectorize_t(ray, *t);
+			s->intersec.t = *t;
+			s->intersec.point = vectorize_t(ray, *t);
 			return 1;
        }
 	   return 0;
