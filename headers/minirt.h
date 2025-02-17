@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/13 18:44:39 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:14:02 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ t_vector	vc_subtract(t_vector v1, t_vector v2);
 t_vector	vc_mult_scalar(t_vector v, double scalar);
 t_vector	cross_product(t_vector v1, t_vector v2);
 double		vec_dot(t_vector v1, t_vector v2);
+t_vector	vectorize_t(t_ray r, double t);
 
 
 //Intersections

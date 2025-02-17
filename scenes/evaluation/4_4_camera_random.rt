@@ -1,0 +1,11 @@
+# Camera: Coordinates, Normal, FOV
+C      3,6,1      -0.442326,-0.884652,-0.147442        75
+
+# Light: Coordinates, Brightness, Color
+L         3,6,1        1.0      255,255,255
+
+# Ambient lighting: Ratio, Color
+A                    0.3    255,255,255
+
+# Sphere: Coordinates, Diameter, Color
+sp             0,0,0      1   0,0,255

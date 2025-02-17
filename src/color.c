@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/13 18:35:36 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:52:29 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,53 +23,15 @@ int	convert_color(t_color color)
 	return (rgb);
 }
 
-
-// int hit_sp(t_ray ray, t_object object, double *t)
-// {
-// 	t_vector	oc;
-//        double	a;
-//        double	half_b;
-//        double	c;
-//        double	discriminant;
-
-//        //s->intersec.self = NULL;
-
-//        oc = vc_subtract(ray.origin, object.sp.center);
-//        a = vec_dot(ray.direction, ray.direction);
-//        half_b = vec_dot(oc, ray.direction);
-//        c = vec_dot(oc, oc) - object.sp.diameter * object.sp.diameter / 4;
-//        discriminant = half_b * half_b - a * c;
-//        if (discriminant < 0)
-//        {
-//            return (0);
-//        }
-//        else
-//        {
-//         	// s->intersec.self = object;
-//         	*t = ((-half_b - sqrt(discriminant)) / a);
-// 			return (1);
-//        }
-// 	   return (0);
-// }
-
-
-double object_intersects(t_object object, t_ray ray, double t, t_scene *s)
+void object_intersects(t_object object, t_ray ray, double t, t_scene *s)
 {
-	(void)s;
-	// printf("%fsp\n", t);
-	if (ray_intersects_sp(ray, object, &t, s))
-	{
-		// printf("%fsp\n", t);
-	}
-	// if (ray_intersects_plane(ray, object, &t))
-	// {
-	// 	// printf("%fp\n", t);
-	// }
-	// if (ray_intersects_cylinder(ray, object, &t))
-	// {
-	// 	printf("%fc\n", t);
-	// }
-	return (t);
+		if (s->object->type == 1)
+    ray_intersects_sp(ray, object, &t, s);
+    	if (s->object->type == 2)
+	ray_intersects_plane(ray, object, &t);
+    	if (s->object->type == 3)
+	ray_intersects_cylinder(ray, object, &t);
+	s->intersec.t = t;
 }
 
 void find_nearest_intersection(t_ray ray, t_scene *s)
@@ -77,14 +39,13 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
 	double closest_t = INFINITY;
 	s->intersec.self = NULL;
 	double t = -1;
-	t_object *current = s->object;  // Start from the head of the linked list
+	t_object *current = s->object;
 	while (current)
 	{
-	t = object_intersects(*current, ray, t, s);
-	s->intersec.t = t; // Check intersection with the current object
+	object_intersects(*current, ray, t, s);
+	t = s->intersec.t;
 	if (t > 0.001 && t < closest_t)
 	{
-		// printf("New closest object at t = %f\n", t);
 		closest_t = t;
 		s->intersec.self = current;
 	}
@@ -101,7 +62,6 @@ void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
 	find_nearest_intersection(ray, scene);
 	if (scene->intersec.self != NULL)
     {
-		//printf("%d", scene->intersec.self->type);
         if (scene->intersec.self->type == 1) // Sphere
 		{
 			//printf("sphere");

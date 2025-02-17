@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 23:45:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/10 15:50:56 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:11:21 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ t_vector	cross_product(t_vector v1, t_vector v2)
 float	vc_length(t_vector v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
+t_vector	vectorize_t(t_ray r, double t)
+{
+	return (vc_add(r.origin, vc_mult_scalar(r.direction, t)));
 }
 
 //We make the vecor's magnitude (size) equal to 1.
