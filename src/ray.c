@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/17 17:24:17 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:51:13 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void store_data(t_scene *s, t_object object)
 	s->intersec.color = object.sp.color;
 }
 
-   double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s)
-   {
+double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s)
+{
        t_vector	oc;
        double	a;
        double	half_b;
@@ -57,13 +57,15 @@ void store_data(t_scene *s, t_object object)
         	*t = ((-half_b - sqrt(discriminant)) / a);
 			s->intersec.t = *t;
 			s->intersec.point = vectorize_t(ray, *t);
+			s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
+			s->intersec.color = object.sp.color;
+}
 			return 1;
-       }
-	   return 0;
+}
 
-   }
 
-   double hit_plane(t_ray ray, t_object object, double *t, t_scene *s)
+
+double hit_plane(t_ray ray, t_object object, double *t, t_scene *s)
    {
 
        t_vector normal = object.pl.orientation;

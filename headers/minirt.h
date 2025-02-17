@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/17 16:14:02 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:29:39 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,15 @@ t_vector	cross_product(t_vector v1, t_vector v2);
 double		vec_dot(t_vector v1, t_vector v2);
 t_vector	vectorize_t(t_ray r, double t);
 
+//shadow
+int			check_shadow(t_scene *scene, t_ray light, t_intersec intersec);
+
+//lights
+t_color		color_add(t_color color1, t_color color2);
+t_color		color_mult(t_color color, double ratio);
+t_color		color_init(double r, double g, double b);
+t_color		find_diffuse_color(t_scene *scene);
+t_color		light_calc(t_scene *scene);
 
 //Intersections
 double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s);
@@ -114,7 +123,12 @@ double hit_plane(t_ray ray, t_object object, double *t, t_scene *s);
 
 float		vc_length(t_vector v);
 
-void		put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
+
 
 void		create_viewport(t_scene *s);
+
+int	convert_color(t_color color);
+double object_intersects(t_object object, t_ray ray, double t, t_scene *s);
+void find_nearest_intersection(t_ray ray, t_scene *s);
+void		put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
 #endif
