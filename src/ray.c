@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/18 16:01:46 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:59:55 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
     return 0;
 }
 
+
+
 int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
 {
     t_vector oc = vc_subtract(ray.origin, object.cy.center);  // Vector from ray origin to cylinder center
@@ -130,10 +132,6 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
         {
             *t = t2;
 			s->intersec.t = *t;
-			// s->intersec.t = *t;
-			// s->intersec.point = vectorize_t(ray, *t);
-			// s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
-			// s->intersec.color = object.pl.color;
             return 1;
         }
     }

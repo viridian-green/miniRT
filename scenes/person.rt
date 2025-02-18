@@ -1,0 +1,32 @@
+# Ambient lighting: Ratio, Color
+A      1.0                                    255,255,255
+
+# Camera: Coordinates, Normal, FOV
+C      0,2,10      0,0,-1        75
+
+# Light: Coordinates, Brightness, Color
+L      0,5,5                   1.0        255,255,255
+
+# Plane: Coordinates, Normal, Color (floor)
+pl    0,-1.4,0       0,1,0                    131,56,236
+
+# Sphere: Coordinates, Diameter, Color (head)
+sp          0,1.7,0       0.7      255,224,189
+
+# Cylinder: Coordinates, Normal of axis, Diameter, Height, Color (neck)
+cy            0,1.35,0      0,1,0         0.3        0.2     255,224,189
+
+# Cylinder: Coordinates, Normal of axis, Diameter, Height, Color (body)
+cy              0,0.5,0      0,1,0         0.5        1.5     0,0,255
+
+# Cylinder: Coordinates, Normal of axis, Diameter, Height, Color (left leg)
+cy         -0.25,-0.75,0      0.3,1,0         0.25        1.4     0,0,255
+
+# Cylinder: Coordinates, Normal of axis, Diameter, Height, Color (right leg)
+cy         0.3,-0.75,0      -0.5,1,0         0.25        1.4     0,0,255
+
+# Cylinder: Coordinates, Normal of axis, Diameter, Height, Color (left arm)
+cy         -0.3,0.5,0      0.5,1,0         0.25        1     255,224,189
+
+# Cylinder: Coordinates, Normal of axis, Diameter, Height, Color (right arm)
+cy         0.25,0.5,0      -0.5,1,0         0.25        1     255,224,189
