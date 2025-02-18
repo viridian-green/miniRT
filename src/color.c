@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/17 17:57:50 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:08:22 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ double object_intersects(t_object object, t_ray ray, double t, t_scene *s)
 	if (s->object->type == 1)
     	ray_intersects_sp(ray, object, &t, s);
     if (s->object->type == 2)
-		ray_intersects_plane(ray, object, &t);
+		ray_intersects_pl(ray, object, &t, s);
     if (s->object->type == 3)
-		ray_intersects_cylinder(ray, object, &t);
-	// printf("my_t %f\n", s->intersec.t);
-	// printf("t: %f\n", t);
+		ray_intersects_cy(ray, object, &t, s);
 	return (t);
 }
 
@@ -45,7 +43,6 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
 	while (current)
 	{
 	t = object_intersects(*current, ray, t, s);
-	// t = s->intersec.t;
 	if (t > 0.001 && t < closest_t)
 	{
 		closest_t = t;
@@ -55,7 +52,7 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
 	}
 }
 
-/* void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
+void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
 {
 	int			color;
 	t_color		rgb;
@@ -66,17 +63,14 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
     {
         if (scene->intersec.self->type == 1) // Sphere
 		{
-			//printf("sphere");
             rgb = scene->object->sp.color;
 		}
         if (scene->intersec.self->type == 2) // Plane
         {
-			//printf("plane");
             rgb = scene->object->pl.color;
 		}
         if (scene->intersec.self->type == 3) // Cylinder
 		{
-			//printf("cylinder");
 			rgb = scene->object->cy.color;
 		}
     }
@@ -86,18 +80,18 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
     }
 	color = convert_color(rgb);
 	mlx_put_pixel(scene->img, p_x, p_y, color);
-}*/
-
-void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
-{
-	int			color;
-	t_color		rgb;
-
-	find_nearest_intersection(ray, scene);
-	if (scene->intersec.self)
-		rgb = light_calc(scene);
-	else
-		rgb = scene->ambience.color;
-	color = convert_color(rgb);
-	mlx_put_pixel(scene->img, p_x, p_y, color);
 }
+
+// void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
+// {
+// 	int			color;
+// 	t_color		rgb;
+
+// 	find_nearest_intersection(ray, scene);
+// 	if (scene->intersec.self)
+// 		rgb = light_calc(scene);
+// 	else
+// 		rgb = scene->ambience.color;
+// 	color = convert_color(rgb);
+// 	mlx_put_pixel(scene->img, p_x, p_y, color);
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/17 17:51:13 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:01:46 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@ t_ray	create_ray(double p_x, double p_y, t_vector origin, t_scene *scene)
 	return (ray);
 }
 
-void store_data(t_scene *s, t_object object)
-{
-	s->intersec.color = object.sp.color;
-}
-
 double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s)
 {
        t_vector	oc;
@@ -53,7 +48,6 @@ double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s)
            return (0);
        else
        {
-			store_data(s, object);
         	*t = ((-half_b - sqrt(discriminant)) / a);
 			s->intersec.t = *t;
 			s->intersec.point = vectorize_t(ray, *t);
@@ -63,32 +57,7 @@ double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s)
 			return 1;
 }
 
-
-
-double hit_plane(t_ray ray, t_object object, double *t, t_scene *s)
-   {
-
-       t_vector normal = object.pl.orientation;
-
-       double denom = vec_dot(ray.direction, normal);
-	   s->intersec.self = NULL;
-       if (fabs(denom) > 1e-6)
-       {
-           // Compute the t value
-           t_vector oc = vc_subtract(ray.origin, object.pl.plane_point);
-           *t = -vec_dot(oc, normal) / denom;
-
-           // Check if intersection is in the positive direction
-           if (*t >= 0.0)
-		    {
-               return *t;
-			   s->intersec.self = NULL;
-			}
-       }
-       return -1.0;  // Return -1.0 to indicate no intersection
-   }
-
-int ray_intersects_plane(t_ray ray, t_object object, double *t)
+int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
 {
 
     t_vector normal = object.pl.orientation;
@@ -100,20 +69,22 @@ int ray_intersects_plane(t_ray ray, t_object object, double *t)
 
         t_vector oc = vc_subtract(ray.origin, object.pl.plane_point);
         *t = -vec_dot(oc, normal) / denom;
+		s->intersec.t = *t;
+		// s->intersec.point = vectorize_t(ray, *t);
+		// s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
+		// s->intersec.color = object.pl.color;
         if (*t >= 0.0)
             return 1;
     }
     return 0;
 }
 
-int ray_intersects_cylinder(t_ray ray, t_object object, double *t)
+int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
 {
     t_vector oc = vc_subtract(ray.origin, object.cy.center);  // Vector from ray origin to cylinder center
     t_vector direction = ray.direction;
     t_vector axis = object.cy.orientation;
     double r = object.cy.diameter / 2.0;  // Radius of the cylinder
-
-    // Project the ray direction and the center-origin vector onto the cylinder's axis
     double dot_dir_axis = vec_dot(direction, axis);
     double dot_oc_axis = vec_dot(oc, axis);
 
@@ -125,7 +96,7 @@ int ray_intersects_cylinder(t_ray ray, t_object object, double *t)
     double b = 2.0 * vec_dot(oc_perp, dir_perp);
     double c = vec_dot(oc_perp, oc_perp) - r * r;
 
-    // Calculate discriminant
+    (void)s;
     double discriminant = b * b - 4.0 * a * c;
     if (discriminant < 0.0)
         return 0;  // No intersection
@@ -143,6 +114,11 @@ int ray_intersects_cylinder(t_ray ray, t_object object, double *t)
         if (height1 >= 0.0 && height1 <= object.cy.height)
         {
             *t = t1;
+			s->intersec.t = *t;
+			// s->intersec.t = *t;
+			// s->intersec.point = vectorize_t(ray, *t);
+			// s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
+			// s->intersec.color = object.pl.color;
             return 1;
         }
     }
@@ -153,6 +129,11 @@ int ray_intersects_cylinder(t_ray ray, t_object object, double *t)
         if (height2 >= 0.0 && height2 <= object.cy.height)
         {
             *t = t2;
+			s->intersec.t = *t;
+			// s->intersec.t = *t;
+			// s->intersec.point = vectorize_t(ray, *t);
+			// s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
+			// s->intersec.color = object.pl.color;
             return 1;
         }
     }

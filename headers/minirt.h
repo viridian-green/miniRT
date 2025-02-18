@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/18 15:09:25 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:53:39 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,9 @@ t_color		light_calc(t_scene *scene);
 
 //Intersections
 double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s);
-int ray_intersects_cylinder(t_ray ray, t_object object, double *t);
-int ray_intersects_plane(t_ray ray, t_object object, double *t);
-//int ray_intersects_cylinder(t_ray ray, t_object object);
+int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s);
+int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s);
 t_vector	scalar_multiply(t_vector v, double scalar);
-double hit_plane(t_ray ray, t_object object, double *t, t_scene *s);
 
 float		vc_length(t_vector v);
 

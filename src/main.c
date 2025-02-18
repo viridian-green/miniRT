@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/18 13:58:46 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:41:23 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	key_board(mlx_key_data_t key, t_scene *scene)
 	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
 	{
 		mlx_close_window(scene->mlx_ptr);
-		free_exit("Closing window and exiting program.", scene);
+		free_exit("Closing window and exiting program\n", scene);
 		return ;
 	}
 	//translation(key, scene);

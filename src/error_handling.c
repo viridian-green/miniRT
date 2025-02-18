@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:12:40 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/18 15:34:00 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:38:40 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	is_in_linked_list(t_object *head, t_object *target)
 	while (head)
 	{
 		if (head == target)
-			return (1); // found
+			return (1);
 		head = head->next;
 	}
-	return (0); // not found
+	return (0);
 }
 
 int	free_exit(char *message, t_scene *scene)
