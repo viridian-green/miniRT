@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/05 15:17:29 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:30:04 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	parse_file(int fd, t_scene *scene)
 		else if (ft_strncmp(normalized_line, "cy", 2) == 0)
 			parse_cylinder(normalized_line, scene);
 		else
-			free_exit("Error. Incorrect file.", scene);
+			free_exit("Error. Incorrect file.\n", scene);
 		free(normalized_line);
 		free(line);
 		line = get_next_line(fd);
@@ -99,7 +99,7 @@ int	parsing(char *config_file, t_scene *scene)
 
 	fd = 0;
 	if (fd < 0)
-		free_exit("Error. Incorrect fd.", scene);
+		free_exit("Error. Incorrect fd.\n", scene);
 	fd = open(config_file, O_RDONLY);
 	parse_file(fd, scene);
 	close(fd);

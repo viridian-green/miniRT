@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:04:37 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/17 14:51:22 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:06:49 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	parse_sphere(char *line, t_scene *scene)
 	set_color(&split_line[3], &node->sp.color);
 	if (validate_diameter(node->sp.diameter) || validate_color(&node->sp.color))
 		handle_parse_error(split_line, scene, "Error. Invalid sphere parameters.");
-	free_split(split_line);
 	node->type = 1;
+	free_split(split_line);
 }
 
 void	parse_plane(char *line, t_scene *scene)
@@ -83,8 +83,8 @@ void	parse_plane(char *line, t_scene *scene)
 	if (validate_orientation(&node->pl.orientation) ||
 		validate_color(&node->pl.color))
 		handle_parse_error(split_line, scene, "Error. Invalid plane parameters.");
-	free_split(split_line);
 	node->type = 2;
+	free_split(split_line);
 }
 
 void	parse_cylinder(char *line, t_scene *scene)
@@ -112,6 +112,7 @@ void	parse_cylinder(char *line, t_scene *scene)
 		validate_height(node->cy.height) || \
 		validate_color(&node->cy.color))
 		handle_parse_error(split_line, scene, "Error. Invalid cylinder parameters.");
-	free_split(split_line);
 	node->type = 3;
+	free_split(split_line);
+
 }

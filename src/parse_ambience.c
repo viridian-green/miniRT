@@ -3,25 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ambience.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:02:45 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/27 18:34:41 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:20:31 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	split_int(char **line, int *one, int *two, int *three)
+int	split_int(char **line, int *one, int *two, int *three)
 {
 	char	**split_line;
 
 	split_line = ft_split(*line, ',');
 	if (!split_line || !split_line[0] || !split_line[1] || !split_line[2])
-		exit(EXIT_FAILURE);
+	{
+		free_split(split_line);
+		return (-1);
+	}
 	*one = ft_atoi(split_line[0]);
 	*two = ft_atoi(split_line[1]);
 	*three = ft_atoi(split_line[2]);
+	free_split(split_line);
+	return (0);
 }
 
 void	set_color(char **line, t_color *color)
@@ -42,12 +47,13 @@ void	parse_ambience(char *line, t_scene *scene)
 
 	split_line = ft_split(line, ' ');
 	if (validate_line_format(split_line, 3))
-		free_exit("Error. Invalid ambience format.", scene);
+		handle_parse_error(split_line, scene, "Error. Invalid ambience format.");
 	if (validate_numeric_value(split_line[1]))
-		free_exit("Error. Invalid ambience light ratio.", scene);
+		handle_parse_error(split_line, scene, "Error. Invalid ambience light ratio.");
 	scene->ambience.light_ratio = ft_atof(split_line[1]);
 	set_color(&split_line[2], &scene->ambience.color);
 	if (validate_light_ratio(scene->ambience.light_ratio) || \
 		validate_color(&scene->ambience.color))
-		free_exit("Error. Invalid ambience parameters.", scene);
+		handle_parse_error(split_line, scene, "Error. Invalid ambience parameters.");
+	free_split(split_line);
 }

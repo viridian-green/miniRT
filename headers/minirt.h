@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/17 17:29:39 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:09:25 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ t_ray		create_ray(double p_x, double p_y, t_vector vp, t_scene *scene);
 int hit_sp(t_ray ray, t_object object, double *t, t_scene *s);
 
 //parse_ambience
-void		split_int(char **line, int *one, int *two, int *three);
-void		set_color(char **line, t_color *color);
+int		split_int(char **line, int *one, int *two, int *three);
+void	set_color(char **line, t_color *color);
 void		parse_ambience(char *line, t_scene *scene);
 
 //parse_camera

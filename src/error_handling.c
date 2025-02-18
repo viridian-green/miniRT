@@ -3,40 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:12:40 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/03 18:47:54 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:34:00 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	free_exit(char *message, t_scene *scene)
+void free_linked_list(t_object *object)
 {
-	if (scene->mlx_ptr)
-		free(scene->mlx_ptr);
-	if (scene->mlx_ptr)
-		free(scene->img);
-	if (scene)
-		free(scene);
-	perror(message);
-	exit (EXIT_FAILURE);
+	t_object *tmp;
+	while (object)
+	{
+		tmp = object->next;
+		free(object);
+		object = tmp;
+	}
 }
 
-void	free_split(char **split)
+int	is_in_linked_list(t_object *head, t_object *target)
+{
+	while (head)
+	{
+		if (head == target)
+			return (1); // found
+		head = head->next;
+	}
+	return (0); // not found
+}
+
+int	free_exit(char *message, t_scene *scene)
+{
+	if (scene)
+	{
+	if (scene->img)
+		mlx_delete_image(scene->mlx_ptr, scene->img);
+	if (scene->mlx_ptr)
+		mlx_terminate(scene->mlx_ptr);
+	if (scene->object)
+		free_linked_list(scene->object);
+	if (scene->intersec.self && !is_in_linked_list(scene->object, scene->intersec.self))
+	{
+		free(scene->intersec.self);
+		scene->intersec.self = NULL;
+	}
+	free(scene);
+	scene = NULL;
+	}
+	printf("%s", message);
+	exit (0);
+}
+
+void	free_split(char **arr)
 {
 	int	i;
 
-	if (!split)
-		return ;
+	if (!arr)
+		return;
 	i = 0;
-	while (split[i])
+	while (arr[i])
 	{
-		free(split[i]);
+		free(arr[i]);
 		i++;
 	}
-	free(split);
+	free(arr);
 }
 
 void	handle_parse_error(char **split_line, t_scene *scene, char *message)
