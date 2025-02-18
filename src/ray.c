@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/18 17:22:29 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:05:32 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,54 @@ double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s)
 			return 1;
 }
 
+// int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
+// {
+
+//     t_vector normal = object.pl.orientation;
+
+//     double denom = vec_dot(ray.direction, normal);
+
+//     if (fabs(denom) > 1e-6)
+//     {
+
+//         t_vector oc = vc_subtract(ray.origin, object.pl.plane_point);
+//         *t = -vec_dot(oc, normal) / denom;
+// 		s->intersec.t = *t;
+// 		s->intersec.point = vectorize_t(ray, *t);
+// 		s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
+// 		s->intersec.color = object.pl.color;
+//         if (*t >= 0.0)
+//             return 1;
+//     }
+//     return 0;
+// }
+
 int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
 {
-
+    // The plane's normal is its orientation
     t_vector normal = object.pl.orientation;
 
+    // Calculate the denominator (dot product between ray direction and plane normal)
     double denom = vec_dot(ray.direction, normal);
 
-    if (fabs(denom) > 1e-6)
+    if (fabs(denom) > 1e-6)  // Avoid division by zero
     {
-
+        // Vector from ray origin to a point on the plane
         t_vector oc = vc_subtract(ray.origin, object.pl.plane_point);
+
+        // Calculate the intersection point distance
         *t = -vec_dot(oc, normal) / denom;
-		s->intersec.t = *t;
-		// s->intersec.point = vectorize_t(ray, *t);
-		// s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
-		// s->intersec.color = object.pl.color;
-        if (*t >= 0.0)
-            return 1;
+
+        if (*t >= 0.0)  // Check if intersection is in front of the ray
+        {
+            s->intersec.t = *t;
+            s->intersec.point = vectorize_t(ray, *t);  // Compute intersection point
+            s->intersec.normal = normal;;  // Plane normal (already normalized)
+            s->intersec.color = object.pl.color;  // Store color
+            return 1;  // Ray intersects the plane
+        }
     }
-    return 0;
+    return 0;  // No intersection
 }
 
 
@@ -117,10 +145,9 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
         {
             *t = t1;
 			s->intersec.t = *t;
-			// s->intersec.t = *t;
-			// s->intersec.point = vectorize_t(ray, *t);
-			// s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
-			// s->intersec.color = object.pl.color;
+			s->intersec.point = vectorize_t(ray, *t);
+			s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
+			s->intersec.color = object.cy.color;
             return 1;
         }
     }
@@ -132,6 +159,9 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
         {
             *t = t2;
 			s->intersec.t = *t;
+			s->intersec.point = vectorize_t(ray, *t);
+			s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
+			s->intersec.color = object.cy.color;
             return 1;
         }
     }

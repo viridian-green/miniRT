@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/18 17:24:46 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:02:15 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ double object_intersects(t_object object, t_ray ray, double t, t_scene *s)
 	ray_intersects_cy(ray, object, &t, s);
 	return (t);
 }
+
 
 void find_nearest_intersection(t_ray ray, t_scene *s)
 {
@@ -59,22 +60,14 @@ void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
 	if (scene->intersec.self != NULL)
     {
         if (scene->intersec.self->type == 1) // Sphere
-		{
-            rgb = scene->object->sp.color;
-		}
+            rgb = scene->intersec.color;
         if (scene->intersec.self->type == 2) // Plane
-        {
-            rgb = scene->object->pl.color;
-		}
+            rgb = scene->intersec.color;
         if (scene->intersec.self->type == 3) // Cylinder
-		{
-			rgb = scene->object->cy.color;
-		}
+			rgb = scene->intersec.color;
     }
     else
-    {
 		rgb = scene->ambience.color;
-    }
 	color = convert_color(rgb);
 	mlx_put_pixel(scene->img, p_x, p_y, color);
 }

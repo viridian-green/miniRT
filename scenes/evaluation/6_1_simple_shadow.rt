@@ -5,7 +5,7 @@ A   0.7       255,255,255
 C   0,0,-6    0,0,1    90
 
 # Light: Coordinates, Brightness, Color
-L      0,6,0                   0.8        255,255,255
+#L      0,6,0                   0.8        255,255,255
 
 # Sphere: Coordinates, Diameter, Color
 sp  0,0,0   1   255,0,0
