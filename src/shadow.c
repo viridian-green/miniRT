@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:25:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/19 13:51:22 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:07:34 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	check_shadow(t_scene *scene, t_ray light, t_intersec intersec)
 		hit = object_intersects(*scene->object, shadow, hit, scene);
 		if (hit && hit > EPSILON && hit < (len_to_light - EPSILON))
 			return (1);
-		printf("1");
 		objects = objects->next;
 	}
 	return (0);
