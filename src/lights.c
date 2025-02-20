@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:09:24 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/17 17:58:39 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:27:03 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_color	find_diffuse_color(t_scene *scene)
 		l_ray.origin = scene->light.light_point;
 		light_intensity = fmax(vec_dot(scene->intersec.normal, \
 										l_ray.direction), 0);
-		if (!check_shadow(scene, l_ray, scene->intersec))
+		if (!check_shadow(scene, l_ray, scene->intersec) && light_intensity > 0)
 			color = color_add(color, color_mult(color_mult(scene->light.color, \
 										light_intensity), scene->light.ratio));
 	}
