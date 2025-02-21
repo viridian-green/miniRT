@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/21 16:15:15 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:16:49 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,38 +60,38 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
 	}
 }
 
-void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
-{
-	int			color;      
-	t_color		rgb;
-
-	(void)ray;
-	find_nearest_intersection(ray, scene);
-	if (scene->intersec.self != NULL)
-    {
-        if (scene->intersec.self->type == 1) // Sphere
-            rgb = scene->intersec.color;
-        if (scene->intersec.self->type == 2) // Plane
-            rgb = scene->intersec.color;
-        if (scene->intersec.self->type == 3) // Cylinder
-			rgb = scene->intersec.color;
-    }
-    else
-		rgb = scene->ambience.color;
-	color = convert_color(rgb);
-	mlx_put_pixel(scene->img, p_x, p_y, color);
-}
-
 // void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
 // {
 // 	int			color;
 // 	t_color		rgb;
 
+// 	(void)ray;
 // 	find_nearest_intersection(ray, scene);
-// 	if (scene->intersec.self)
-// 		rgb = light_calc(scene);
-// 	else
+// 	if (scene->intersec.self != NULL)
+//     {
+//         if (scene->intersec.self->type == 1) // Sphere
+//             rgb = scene->intersec.color;
+//         if (scene->intersec.self->type == 2) // Plane
+//             rgb = scene->intersec.color;
+//         if (scene->intersec.self->type == 3) // Cylinder
+// 			rgb = scene->intersec.color;
+//     }
+//     else
 // 		rgb = scene->ambience.color;
 // 	color = convert_color(rgb);
 // 	mlx_put_pixel(scene->img, p_x, p_y, color);
 // }
+
+void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
+{
+	int			color;
+	t_color		rgb;
+
+	find_nearest_intersection(ray, scene);
+	if (scene->intersec.self)
+		rgb = light_calc(scene);
+	else
+		rgb = scene->ambience.color;
+	color = convert_color(rgb);
+	mlx_put_pixel(scene->img, p_x, p_y, color);
+}
