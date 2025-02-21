@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/21 16:27:19 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:18:48 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	convert_color(t_color color)
 	return (rgb);
 }
 
+/*
+The function object_intersects is called inside the loop in
+find_nearest_intersection to check whether the current object is intersected by the ray.
+It modifies t if the intersection is closer than the previous one.
+*/
 double object_intersects(t_object object, t_ray ray, double t, t_scene *s)
 {
     ray_intersects_sp(ray, object, &t, s);

@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/18 18:05:32 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:13:52 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,6 @@ double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s)
 			return 1;
 }
 
-// int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
-// {
-
-//     t_vector normal = object.pl.orientation;
-
-//     double denom = vec_dot(ray.direction, normal);
-
-//     if (fabs(denom) > 1e-6)
-//     {
-
-//         t_vector oc = vc_subtract(ray.origin, object.pl.plane_point);
-//         *t = -vec_dot(oc, normal) / denom;
-// 		s->intersec.t = *t;
-// 		s->intersec.point = vectorize_t(ray, *t);
-// 		s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
-// 		s->intersec.color = object.pl.color;
-//         if (*t >= 0.0)
-//             return 1;
-//     }
-//     return 0;
-// }
-
 int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
 {
     // The plane's normal is its orientation
@@ -106,7 +84,6 @@ int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
     }
     return 0;  // No intersection
 }
-
 
 
 int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
