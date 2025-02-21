@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/21 16:09:06 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:15:15 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
 
 void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
 {
-	int			color;        ray_intersects_sp(ray, *closest_object, &closest_t, s);
-	ray_intersects_pl(ray, *closest_object, &closest_t, s);
-	ray_intersects_cy(ray, *closest_object, &closest_t, s);
+	int			color;      
 	t_color		rgb;
 
 	(void)ray;
