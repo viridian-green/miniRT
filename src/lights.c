@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:09:24 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/20 14:27:03 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:56:58 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_color	color_init(double r, double g, double b)
 	return (color);
 }
 
-
 t_color	find_diffuse_color(t_scene *scene)
 {
 	t_ray		l_ray;
@@ -74,11 +73,11 @@ t_color	light_calc(t_scene *scene)
 	intersec_color = scene->intersec.color;
 	amb_color = color_mult(scene->ambience.color, scene->ambience.light_ratio);
 	diff_color = find_diffuse_color(scene);
-	final_color.r = fmin(fmax(((amb_color.r + diff_color.r) / 255) * \
-								intersec_color.r, 0), 255);
-	final_color.g = fmin(fmax(((amb_color.g + diff_color.g) / 255) * \
-								intersec_color.g, 0), 255);
-	final_color.b = fmin(fmax(((amb_color.b + diff_color.b) / 255) * \
-								intersec_color.b, 0), 255);
+	final_color.r = fmin(fmax(((amb_color.r + diff_color.r) / 255.0) * \
+								intersec_color.r, 0), 255.0);
+	final_color.g = fmin(fmax(((amb_color.g + diff_color.g) / 255.0) * \
+								intersec_color.g, 0), 255.0);
+	final_color.b = fmin(fmax(((amb_color.b + diff_color.b) / 255.0) * \
+								intersec_color.b, 0), 255.0);
 	return (final_color);
 }
