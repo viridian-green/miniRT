@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/18 17:23:50 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:27:31 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,6 @@ void	key_board(mlx_key_data_t key, t_scene *scene)
 	//zoom(key, scene);
 	//update(scene);
 }
-
-/*
-void render_hit(t_ray ray, double t, t_object *object) {
-    t_vector hit_point = vc_add(ray.origin, vc_multiply(ray.direction, t));
-
-    // For now, just set the color based on the object's type
-    if (object->type == SPHERE) {
-        t_sp *sphere = (t_sp *)object->obj_data;
-        set_pixel_color(hit_point, sphere->color);
-    } else if (object->type == PLANE) {
-        t_pl *plane = (t_pl *)object->obj_data;
-        set_pixel_color(hit_point, plane->color);
-    }
-}
-*/
-
-
 
 void	render_image(t_scene *scene)
 {

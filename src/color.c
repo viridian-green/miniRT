@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:35:20 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/21 16:16:49 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:27:19 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,20 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
 	}
 }
 
+void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
+{
+	int			color;
+	t_color		rgb;
+
+	find_nearest_intersection(ray, scene);
+	if (scene->intersec.self)
+		rgb = light_calc(scene);
+	else
+		rgb = scene->ambience.color;
+	color = convert_color(rgb);
+	mlx_put_pixel(scene->img, p_x, p_y, color);
+}
+
 // void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
 // {
 // 	int			color;
@@ -81,17 +95,3 @@ void find_nearest_intersection(t_ray ray, t_scene *s)
 // 	color = convert_color(rgb);
 // 	mlx_put_pixel(scene->img, p_x, p_y, color);
 // }
-
-void	put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray)
-{
-	int			color;
-	t_color		rgb;
-
-	find_nearest_intersection(ray, scene);
-	if (scene->intersec.self)
-		rgb = light_calc(scene);
-	else
-		rgb = scene->ambience.color;
-	color = convert_color(rgb);
-	mlx_put_pixel(scene->img, p_x, p_y, color);
-}
