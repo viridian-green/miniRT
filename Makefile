@@ -26,7 +26,7 @@ SRCS = 	src/main.c \
 		src/parse_objects.c \
 		src/utils.c \
 		src/math.c \
-		src/math2.c \
+		src/math_2.c \
 		src/checks.c \
 		src/init.c \
 		src/lights.c \
