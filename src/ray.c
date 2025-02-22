@@ -1,12 +1,12 @@
-/* ************************************************************************** */
+		/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/21 17:13:52 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:50:52 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,28 @@ t_ray	create_ray(double p_x, double p_y, t_vector origin, t_scene *scene)
 
 double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s)
 {
-       t_vector	oc;
-       double	a;
-       double	half_b;
-       double	c;
-       double	discriminant;
+	t_vector	oc;
+	double	a;
+	double	half_b;
+	double	c;
+	double	discriminant;
 
-       oc = vc_subtract(ray.origin, object.sp.center);
-       a = vec_dot(ray.direction, ray.direction);
-       half_b = vec_dot(oc, ray.direction);
-       c = vec_dot(oc, oc) - object.sp.diameter * object.sp.diameter / 4;
-       discriminant = half_b * half_b - a * c;
-       if (discriminant < 0)
-           return (0);
-       else
-       {
-        	*t = ((-half_b - sqrt(discriminant)) / a);
-			s->intersec.t = *t;
-			s->intersec.point = vectorize_t(ray, *t);
-			s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
-			s->intersec.color = object.sp.color;
-}
-			return 1;
+	oc = vc_subtract(ray.origin, object.sp.center);
+	a = vc_dot(ray.direction, ray.direction);
+	half_b = vc_dot(oc, ray.direction);
+	c = vc_dot(oc, oc) - object.sp.diameter * object.sp.diameter / 4;
+	discriminant = half_b * half_b - a * c;
+	if (discriminant < 0)
+		return (0);
+	else
+	{
+		*t = ((-half_b - sqrt(discriminant)) / a);
+		s->intersec.t = *t;
+		s->intersec.point = vectorize_t(ray, *t);
+		s->intersec.normal = vc_normalize(vc_subtract(s->intersec.point, object.sp.center));
+		s->intersec.color = object.sp.color;
+	}
+	return (1);
 }
 
 int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
@@ -63,7 +63,7 @@ int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
     t_vector normal = object.pl.orientation;
 
     // Calculate the denominator (dot product between ray direction and plane normal)
-    double denom = vec_dot(ray.direction, normal);
+    double denom = vc_dot(ray.direction, normal);
 
     if (fabs(denom) > 1e-6)  // Avoid division by zero
     {
@@ -71,7 +71,7 @@ int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
         t_vector oc = vc_subtract(ray.origin, object.pl.plane_point);
 
         // Calculate the intersection point distance
-        *t = -vec_dot(oc, normal) / denom;
+        *t = -vc_dot(oc, normal) / denom;
 
         if (*t >= 0.0)  // Check if intersection is in front of the ray
         {
@@ -92,16 +92,16 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
     t_vector direction = ray.direction;
     t_vector axis = object.cy.orientation;
     double r = object.cy.diameter / 2.0;  // Radius of the cylinder
-    double dot_dir_axis = vec_dot(direction, axis);
-    double dot_oc_axis = vec_dot(oc, axis);
+    double dot_dir_axis = vc_dot(direction, axis);
+    double dot_oc_axis = vc_dot(oc, axis);
 
     // We now form the quadratic equation to solve for intersection t
     t_vector oc_perp = vc_subtract(oc, vc_mult_scalar(axis, dot_oc_axis));  // Vector perpendicular to axis
     t_vector dir_perp = vc_subtract(direction, vc_mult_scalar(axis, dot_dir_axis));  // Ray direction perpendicular to axis
 
-    double a = vec_dot(dir_perp, dir_perp);  // Coefficient for quadratic equation
-    double b = 2.0 * vec_dot(oc_perp, dir_perp);
-    double c = vec_dot(oc_perp, oc_perp) - r * r;
+    double a = vc_dot(dir_perp, dir_perp);  // Coefficient for quadratic equation
+    double b = 2.0 * vc_dot(oc_perp, dir_perp);
+    double c = vc_dot(oc_perp, oc_perp) - r * r;
 
     (void)s;
     double discriminant = b * b - 4.0 * a * c;
@@ -117,13 +117,13 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
     {
         // Now, we need to check if the intersection is within the cylinder's height
         t_vector intersection1 = vc_add(ray.origin, vc_mult_scalar(ray.direction, t1));
-        double height1 = vec_dot(vc_subtract(intersection1, object.cy.center), axis);
+        double height1 = vc_dot(vc_subtract(intersection1, object.cy.center), axis);
         if (height1 >= 0.0 && height1 <= object.cy.height)
         {
             *t = t1;
 			s->intersec.t = *t;
 			s->intersec.point = vectorize_t(ray, *t);
-			s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
+			s->intersec.normal = vc_normalize(vc_subtract(s->intersec.point, object.sp.center));
 			s->intersec.color = object.cy.color;
             return 1;
         }
@@ -131,13 +131,13 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
     if (t2 >= 0.0)
     {
         t_vector intersection2 = vc_add(ray.origin, vc_mult_scalar(ray.direction, t2));
-        double height2 = vec_dot(vc_subtract(intersection2, object.cy.center), axis);
+        double height2 = vc_dot(vc_subtract(intersection2, object.cy.center), axis);
         if (height2 >= 0.0 && height2 <= object.cy.height)
         {
             *t = t2;
 			s->intersec.t = *t;
 			s->intersec.point = vectorize_t(ray, *t);
-			s->intersec.normal = normalize(vc_subtract(s->intersec.point, object.sp.center));
+			s->intersec.normal = vc_normalize(vc_subtract(s->intersec.point, object.sp.center));
 			s->intersec.color = object.cy.color;
             return 1;
         }

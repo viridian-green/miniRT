@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/18 15:53:39 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:44:52 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,6 @@ void		handle_parse_error(char **split_line, t_scene *scene, char *message);
 //init
 void		init_mlx(t_scene *scene);
 
-//init_objects
-void		init_sphere(t_sp *sp);
-void		init_plane(t_pl *pl);
-void		init_cylinder(t_cy *cy);
-void		init_object(t_object *obj);
 
 //main
 void		init_mlx(t_scene *scene);
@@ -93,14 +88,14 @@ char		*ft_strcat(char *dest, const char *src);
 char		*ft_strtok(char *str, const char *delim);
 int			validate_numeric_value(char *str);
 double		process_integer_part(const char **str);
-t_vector	normalize(t_vector v);
+t_vector	vc_normalize(t_vector v);
 
 //math
 t_vector	vc_add(t_vector v1, t_vector v2);
 t_vector	vc_subtract(t_vector v1, t_vector v2);
 t_vector	vc_mult_scalar(t_vector v, double scalar);
-t_vector	cross_product(t_vector v1, t_vector v2);
-double		vec_dot(t_vector v1, t_vector v2);
+t_vector	vc_cross_product(t_vector v1, t_vector v2);
+double		vc_dot(t_vector v1, t_vector v2);
 t_vector	vectorize_t(t_ray r, double t);
 
 //shadow

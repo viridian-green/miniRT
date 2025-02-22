@@ -26,11 +26,11 @@ SRCS = 	src/main.c \
 		src/parse_objects.c \
 		src/utils.c \
 		src/math.c \
+		src/math2.c \
 		src/checks.c \
 		src/init.c \
 		src/lights.c \
 		src/shadow.c \
-		src/init_objects.c \
 		src/error_handling.c \
 		src/viewport.c \
 		src/color.c \

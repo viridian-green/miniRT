@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:12:40 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/18 15:38:40 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:37:26 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void free_linked_list(t_object *object)
+void	free_linked_list(t_object *object)
 {
-	t_object *tmp;
+	t_object	*tmp;
+
 	while (object)
 	{
 		tmp = object->next;
@@ -38,19 +39,20 @@ int	free_exit(char *message, t_scene *scene)
 {
 	if (scene)
 	{
-	if (scene->img)
-		mlx_delete_image(scene->mlx_ptr, scene->img);
-	if (scene->mlx_ptr)
-		mlx_terminate(scene->mlx_ptr);
-	if (scene->object)
-		free_linked_list(scene->object);
-	if (scene->intersec.self && !is_in_linked_list(scene->object, scene->intersec.self))
-	{
-		free(scene->intersec.self);
-		scene->intersec.self = NULL;
-	}
-	free(scene);
-	scene = NULL;
+		if (scene->img)
+			mlx_delete_image(scene->mlx_ptr, scene->img);
+		if (scene->mlx_ptr)
+			mlx_terminate(scene->mlx_ptr);
+		if (scene->object)
+			free_linked_list(scene->object);
+		if (scene->intersec.self && \
+			!is_in_linked_list(scene->object, scene->intersec.self))
+		{
+			free(scene->intersec.self);
+			scene->intersec.self = NULL;
+		}
+		free(scene);
+		scene = NULL;
 	}
 	printf("%s", message);
 	exit (0);
@@ -61,7 +63,7 @@ void	free_split(char **arr)
 	int	i;
 
 	if (!arr)
-		return;
+		return ;
 	i = 0;
 	while (arr[i])
 	{

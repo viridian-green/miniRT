@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:25:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/20 17:11:27 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:52:56 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	check_shadow(t_scene *scene, t_ray light, t_intersec intersec)
 	t_object	*objects;
 
 	shadow.direction = light.direction;
-	shadow.origin = vc_add(intersec.point, vc_mult_scalar(intersec.normal, EPSILON));
+	shadow.origin = vc_add(intersec.point, \
+					vc_mult_scalar(intersec.normal, EPSILON));
 	len_to_light = vc_length(vc_subtract(light.origin, shadow.origin));
 	objects = scene->object;
 	while (objects)

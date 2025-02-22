@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/18 15:30:04 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:50:09 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ char	*normalize_whitespace(char *line)
 	return (normalized);
 }
 
-int skip_lines(char *line)
+int	skip_lines(char *line)
 {
-	if (line[0] == '\0' || line[0] == '\n' ||
-	line[0] == '#' || ft_strncmp(line, "//", 2) == 0)
-		return 1;
-	return 0;
+	if (line[0] == '\0' || line[0] == '\n' || \
+		line[0] == '#' || ft_strncmp(line, "//", 2) == 0)
+		return (1);
+	return (0);
 }
 
 void	parse_file(int fd, t_scene *scene)
@@ -71,7 +71,7 @@ void	parse_file(int fd, t_scene *scene)
 			free(normalized_line);
 			free(line);
 			line = get_next_line(fd);
-			continue;
+			continue ;
 		}
 		if (ft_strncmp(normalized_line, "A", 1) == 0)
 			parse_ambience(normalized_line, scene);

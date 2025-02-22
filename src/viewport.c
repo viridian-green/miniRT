@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:09:23 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/14 12:59:18 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:44:52 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Check if the camera orientation is aligned with world-up or its negative
 */
 int	is_aligned_with_up_vector(t_vector orientation)
 {
-	orientation = normalize(orientation);
+	orientation = vc_normalize(orientation);
 	if (fabs(orientation.y - 1.0) < EPSILON || \
 		fabs(orientation.y + 1.0) < EPSILON)
 		return (1);
@@ -48,15 +48,15 @@ void	create_viewport(t_scene *s)
 	fov_to_radians = s->camera.fov * M_PI / 180.0;
 	s->vp.width = 2.0 * tan(fov_to_radians / 2.0);
 	s->vp.height = s->vp.width / (s->canvas_width / s->canvas_height);
-	s->camera.right_v = normalize(cross_product(s->camera.forward_v, worldup_v));
-	s->camera.up_v = normalize(cross_product(s->camera.right_v, s->camera.forward_v));
+	s->camera.right_v = vc_normalize(vc_cross_product(s->camera.forward_v, worldup_v));
+	s->camera.up_v = vc_normalize(vc_cross_product(s->camera.right_v, s->camera.forward_v));
 	s->vp.center = vc_add(s->camera.origin, vc_mult_scalar(s->camera.forward_v, FOCAL_LENGTH));
 	s->vp.up_left = vc_add(vc_subtract(s->vp.center, vc_mult_scalar(s->camera.right_v, s->vp.width / 2.0)), vc_mult_scalar(s->camera.up_v, s->vp.height / 2.0));
 	// if (!is_aligned_with_up_vector(s->camera.forward_v))
-	// 	s->camera.right_v = normalize(cross_product(worldup_v, s->camera.forward_v));
+	// 	s->camera.right_v = vc_normalize(vc_cross_product(worldup_v, s->camera.forward_v));
 	// else
-	// 	s->camera.right_v = normalize(cross_product((t_vector){0.0, 0.0, 1.0}, s->camera.forward_v));
-	// s->camera.up_v = cross_product(s->camera.forward_v, s->camera.right_v);
+	// 	s->camera.right_v = vc_normalize(vc_cross_product((t_vector){0.0, 0.0, 1.0}, s->camera.forward_v));
+	// s->camera.up_v = vc_cross_product(s->camera.forward_v, s->camera.right_v);
 	scalarize_pixels(s);
 	//s->camera.up_v = s->camera.up_v;
 	//s->camera.right_v = s->camera.right_v;

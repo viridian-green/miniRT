@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:04:37 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/18 15:06:49 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:49:28 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	parse_plane(char *line, t_scene *scene)
 	set_coordinates(&split_line[0], &node->pl.plane_point);
 	set_orientation(&split_line[1], &node->pl.orientation);
 	set_color(&split_line[3], &node->pl.color);
-	if (validate_orientation(&node->pl.orientation) ||
+	if (validate_orientation(&node->pl.orientation) || \
 		validate_color(&node->pl.color))
 		handle_parse_error(split_line, scene, "Error. Invalid plane parameters.");
 	node->type = 2;
@@ -114,5 +114,4 @@ void	parse_cylinder(char *line, t_scene *scene)
 		handle_parse_error(split_line, scene, "Error. Invalid cylinder parameters.");
 	node->type = 3;
 	free_split(split_line);
-
 }

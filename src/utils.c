@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:15:12 by ademarti          #+#    #+#             */
-/*   Updated: 2025/01/27 18:58:20 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:53:22 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,14 @@ char	*ft_strcat(char *dest, const char *src)
 	char	*ptr;
 
 	ptr = dest;
-	// Move the pointer to the end of the destination string
 	while (*ptr != '\0')
 		ptr++;
-	// Copy characters from the source string to the destination
 	while (*src != '\0')
 	{
 		*ptr = *src;
 		ptr++;
 		src++;
 	}
-	// Null-terminate the resulting string
 	*ptr = '\0';
 	return (dest);
 }
