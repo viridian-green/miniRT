@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/24 17:47:11 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:01:20 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s);
 int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s);
 int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s);
 
-
+t_ray	create_ray(double p_x, double p_y, t_vector origin, t_scene *scene);
 
 double object_intersects(t_object object, t_ray ray, double t, t_scene *s);
 void find_nearest_intersection(t_ray ray, t_scene *s);
