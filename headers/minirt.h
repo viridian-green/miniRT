@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/22 17:44:52 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:47:11 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,46 @@ int			validate_diameter(double diameter);
 int			validate_height(double height);
 int			validate_fov(int fov);
 
+//color
+int			convert_color(t_color color);
+void		put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
+
 //error handling
+void		free_linked_list(t_object *object);
+int			is_in_linked_list(t_object *head, t_object *target);
 int			free_exit(char *message, t_scene *scene);
 void		free_split(char **split);
-void		handle_parse_error(char **split_line, t_scene *scene, char *message);
+void		handle_parse_error(char **split_l, t_scene *scene, char *message);
 
 //init
 void		init_mlx(t_scene *scene);
 
+//lights
+t_color		color_add(t_color color1, t_color color2);
+t_color		color_mult(t_color color, double ratio);
+t_color		color_init(double r, double g, double b);
+t_color		find_diffuse_color(t_scene *scene);
+t_color		light_calc(t_scene *scene);
 
 //main
-void		init_mlx(t_scene *scene);
 void		key_board(mlx_key_data_t key, t_scene *scene);
 void		render_image(t_scene *scene);
-t_ray		create_ray(double p_x, double p_y, t_vector vp, t_scene *scene);
-int hit_sp(t_ray ray, t_object object, double *t, t_scene *s);
+
+//math_2
+double		vc_dot(t_vector v1, t_vector v2);
+float		vc_length(t_vector v);
+t_vector	vectorize_t(t_ray r, double t);
+t_vector	vc_normalize(t_vector v);
+
+//math
+t_vector	vc_add(t_vector v1, t_vector v2);
+t_vector	vc_subtract(t_vector v1, t_vector v2);
+t_vector	vc_mult_scalar(t_vector v, double scalar);
+t_vector	vc_cross_product(t_vector v1, t_vector v2);
 
 //parse_ambience
-int		split_int(char **line, int *one, int *two, int *three);
-void	set_color(char **line, t_color *color);
+int			split_int(char **line, int *one, int *two, int *three);
+void		set_color(char **line, t_color *color);
 void		parse_ambience(char *line, t_scene *scene);
 
 //parse_camera
@@ -72,56 +93,44 @@ int			validate_light_ratio(double ratio);
 void		parse_light(char *line, t_scene *scene);
 
 //parse_objects
+t_object	*new_object_node(void);
+void		add_node_to_object(t_object **head, t_object *node);
 void		parse_plane(char *line, t_scene *scene);
 void		parse_sphere(char *line, t_scene *scene);
 void		parse_cylinder(char *line, t_scene *scene);
 
 //parsing
+int			validate_line_format(char **split_line, int expected_params);
 char		*normalize_whitespace(char *line);
+int			skip_lines(char *line);
 void		parse_file(int fd, t_scene *scene);
 int			parsing(char *config_file, t_scene *scene);
-int			validate_line_format(char **split_line, int expected_params);
 
-//utils
-double		ft_atof(const char *str);
-char		*ft_strcat(char *dest, const char *src);
-char		*ft_strtok(char *str, const char *delim);
-int			validate_numeric_value(char *str);
-double		process_integer_part(const char **str);
-t_vector	vc_normalize(t_vector v);
-
-//math
-t_vector	vc_add(t_vector v1, t_vector v2);
-t_vector	vc_subtract(t_vector v1, t_vector v2);
-t_vector	vc_mult_scalar(t_vector v, double scalar);
-t_vector	vc_cross_product(t_vector v1, t_vector v2);
-double		vc_dot(t_vector v1, t_vector v2);
-t_vector	vectorize_t(t_ray r, double t);
+//ray
 
 //shadow
 int			check_shadow(t_scene *scene, t_ray light, t_intersec intersec);
 
-//lights
-t_color		color_add(t_color color1, t_color color2);
-t_color		color_mult(t_color color, double ratio);
-t_color		color_init(double r, double g, double b);
-t_color		find_diffuse_color(t_scene *scene);
-t_color		light_calc(t_scene *scene);
+//utils
+double		process_integer_part(const char **str);
+double		ft_atof(const char *str);
+char		*ft_strtok(char *str, const char *delim);
+char		*ft_strcat(char *dest, const char *src);
+int			validate_numeric_value(char *str);
+
+//viewport
+int			is_aligned_with_up_vector(t_vector orientation);
+void		scalarize_pixels(t_scene *s);
+void		create_viewport(t_scene *s);
 
 //Intersections
 double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s);
 int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s);
 int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s);
-t_vector	scalar_multiply(t_vector v, double scalar);
-
-float		vc_length(t_vector v);
 
 
 
-void		create_viewport(t_scene *s);
-
-int	convert_color(t_color color);
 double object_intersects(t_object object, t_ray ray, double t, t_scene *s);
 void find_nearest_intersection(t_ray ray, t_scene *s);
-void		put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
+
 #endif

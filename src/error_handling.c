@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:12:40 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/22 17:37:26 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:36:22 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	free_split(char **arr)
 	free(arr);
 }
 
-void	handle_parse_error(char **split_line, t_scene *scene, char *message)
+void	handle_parse_error(char **split_l, t_scene *scene, char *message)
 {
-	if (split_line)
-		free_split(split_line);
+	if (split_l)
+		free_split(split_l);
 	free_exit(message, scene);
 }
