@@ -6,13 +6,14 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:25:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/22 17:52:56 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:37:28 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-//origin of shadow origin should be a little bit offset from the intersection point (light)
+/* origin of shadow origin should be a little bit offset
+from the intersection point (light) */
 int	check_shadow(t_scene *scene, t_ray light, t_intersec intersec)
 {
 	t_ray		shadow;

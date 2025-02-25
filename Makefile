@@ -19,6 +19,7 @@ LIBS += $(LIBFT_DIR)/libft.a $(GNL_DIR)/libgnl.a
 INCLUDES = -I$(HEADERS_DIR) -I$(LIBMLX)/include -I$(LIBFT_DIR)
 
 SRCS = 	src/main.c \
+		src/checks_2.c \
 		src/checks.c \
 		src/color_op.c \
 		src/color.c \

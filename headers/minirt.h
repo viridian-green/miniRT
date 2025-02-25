@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/25 16:04:52 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:21:25 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define HEIGHT 675
 # define EPSILON 1e-6
 
+# define ERR_MEMORY_ALLOC "Error: Memory allocation failed.\n"
 # define ERR_INVAL_AMBIENCE "Error: Invalid ambience parameters.\n"
 # define ERR_INVAL_A_RATIO "Error: Invalid ambience light ratio.\n"
 # define ERR_INVAL_A_FORMAT "Error: Invalid ambience format.\n"
@@ -28,6 +29,14 @@
 # define ERR_INVAL_L_FORMAT "Error: Invalid light format.\n"
 # define ERR_INVAL_L_DIAM "Error: Invalid light diameter.\n"
 # define ERR_INVAL_LIGHT "Error: Invalid light parameters.\n"
+# define ERR_INVAL_S_FORMAT "Error: Invalid sphere format.\n"
+# define ERR_INVAL_S_DIAM "Error: Invalid sphere diameter.\n"
+# define ERR_INVAL_S_PARAMS "Error: Invalid sphere parameters.\n"
+# define ERR_INVAL_PL_FORMAT "Error: Invalid plane format.\n"
+# define ERR_INVAL_PL_PARAMS "Error: Invalid plane parameters.\n"
+# define ERR_INVAL_CY_FORMAT "Error: Invalid cylinder format.\n"
+# define ERR_INVAL_CY_DIMEN "Error: Invalid cylinder dimensions.\n"
+# define ERR_INVAL_CY_PARAMS "Error: Invalid cylinder parameters.\n"
 
 # include <fcntl.h>
 # include <limits.h>

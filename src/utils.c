@@ -6,24 +6,11 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:15:12 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/22 17:53:22 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:35:45 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-double	process_integer_part(const char **str)
-{
-	double	result;
-
-	result = 0.0;
-	while (ft_isdigit(**str))
-	{
-		result = result * 10 + (**str - '0');
-		(*str)++;
-	}
-	return (result);
-}
 
 double	ft_atof(const char *str)
 {
@@ -94,20 +81,15 @@ char	*ft_strcat(char *dest, const char *src)
 	return (dest);
 }
 
-int	validate_numeric_value(char *str)
+double	process_integer_part(const char **str)
 {
-	int	i;
+	double	result;
 
-	i = 0;
-	if (str[strlen(str) - 1] == '\n')
-		str[strlen(str) - 1] = '\0';
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i])
+	result = 0.0;
+	while (ft_isdigit(**str))
 	{
-		if (!ft_isdigit(str[i]) && str[i] != '.')
-			return (1);
-		i++;
+		result = result * 10 + (**str - '0');
+		(*str)++;
 	}
-	return (0);
+	return (result);
 }
