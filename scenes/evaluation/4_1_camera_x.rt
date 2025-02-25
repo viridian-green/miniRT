@@ -1,5 +1,5 @@
 # Ambient lighting: Ratio, Color
-A   1.0       255,255,255
+#A   1.0       255,255,255
 
 # Camera: Coordinates, Normal, FOV
 C      2,0,0      -1,0,0        90

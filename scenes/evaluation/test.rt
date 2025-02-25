@@ -5,10 +5,11 @@ A   1.0       255,255,255
 C              0,0,-3    0,0,1    90
 
 # Sphere: Coordinates, Diameter, Color
-sp             0,0,0      1   255,0,0
+#sp             0,0,0      1   255,0,0
+#sp             1,0,2      1   0,255,0
 
 # Plane: Coordinates, Normal, Color
-pl        0,-1,0   0,1,0   0,255,0
+# pl        0,-1,0   0,1,0   0,255,0
 
 # Cylinder: Coordinates, Normal of axis, Diameter, Height, Color
-cy              0,0,1         0,1,0          1        2   0,0,255
+cy              1,0,2         0,1,0          1        2   0,0,255
