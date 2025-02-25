@@ -94,23 +94,6 @@ double find_discriminant(t_vector oc_perp , t_vector dir_perp , \
 	return (b * b - 4.0 * a * c);
 }
 
-int cyl_side_is_closest(double t_cap, double t_cyl_side, double *t, t_scene *s)
-{
-	double radius;
-
-	radius = s->object->cy.diameter / 2.0;
-	if (t_cyl_side >= 0.0 && (t_cap < 0.0 || t_cyl_side < t_cap))
-    {
-        *t = t_cyl_side;
-        s->intersec.t = *t;
-        s->intersec.point = vectorize_t(s->ray, *t);
-        s->intersec.normal = vc_normalize(vc_subtract(s->intersec.point, s->object->cy.center));
-        s->intersec.color = s->object->cy.color;
-        return 1;
-    }
-	else
-		return 0;
-}
 
 int cyl_cap_is_closest(double t_cap, t_vector axis,  double *t, t_scene *s)
 {
@@ -130,6 +113,29 @@ int cyl_cap_is_closest(double t_cap, t_vector axis,  double *t, t_scene *s)
     }
 	else
 		return 0;
+}
+
+
+void cyl_side_is_closest(double t_cap, double t_cyl_side, double *t, t_scene *s)
+{
+	double radius;
+	t_vector axis;
+
+	axis = vc_normalize(s->object->cy.orientation);
+	radius = s->object->cy.diameter / 2.0;
+
+	if (t_cyl_side >= 0.0 && (t_cap < 0.0 || t_cyl_side < t_cap))
+    {
+		// printf("Before color assignment: (%f, %f, %f)\n", s->object->cy.color.x, s->object->cy.color.y, s->object->cy.color.z);
+        *t = t_cyl_side;
+        s->intersec.t = *t;
+        s->intersec.point = vectorize_t(s->ray, *t);
+        s->intersec.normal = vc_normalize(vc_subtract(s->intersec.point, s->object->cy.center));
+        s->intersec.color = s->object->cy.color;
+		// printf("After color assignment: (%f, %f, %f)\n", s->intersec.color.x, s->intersec.color.y, s->intersec.color.z);
+    }
+	else if (t_cap >= 0.0)
+		cyl_cap_is_closest(t_cap, axis, t, s);
 }
 
 int ray_intersects_cy(t_ray r, t_object object, double *t, t_scene *s)
@@ -216,9 +222,6 @@ int ray_intersects_cy(t_ray r, t_object object, double *t, t_scene *s)
             }
         }
     }
-
 	cyl_side_is_closest(t_cap, t_cyl_side, t, s);
-	cyl_cap_is_closest(t_cap, axis, t, s);
-
     return 0;
 }
