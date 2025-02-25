@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:51:35 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/22 17:50:09 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:39:29 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ int	parsing(char *config_file, t_scene *scene)
 	int	fd;
 
 	fd = 0;
+	fd = open(config_file, O_RDONLY);
 	if (fd < 0)
 		free_exit("Error. Incorrect fd.\n", scene);
-	fd = open(config_file, O_RDONLY);
 	parse_file(fd, scene);
 	close(fd);
 	return (0);
