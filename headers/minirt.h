@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/24 20:01:20 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:44:41 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		put_color_pixel(double p_x, double p_y, t_scene *scene, t_ray ray);
 //error handling
 void		free_linked_list(t_object *object);
 int			is_in_linked_list(t_object *head, t_object *target);
-int			free_exit(char *message, t_scene *scene);
+int			free_exit(char *message, t_scene *scene, int exit_value);
 void		free_split(char **split);
 void		handle_parse_error(char **split_l, t_scene *scene, char *message);
 

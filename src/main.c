@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/22 17:40:08 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:45:16 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	key_board(mlx_key_data_t key, t_scene *scene)
 	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
 	{
 		mlx_close_window(scene->mlx_ptr);
-		free_exit("Closing window and exiting program\n", scene);
+		free_exit("Closing window and exiting program\n", scene, 0);
 		return ;
 	}
 	//translation(key, scene);
@@ -54,7 +54,7 @@ int	main(int ac, char **av)
 		perror("Error. Please enter the config file as argument.");
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
-		free_exit("Memory allocation error.", scene);
+		free_exit("Memory allocation error.", scene, 1);
 	init_mlx(scene);
 	parsing(av[1], scene);
 	create_viewport(scene);

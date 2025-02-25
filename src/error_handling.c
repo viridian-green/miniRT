@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:12:40 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/24 17:36:22 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:44:56 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	is_in_linked_list(t_object *head, t_object *target)
 	return (0);
 }
 
-int	free_exit(char *message, t_scene *scene)
+int	free_exit(char *message, t_scene *scene, int exit_value)
 {
 	if (scene)
 	{
@@ -55,7 +55,7 @@ int	free_exit(char *message, t_scene *scene)
 		scene = NULL;
 	}
 	printf("%s", message);
-	exit (0);
+	exit (exit_value);
 }
 
 void	free_split(char **arr)
@@ -77,5 +77,5 @@ void	handle_parse_error(char **split_l, t_scene *scene, char *message)
 {
 	if (split_l)
 		free_split(split_l);
-	free_exit(message, scene);
+	free_exit(message, scene, 1);
 }
