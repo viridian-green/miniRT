@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:04:37 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/22 17:49:28 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:01:37 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	add_node_to_object(t_object **head, t_object *node)
 		}
 	}
 }
-//verify necessity of creating function to move to last node
 
 void	parse_sphere(char *line, t_scene *scene)
 {

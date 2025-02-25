@@ -6,41 +6,11 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:09:24 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/22 17:43:40 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:34:24 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-t_color	color_add(t_color color1, t_color color2)
-{
-	t_color	result;
-
-	result.r = color1.r + color2.r;
-	result.g = color1.g + color2.g;
-	result.b = color1.b + color2.b;
-	return (result);
-}
-
-t_color	color_mult(t_color color, double ratio)
-{
-	t_color	result;
-
-	result.r = color.r * ratio;
-	result.g = color.g * ratio;
-	result.b = color.b * ratio;
-	return (result);
-}
-
-t_color	color_init(double r, double g, double b)
-{
-	t_color	color;
-
-	color.r = r;
-	color.g = g;
-	color.b = b;
-	return (color);
-}
 
 t_color	find_diffuse_color(t_scene *scene)
 {

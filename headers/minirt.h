@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/25 12:44:41 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:04:52 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@
 # define WIDTH 1200
 # define HEIGHT 675
 # define EPSILON 1e-6
+
+# define ERR_INVAL_AMBIENCE "Error: Invalid ambience parameters.\n"
+# define ERR_INVAL_A_RATIO "Error: Invalid ambience light ratio.\n"
+# define ERR_INVAL_A_FORMAT "Error: Invalid ambience format.\n"
+# define ERR_INVAL_C_FORMAT "Error: Invalid camera format.\n"
+# define ERR_INVAL_FOV "Error: Invalid camera FOV.\n"
+# define ERR_INVAL_COORD_FOV "Error: Invalid camera coordinates or FOV.\n"
+# define ERR_INVAL_L_FORMAT "Error: Invalid light format.\n"
+# define ERR_INVAL_L_DIAM "Error: Invalid light diameter.\n"
+# define ERR_INVAL_LIGHT "Error: Invalid light parameters.\n"
 
 # include <fcntl.h>
 # include <limits.h>

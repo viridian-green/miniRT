@@ -19,22 +19,25 @@ LIBS += $(LIBFT_DIR)/libft.a $(GNL_DIR)/libgnl.a
 INCLUDES = -I$(HEADERS_DIR) -I$(LIBMLX)/include -I$(LIBFT_DIR)
 
 SRCS = 	src/main.c \
-		src/parsing.c \
+		src/checks.c \
+		src/color_op.c \
+		src/color.c \
+		src/free_error_handling.c \
+		src/init.c \
+		src/intersection.c \
+		src/lights.c \
+		src/math_2.c \
+		src/math.c \
 		src/parse_ambience.c \
 		src/parse_camera.c \
 		src/parse_light.c \
 		src/parse_objects.c \
-		src/utils.c \
-		src/math.c \
-		src/math_2.c \
-		src/checks.c \
-		src/init.c \
-		src/lights.c \
+		src/parsing.c \
+		src/ray.c \
 		src/shadow.c \
-		src/error_handling.c \
-		src/viewport.c \
-		src/color.c \
-		src/ray.c
+		src/utils.c \
+		src/viewport.c
+
 
 OBJS = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 HDRS = $(addprefix $(HEADERS_DIR), minirt.h structures.h)
