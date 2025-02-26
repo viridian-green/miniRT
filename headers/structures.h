@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/25 16:41:20 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:18:07 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,18 @@ typedef struct s_intersec
 	struct s_object	*self;
 }	t_intersec;
 
+typedef struct {
+    double a;
+    double b;
+    double t_cylinder;
+	double t_cap;
+	double t_cyl_side;
+	t_vector oc;
+	t_vector dir_perp;
+	double discriminant;
+} t_results;
+
+
 //type 1 = sphere, type 2 = plane, type 3 = cylinder
 typedef struct s_object
 {
@@ -99,6 +111,8 @@ typedef struct s_object
 	t_pl			pl;
 	t_cy			cy;
 	struct s_object	*next;
+	t_ray ray;
+
 }	t_object;
 
 //understand the attributes of the viewport
