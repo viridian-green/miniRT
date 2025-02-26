@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/26 17:05:33 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:42:54 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,14 @@ typedef struct s_results{
 	t_vector oc;
     double a;
     double b;
+	t_vector oc_perp;
+	double dot_oc_axis;
 	double sqrt_discriminant;
     double t_cylinder;
 	double t_cap;
 	double t_cyl_side;
-
+	double t1;
+	double t2;
 	t_vector dir_perp;
 	double discriminant;
 } t_results;
