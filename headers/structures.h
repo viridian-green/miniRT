@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/26 16:24:27 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:05:33 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_scene
 	t_viewp		vp;
 	t_object	*object;
 	t_intersec intersec;
+	t_ray ray;
 }	t_scene;
 
 typedef struct s_results{

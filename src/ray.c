@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/26 16:25:28 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:11:37 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,55 +112,102 @@ double find_discriminant(t_results result , t_vector dir_perp , \
 }
 
 
-void find_t1(t_results result, double sqrt_discriminant, double t_cylinder, t_object object)
+// void find_t1(t_results result, double sqrt_discriminant, double t_cylinder, t_object object)
+// {
+// 	double a;
+// 	double t1;
+// 	t_vector axis;
+// 	t_vector dir_perp;
+// 	double dot_dir_axis;
+// 	t_vector intersection1;
+// 	double height1;
+
+// 	axis = vc_normalize(object.cy.orientation);
+// 	dot_dir_axis = vc_dot(object.ray.direction, axis);
+// 	dir_perp = vc_subtract(object.ray.direction, vc_mult_scalar(axis, dot_dir_axis));
+// 	a = vc_dot(dir_perp, dir_perp);
+
+// 	t1 = (-result.b - sqrt_discriminant) / (2.0 * a);
+//     if (t1 >= 0.0)
+//     {
+//         intersection1 = vc_add(object.ray.origin, vc_mult_scalar(object.ray.direction, t1));
+//         height1 = vc_dot(vc_subtract(intersection1, object.cy.center), axis);
+//         if (height1 >= -object.cy.height / 2.0 && height1 <= object.cy.height / 2.0)
+//             t_cylinder = t1;
+// }
+// }
+// void find_t2(t_results result, double sqrt_discriminant, double t_cylinder, t_object object)
+// {
+// 	double a;
+// 	double t2;
+// 	t_vector axis;
+// 	t_vector dir_perp;
+// 	double dot_dir_axis;
+// 	t_vector intersection2;
+// 	double height2;
+
+// 	axis = vc_normalize(object.cy.orientation);
+// 	dot_dir_axis = vc_dot(object.ray.direction, axis);
+// 	dir_perp = vc_subtract(object.ray.direction, vc_mult_scalar(axis, dot_dir_axis));
+// 	a = vc_dot(dir_perp, dir_perp);
+// 	t2 = (-result.b + sqrt_discriminant) / (2.0 * a);
+// 	if (t2 >= 0.0)
+// 	{
+// 		intersection2 = vc_add(object.ray.origin, vc_mult_scalar(object.ray.direction, t2));
+// 		height2 = vc_dot(vc_subtract(intersection2, object.cy.center), axis);
+// 		if (height2 >= -object.cy.height / 2.0 && height2 <= object.cy.height / 2.0)
+// 		{
+// 			if (t_cylinder < 0.0 || t2 < t_cylinder)
+// 				t_cylinder = t2;
+// 		}
+// 	}
+// }
+
+void cyl_cap_is_closest(t_results result, t_object *object,  double *t,  t_scene *s, t_ray ray)
 {
-	double a;
-	double t1;
-	t_vector axis;
-	t_vector dir_perp;
-	double dot_dir_axis;
-	t_vector intersection1;
-	double height1;
-
-	axis = vc_normalize(object.cy.orientation);
-	dot_dir_axis = vc_dot(object.ray.direction, axis);
-	dir_perp = vc_subtract(object.ray.direction, vc_mult_scalar(axis, dot_dir_axis));
-	a = vc_dot(dir_perp, dir_perp);
-
-	t1 = (-result.b - sqrt_discriminant) / (2.0 * a);
-    if (t1 >= 0.0)
+	double radius;
+	t_vector axis = vc_normalize(object->cy.orientation);
+	radius = object->cy.diameter / 2.0;
+    // if (result.t_cap >= 0.0)
+    // {
+    //     *t = result.t_cap;
+    //     s->intersec.t = *t;
+    //     s->intersec.point = vectorize_t(s->ray, *t);
+    //     s->intersec.normal = axis;
+    //     if (vc_dot(s->ray.direction, axis) > 0.0)
+	// 		s->intersec.normal = vc_mult_scalar(axis, -1.0); // Flip normal if hitting from inside
+	// 	s->intersec.color = object->cy.color;
+    // }
+	// else if (result.t_cyl_side >= 0.0 && (result.t_cap < 0.0 || result.t_cyl_side < result.t_cap))
+    // {
+    //     *t = result.t_cyl_side;
+    //     s->intersec.t = *t;
+    //     s->intersec.point = vectorize_t(s->ray, *t);
+    //     s->intersec.normal = vc_normalize(vc_subtract(s->intersec.point, object->cy.center));
+    //     s->intersec.color = object->cy.color;
+    // }
+	if (result.t_cylinder >= 0.0 && (result.t_cap < 0.0 || result.t_cylinder < result.t_cap))
     {
-        intersection1 = vc_add(object.ray.origin, vc_mult_scalar(object.ray.direction, t1));
-        height1 = vc_dot(vc_subtract(intersection1, object.cy.center), axis);
-        if (height1 >= -object.cy.height / 2.0 && height1 <= object.cy.height / 2.0)
-            t_cylinder = t1;
-}
-}
-void find_t2(t_results result, double sqrt_discriminant, double t_cylinder, t_object object)
-{
-	double a;
-	double t2;
-	t_vector axis;
-	t_vector dir_perp;
-	double dot_dir_axis;
-	t_vector intersection2;
-	double height2;
-
-	axis = vc_normalize(object.cy.orientation);
-	dot_dir_axis = vc_dot(object.ray.direction, axis);
-	dir_perp = vc_subtract(object.ray.direction, vc_mult_scalar(axis, dot_dir_axis));
-	a = vc_dot(dir_perp, dir_perp);
-	t2 = (-result.b + sqrt_discriminant) / (2.0 * a);
-	if (t2 >= 0.0)
-	{
-		intersection2 = vc_add(object.ray.origin, vc_mult_scalar(object.ray.direction, t2));
-		height2 = vc_dot(vc_subtract(intersection2, object.cy.center), axis);
-		if (height2 >= -object.cy.height / 2.0 && height2 <= object.cy.height / 2.0)
-		{
-			if (t_cylinder < 0.0 || t2 < t_cylinder)
-				t_cylinder = t2;
-		}
-	}
+		*t = result.t_cylinder;
+        s->intersec.t = *t;
+        s->intersec.point = vectorize_t(ray, *t);
+        {
+			t_vector center_to_point = vc_subtract(s->intersec.point, object->cy.center);
+            t_vector projected = vc_subtract(center_to_point, vc_mult_scalar(axis, vc_dot(center_to_point, axis)));
+            s->intersec.normal = vc_normalize(projected);
+        }
+        s->intersec.color = object->cy.color;
+    }
+    else if (result.t_cap >= 0.0)
+    {
+		*t = result.t_cap;
+        s->intersec.t = *t;
+        s->intersec.point = vectorize_t(ray, *t);
+        s->intersec.normal = axis;
+        if (vc_dot(ray.direction, axis) > 0.0)
+		s->intersec.normal = vc_mult_scalar(axis, -1.0); // Flip normal if hitting from inside
+        s->intersec.color = object->cy.color;
+    }
 }
 
 int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
@@ -173,18 +220,14 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
     double dot_dir_axis = vc_dot(ray.direction, axis);
     double dot_oc_axis = vc_dot(result.oc, axis);
 
-
-    // Compute the top and bottom cap centers
     t_vector bottom_cap = vc_subtract(object.cy.center, vc_mult_scalar(axis, object.cy.height / 2.0));
     t_vector top_cap = vc_add(object.cy.center, vc_mult_scalar(axis, object.cy.height / 2.0));
 
-    // Now form the quadratic equation to solve for intersection t
     t_vector oc_perp = vc_subtract(result.oc, vc_mult_scalar(axis, dot_oc_axis));  // Vector perpendicular to axis
     t_vector dir_perp = vc_subtract(ray.direction, vc_mult_scalar(axis, dot_dir_axis));  // Ray direction perpendicular to axis
 
     double a = vc_dot(dir_perp, dir_perp);
     double b = 2.0 * vc_dot(oc_perp, dir_perp);
-    // double c = vc_dot(oc_perp, oc_perp) - r * r
     result.discriminant = find_discriminant(result, dir_perp, ray , object);
     double t_cylinder = -1.0;
 
@@ -240,32 +283,8 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
             }
         }
     }
-
+	cyl_cap_is_closest(result, &object, t, s, ray);
     // Determine the closest valid intersection
-    if (t_cylinder >= 0.0 && (t_cap < 0.0 || t_cylinder < t_cap))
-    {
-		*t = t_cylinder;
-        s->intersec.t = *t;
-        s->intersec.point = vectorize_t(ray, *t);
-        {
-			t_vector center_to_point = vc_subtract(s->intersec.point, object.cy.center);
-            t_vector projected = vc_subtract(center_to_point, vc_mult_scalar(axis, vc_dot(center_to_point, axis)));
-            s->intersec.normal = vc_normalize(projected);
-        }
-        s->intersec.color = object.cy.color;
-        return 1;
-    }
-    else if (t_cap >= 0.0)
-    {
-		*t = t_cap;
-        s->intersec.t = *t;
-        s->intersec.point = vectorize_t(ray, *t);
-        s->intersec.normal = axis;
-        if (vc_dot(ray.direction, axis) > 0.0)
-		s->intersec.normal = vc_mult_scalar(axis, -1.0); // Flip normal if hitting from inside
-        s->intersec.color = object.cy.color;
-        return 1;
-    }
 
     return 0;
 }
