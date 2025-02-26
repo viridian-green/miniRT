@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   test2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/26 17:25:54 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:19:54 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,56 +112,56 @@ double find_discriminant(t_results result , t_vector dir_perp , \
 }
 
 
-// void find_t1(t_results result, double sqrt_discriminant, double t_cylinder, t_object object)
-// {
-// 	double a;
-// 	double t1;
-// 	t_vector axis;
-// 	t_vector dir_perp;
-// 	double dot_dir_axis;
-// 	t_vector intersection1;
-// 	double height1;
+void find_t1(t_results result, double sqrt_discriminant, double t_cylinder, t_object object)
+{
+	double a;
+	double t1;
+	t_vector axis;
+	t_vector dir_perp;
+	double dot_dir_axis;
+	t_vector intersection1;
+	double height1;
 
-// 	axis = vc_normalize(object.cy.orientation);
-// 	dot_dir_axis = vc_dot(object.ray.direction, axis);
-// 	dir_perp = vc_subtract(object.ray.direction, vc_mult_scalar(axis, dot_dir_axis));
-// 	a = vc_dot(dir_perp, dir_perp);
+	axis = vc_normalize(object.cy.orientation);
+	dot_dir_axis = vc_dot(object.ray.direction, axis);
+	dir_perp = vc_subtract(object.ray.direction, vc_mult_scalar(axis, dot_dir_axis));
+	a = vc_dot(dir_perp, dir_perp);
 
-// 	t1 = (-result.b - sqrt_discriminant) / (2.0 * a);
-//     if (t1 >= 0.0)
-//     {
-//         intersection1 = vc_add(object.ray.origin, vc_mult_scalar(object.ray.direction, t1));
-//         height1 = vc_dot(vc_subtract(intersection1, object.cy.center), axis);
-//         if (height1 >= -object.cy.height / 2.0 && height1 <= object.cy.height / 2.0)
-//             t_cylinder = t1;
-// }
-// }
-// void find_t2(t_results result, double sqrt_discriminant, double t_cylinder, t_object object)
-// {
-// 	double a;
-// 	double t2;
-// 	t_vector axis;
-// 	t_vector dir_perp;
-// 	double dot_dir_axis;
-// 	t_vector intersection2;
-// 	double height2;
+	t1 = (-result.b - sqrt_discriminant) / (2.0 * a);
+    if (t1 >= 0.0)
+    {
+        intersection1 = vc_add(object.ray.origin, vc_mult_scalar(object.ray.direction, t1));
+        height1 = vc_dot(vc_subtract(intersection1, object.cy.center), axis);
+        if (height1 >= -object.cy.height / 2.0 && height1 <= object.cy.height / 2.0)
+            t_cylinder = t1;
+}
+}
+void find_t2(t_results result, double sqrt_discriminant, double t_cylinder, t_object object)
+{
+	double a;
+	double t2;
+	t_vector axis;
+	t_vector dir_perp;
+	double dot_dir_axis;
+	t_vector intersection2;
+	double height2;
 
-// 	axis = vc_normalize(object.cy.orientation);
-// 	dot_dir_axis = vc_dot(object.ray.direction, axis);
-// 	dir_perp = vc_subtract(object.ray.direction, vc_mult_scalar(axis, dot_dir_axis));
-// 	a = vc_dot(dir_perp, dir_perp);
-// 	t2 = (-result.b + sqrt_discriminant) / (2.0 * a);
-// 	if (t2 >= 0.0)
-// 	{
-// 		intersection2 = vc_add(object.ray.origin, vc_mult_scalar(object.ray.direction, t2));
-// 		height2 = vc_dot(vc_subtract(intersection2, object.cy.center), axis);
-// 		if (height2 >= -object.cy.height / 2.0 && height2 <= object.cy.height / 2.0)
-// 		{
-// 			if (t_cylinder < 0.0 || t2 < t_cylinder)
-// 				t_cylinder = t2;
-// 		}
-// 	}
-// }
+	axis = vc_normalize(object.cy.orientation);
+	dot_dir_axis = vc_dot(object.ray.direction, axis);
+	dir_perp = vc_subtract(object.ray.direction, vc_mult_scalar(axis, dot_dir_axis));
+	a = vc_dot(dir_perp, dir_perp);
+	t2 = (-result.b + sqrt_discriminant) / (2.0 * a);
+	if (t2 >= 0.0)
+	{
+		intersection2 = vc_add(object.ray.origin, vc_mult_scalar(object.ray.direction, t2));
+		height2 = vc_dot(vc_subtract(intersection2, object.cy.center), axis);
+		if (height2 >= -object.cy.height / 2.0 && height2 <= object.cy.height / 2.0)
+		{
+			if (t_cylinder < 0.0 || t2 < t_cylinder)
+				result.t_cylinder = t2;
+		}
+	}
+}
 
 void cyl_cap_is_closest(t_results result, t_object *object,  double *t,  t_scene *s, t_ray ray)
 {
@@ -211,7 +211,7 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
     double a = vc_dot(dir_perp, dir_perp);
     double b = 2.0 * vc_dot(oc_perp, dir_perp);
     result.discriminant = find_discriminant(result, dir_perp, ray , object);
-    result.t_cylinder = -1.0;
+    double t_cylinder = -1.0;
 
     if ( result.discriminant >= 0.0)
     {
@@ -227,7 +227,7 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
             double height1 = vc_dot(vc_subtract(intersection1, object.cy.center), axis);
             if (height1 >= -object.cy.height / 2.0 && height1 <= object.cy.height / 2.0)
             {
-				result.t_cylinder = t1;
+				t_cylinder = t1;
             }
         }
 
@@ -238,13 +238,14 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
             double height2 = vc_dot(vc_subtract(intersection2, object.cy.center), axis);
             if (height2 >= -object.cy.height / 2.0 && height2 <= object.cy.height / 2.0)
             {
-				if (result.t_cylinder < 0.0 || t2 < result.t_cylinder)
-				result.t_cylinder = t2;
+				if (t_cylinder < 0.0 || t2 < t_cylinder)
+				t_cylinder = t2;
             }
         }
     }
+
     // Check for intersections with the caips
-    result.t_cap = -1.0;
+    double t_cap = -1.0;
     for (int i = 0; i < 2; i++)
     {
 		t_vector cap_center;
@@ -259,11 +260,13 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
 			t_vector p = vc_add(ray.origin, vc_mult_scalar(ray.direction, t_plane));
             if (vc_length(vc_subtract(p, cap_center)) <= r)
             {
-				if (result.t_cap < 0.0 || t_plane < result.t_cap)
-				result.t_cap = t_plane;
+				if (t_cap < 0.0 || t_plane < t_cap)
+				t_cap = t_plane;
             }
         }
     }
 	cyl_cap_is_closest(result, &object, t, s, ray);
+    // Determine the closest valid intersection
+
     return 0;
 }
