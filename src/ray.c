@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/26 15:45:14 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:25:28 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 In this function the pixels are scaled both vertically and horizontally
-The variable p_center (pixel center) marks the exact spot on the window in 
+The variable p_center (pixel center) marks the exact spot on the window in
 3D space for a given pixel (from 2D to 3D)
 */
 t_ray	create_ray(double p_x, double p_y, t_vector origin, t_scene *scene)
@@ -86,37 +86,115 @@ int	ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
 	return (0);
 }
 
+double find_discriminant(t_results result , t_vector dir_perp , \
+	t_ray r, t_object object)
+{
+    t_vector axis;   // Ensure axis is normalized
+    double radius;   // Radius of the cylinder
+    double dot_dir_axis;
+    double dot_oc_axis;
+	t_vector top_cap;
+	t_vector oc_perp;
+	double c;
+
+	result.oc = vc_subtract(r.origin, object.cy.center);
+	axis = vc_normalize(object.cy.orientation);
+	radius = object.cy.diameter / 2.0;
+	dot_dir_axis = vc_dot(r.direction, axis);
+	dot_oc_axis = vc_dot(result.oc, axis);
+    top_cap = vc_add(object.cy.center, vc_mult_scalar(axis, object.cy.height / 2.0));
+	oc_perp = vc_subtract(result.oc, vc_mult_scalar(axis, dot_oc_axis));
+    dir_perp = vc_subtract(r.direction, vc_mult_scalar(axis, dot_dir_axis));
+	result.a = vc_dot(dir_perp, dir_perp);
+    result.b = 2.0 * vc_dot(oc_perp, dir_perp);
+    c = vc_dot(oc_perp, oc_perp) - radius * radius;
+	return (result.b * result.b - 4.0 * result.a * c);
+}
+
+
+void find_t1(t_results result, double sqrt_discriminant, double t_cylinder, t_object object)
+{
+	double a;
+	double t1;
+	t_vector axis;
+	t_vector dir_perp;
+	double dot_dir_axis;
+	t_vector intersection1;
+	double height1;
+
+	axis = vc_normalize(object.cy.orientation);
+	dot_dir_axis = vc_dot(object.ray.direction, axis);
+	dir_perp = vc_subtract(object.ray.direction, vc_mult_scalar(axis, dot_dir_axis));
+	a = vc_dot(dir_perp, dir_perp);
+
+	t1 = (-result.b - sqrt_discriminant) / (2.0 * a);
+    if (t1 >= 0.0)
+    {
+        intersection1 = vc_add(object.ray.origin, vc_mult_scalar(object.ray.direction, t1));
+        height1 = vc_dot(vc_subtract(intersection1, object.cy.center), axis);
+        if (height1 >= -object.cy.height / 2.0 && height1 <= object.cy.height / 2.0)
+            t_cylinder = t1;
+}
+}
+void find_t2(t_results result, double sqrt_discriminant, double t_cylinder, t_object object)
+{
+	double a;
+	double t2;
+	t_vector axis;
+	t_vector dir_perp;
+	double dot_dir_axis;
+	t_vector intersection2;
+	double height2;
+
+	axis = vc_normalize(object.cy.orientation);
+	dot_dir_axis = vc_dot(object.ray.direction, axis);
+	dir_perp = vc_subtract(object.ray.direction, vc_mult_scalar(axis, dot_dir_axis));
+	a = vc_dot(dir_perp, dir_perp);
+	t2 = (-result.b + sqrt_discriminant) / (2.0 * a);
+	if (t2 >= 0.0)
+	{
+		intersection2 = vc_add(object.ray.origin, vc_mult_scalar(object.ray.direction, t2));
+		height2 = vc_dot(vc_subtract(intersection2, object.cy.center), axis);
+		if (height2 >= -object.cy.height / 2.0 && height2 <= object.cy.height / 2.0)
+		{
+			if (t_cylinder < 0.0 || t2 < t_cylinder)
+				t_cylinder = t2;
+		}
+	}
+}
+
 int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
 {
-	t_vector oc = vc_subtract(ray.origin, object.cy.center);  // Vector from ray origin to cylinder center
-    t_vector direction = ray.direction;
-    t_vector axis = vc_normalize(object.cy.orientation);  // Ensure axis is normalized
-    double r = object.cy.diameter / 2.0;  // Radius of the cylinder
-    double dot_dir_axis = vc_dot(direction, axis);
-    double dot_oc_axis = vc_dot(oc, axis);
-	
+
+	t_results result = {0};
+	result.oc = vc_subtract(ray.origin, object.cy.center);
+    t_vector axis = vc_normalize(object.cy.orientation);
+    double r = object.cy.diameter / 2.0;
+    double dot_dir_axis = vc_dot(ray.direction, axis);
+    double dot_oc_axis = vc_dot(result.oc, axis);
+
+
     // Compute the top and bottom cap centers
     t_vector bottom_cap = vc_subtract(object.cy.center, vc_mult_scalar(axis, object.cy.height / 2.0));
     t_vector top_cap = vc_add(object.cy.center, vc_mult_scalar(axis, object.cy.height / 2.0));
-	
+
     // Now form the quadratic equation to solve for intersection t
-    t_vector oc_perp = vc_subtract(oc, vc_mult_scalar(axis, dot_oc_axis));  // Vector perpendicular to axis
-    t_vector dir_perp = vc_subtract(direction, vc_mult_scalar(axis, dot_dir_axis));  // Ray direction perpendicular to axis
-	
-    double a = vc_dot(dir_perp, dir_perp);  // Coefficient for quadratic equation
+    t_vector oc_perp = vc_subtract(result.oc, vc_mult_scalar(axis, dot_oc_axis));  // Vector perpendicular to axis
+    t_vector dir_perp = vc_subtract(ray.direction, vc_mult_scalar(axis, dot_dir_axis));  // Ray direction perpendicular to axis
+
+    double a = vc_dot(dir_perp, dir_perp);
     double b = 2.0 * vc_dot(oc_perp, dir_perp);
-    double c = vc_dot(oc_perp, oc_perp) - r * r;
-	
-    double discriminant = b * b - 4.0 * a * c;
+    // double c = vc_dot(oc_perp, oc_perp) - r * r
+    result.discriminant = find_discriminant(result, dir_perp, ray , object);
     double t_cylinder = -1.0;
-	
-    if (discriminant >= 0.0)
+
+    if ( result.discriminant >= 0.0)
     {
 		// Calculate t values for the intersection
-        double sqrt_discriminant = sqrt(discriminant);
+        double sqrt_discriminant = sqrt( result.discriminant);
         double t1 = (-b - sqrt_discriminant) / (2.0 * a);
         double t2 = (-b + sqrt_discriminant) / (2.0 * a);
-		
+
         // Check if t1 is valid and within the cylinder's height
         if (t1 >= 0.0)
         {
@@ -127,7 +205,7 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
 				t_cylinder = t1;
             }
         }
-		
+
         // Check if t2 is valid and within the cylinder's height
         if (t2 >= 0.0)
         {
@@ -140,8 +218,8 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
             }
         }
     }
-	
-    // Check for intersections with the caps
+
+    // Check for intersections with the caips
     double t_cap = -1.0;
     for (int i = 0; i < 2; i++)
     {
@@ -150,7 +228,7 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
 		cap_center = bottom_cap;
         else
 		cap_center = top_cap;
-		
+
         double t_plane = vc_dot(vc_subtract(cap_center, ray.origin), axis) / vc_dot(ray.direction, axis);
         if (t_plane >= 0.0)
         {
@@ -162,7 +240,7 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
             }
         }
     }
-	
+
     // Determine the closest valid intersection
     if (t_cylinder >= 0.0 && (t_cap < 0.0 || t_cylinder < t_cap))
     {
@@ -188,6 +266,6 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
         s->intersec.color = object.cy.color;
         return 1;
     }
-	
+
     return 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/14 12:26:23 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:24:27 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STRUCTURES_H
 
 # include "../libs/MLX42/include/MLX42/MLX42.h"
+
 
 typedef struct s_vector
 {
@@ -91,6 +92,8 @@ typedef struct s_intersec
 	struct s_object	*self;
 }	t_intersec;
 
+
+
 //type 1 = sphere, type 2 = plane, type 3 = cylinder
 typedef struct s_object
 {
@@ -126,6 +129,21 @@ typedef struct s_scene
 	t_object	*object;
 	t_intersec intersec;
 }	t_scene;
+
+typedef struct s_results{
+	t_vector oc;
+    double a;
+    double b;
+	double sqrt_discriminant;
+    double t_cylinder;
+	double t_cap;
+	double t_cyl_side;
+
+	t_vector dir_perp;
+	double discriminant;
+} t_results;
+
+
 
 #endif
 
