@@ -165,14 +165,3 @@ int ray_intersects_cy(t_ray r, t_object object, double *t, t_scene *s)
 	cyl_cap_is_closest(result, &object, t, s);
 	return 0;
 }
-
-typedef struct {
-    double a;
-    double b;
-    double t_cylinder;
-	double t_cap;
-	double t_cyl_side;
-	t_vector oc;
-	t_vector dir_perp;
-	double discriminant;
-} t_results;

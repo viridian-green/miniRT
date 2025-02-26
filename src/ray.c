@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/26 16:44:35 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:47:23 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,26 +169,21 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
     t_vector axis = vc_normalize(object.cy.orientation);
     double r = object.cy.diameter / 2.0;
     double dot_dir_axis = vc_dot(ray.direction, axis);
-    double dot_oc_axis = vc_dot(result.oc, axis);
-
 
     t_vector bottom_cap = vc_subtract(object.cy.center, vc_mult_scalar(axis, object.cy.height / 2.0));
     t_vector top_cap = vc_add(object.cy.center, vc_mult_scalar(axis, object.cy.height / 2.0));
 
-    t_vector oc_perp = vc_subtract(result.oc, vc_mult_scalar(axis, dot_oc_axis));  // Vector perpendicular to axis
     result.dir_perp = vc_subtract(ray.direction, vc_mult_scalar(axis, dot_dir_axis));  // Ray direction perpendicular to axis
-
-    double b = 2.0 * vc_dot(oc_perp, result.dir_perp);
     result.discriminant = find_discriminant(result, ray, object);
     result.t_cylinder = -1.0;
 	result.sqrt_discriminant = sqrt( result.discriminant);
 
     if (result.discriminant >= 0.0)
     {
-
+		// find_t1(result, ray, object);
+		// find_t2(result, ray, object);
     }
-
-    // Check for intersections with the caips
+    // Check for intersections with the caps
     double t_cap = -1.0;
     for (int i = 0; i < 2; i++)
     {
