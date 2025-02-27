@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/27 12:48:14 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:57:59 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,34 +173,33 @@ double find_discriminant(t_results *r, t_ray ray, t_object object)
 	return (r->b * r->b - 4.0 * r->a * r->c);
 }
 
-void intersections_caps(t_results *result, t_ray ray, t_object object)
+/*
+In this function we loop through the top and bottom caps.
+For each cap, we compute the intersection with the cap's plane.
+*/
+void intersections_caps(t_results *r, t_ray ray, t_object object)
 {
 	t_vector p;
-	t_vector cap_center;
+	int i;
 
-	result->bottom_cap = vc_subtract(object.cy.center, vc_mult_scalar(result->axis, object.cy.height / 2.0));
-    result->top_cap = vc_add(object.cy.center, vc_mult_scalar(result->axis, object.cy.height / 2.0));
-	result->radius =object.cy.diameter / 2.0;
-	for (int i = 0; i < 2; i++)
+	r->bottom_cap = vc_subtract(object.cy.center, vc_mult_scalar(r->axis, object.cy.height / 2.0));
+	i = 0;
+	while (i < 2)
     {
         if (i == 0)
-		cap_center = result->bottom_cap;
+			r->curr_cap = r->bottom_cap;
         else
-		cap_center = result->top_cap;
-
-        double t_plane = vc_dot(vc_subtract(cap_center, ray.origin), result->axis) / vc_dot(ray.direction, result->axis);
+			r->curr_cap = r->top_cap;
+        double t_plane = vc_dot(vc_subtract(r->curr_cap, ray.origin), r->axis) / vc_dot(ray.direction, r->axis);
         if (t_plane >= 0.0)
         {
 			p = vc_add(ray.origin, vc_mult_scalar(ray.direction, t_plane));
-            if (vc_length(vc_subtract(p, cap_center)) <= result->radius)
-            {
-				if (result->t_cap < 0.0 || t_plane < result->t_cap)
-				result->t_cap = t_plane;
-            }
+            if (vc_length(vc_subtract(p, r->curr_cap)) <= r->radius)
+				if (r->t_cap < 0.0 || t_plane < r->t_cap)
+					r->t_cap = t_plane;
         }
+		i++;
     }
-
-
 }
 
 int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
