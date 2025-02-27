@@ -1,8 +1,0 @@
-# Camera: Coordinates, Normal, FOV
-C           0,0,1      0,0,-1        75
-
-# Light: Coordinates, Brightness, Color
-L -2,8,15 1.0 255,255,255
-
-# Sphere: Coordinates, Diameter, Color
-sp           -1,-2,-10   1   255,0,0
