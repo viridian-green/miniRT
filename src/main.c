@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/25 12:45:16 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:07:39 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
+/*maybe implement
+	//translation(key, scene);
+	//rotation(key, scene);
+	//zoom(key, scene);
+	//update(scene);
+*/
 void	key_board(mlx_key_data_t key, t_scene *scene)
 {
 	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
@@ -20,10 +26,6 @@ void	key_board(mlx_key_data_t key, t_scene *scene)
 		free_exit("Closing window and exiting program\n", scene, 0);
 		return ;
 	}
-	//translation(key, scene);
-	//rotation(key, scene);
-	//zoom(key, scene);
-	//update(scene);
 }
 
 void	render_image(t_scene *scene)

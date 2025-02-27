@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:09:23 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/25 16:41:47 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:41:16 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ void	create_viewport(t_scene *s)
 	t_vector	worldup_v;
 
 	worldup_v = (t_vector){0.0, 1.0, 0.0};
+	if (fabs(s->camera.forward_v.y - 1) < EPSILON || \
+	fabs(s->camera.forward_v.y + 1) < EPSILON)
+		worldup_v = (t_vector){0.0, 0.0, 1.0};
 	fov_to_radians = s->camera.fov * M_PI / 180.0;
 	s->vp.width = 2.0 * tan(fov_to_radians / 2.0);
 	s->vp.height = s->vp.width / (s->canvas_width / s->canvas_height);
@@ -62,16 +65,4 @@ void	create_viewport(t_scene *s)
 											vc_mult_scalar(s->camera.up_v, \
 														s->vp.height / 2.0));
 	scalarize_pixels(s);
-	//s->camera.up_v = s->camera.up_v;
-	//s->camera.right_v = s->camera.right_v;
 }
-
-/*
-TODO: Add the pixel calculations later
-    // s->vp.pixel00 = vector_add(s->vp.up_left,
-    // scalar_multiply(vector_add(s->vp.pixel_x, s->vp.pixel_y), 0.5))
-TODO: Add a world up definition and see in what ways we need it in translating
-read this article
-https://medium.com/@iremoztimur/building-a-minirt-42-project-part-1-ae7a00aebdb9
-before doing anything else!!!-
-*/

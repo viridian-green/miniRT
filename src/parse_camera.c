@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:38:17 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/25 15:58:20 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:14:01 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ void	parse_camera(char *line, t_scene *scene)
 	set_coordinates(&split_line[0], &scene->camera.origin);
 	set_orientation(&split_line[1], &scene->camera.forward_v);
 	if (validate_numeric_value(split_line[3]))
-	{
 		handle_parse_error(split_line, scene, ERR_INVAL_FOV);
-	}
 	scene->camera.fov = ft_atoi(split_line[3]);
 	if (validate_orientation(&scene->camera.forward_v) || \
 		validate_fov(scene->camera.fov))
