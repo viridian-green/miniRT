@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/26 17:42:54 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:54:55 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ typedef struct s_scene
 typedef struct s_results{
 	t_vector oc;
     double a;
+	t_vector axis;
     double b;
 	t_vector oc_perp;
 	double dot_oc_axis;
@@ -143,6 +144,9 @@ typedef struct s_results{
 	double t_cyl_side;
 	double t1;
 	double t2;
+	double radius;
+	t_vector bottom_cap;
+	t_vector top_cap;
 	t_vector dir_perp;
 	double discriminant;
 } t_results;
