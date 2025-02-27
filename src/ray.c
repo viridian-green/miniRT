@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/27 15:23:53 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:31:07 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ void	ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
 		find_t2(&r, ray, object, r.closest_side);
 	}
 	intersections_caps(&r, ray, object);
+	s->ray = ray;
 	is_cap_or_side_closer(&r, &object, t, s);
 }
