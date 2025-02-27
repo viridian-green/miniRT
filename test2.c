@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/27 12:47:56 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:27:53 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ The variable p_center (pixel center) marks the exact spot on the window in
 void is_cap_or_side_closer(t_results r, t_object *object,  double *t,  t_scene *s, t_ray ray)
 {
 	t_vector axis = vc_normalize(object->cy.orientation);
-	if (r.t_side >= 0.0 && (r.t_cap < 0.0 || r.t_side < r.t_cap))
+	if (r.t_side >= 0.0 && (r.closest_cap < 0.0 || r.t_side < r.closest_cap))
     {
 		*t = r.t_side;
         s->intersec.t = *t;
@@ -33,9 +33,9 @@ void is_cap_or_side_closer(t_results r, t_object *object,  double *t,  t_scene *
         }
         s->intersec.color = object->cy.color;
     }
-    else if (r.t_cap >= 0.0)
+    else if (r.closest_cap >= 0.0)
     {
-		*t = r.t_cap;
+		*t = r.closest_cap;
         s->intersec.t = *t;
         s->intersec.point = vectorize_t(ray, *t);
         s->intersec.normal = axis;
@@ -126,8 +126,8 @@ void	intersections_caps(t_results *r, t_ray ray, t_object object)
 		{
 			p = vc_add(ray.origin, vc_mult_scalar(ray.direction, r->t_plane));
 			if (vc_length(vc_subtract(p, r->curr_cap)) <= r->radius)
-				if (r->t_cap < 0.0 || r->t_plane < r->t_cap)
-					r->t_cap = r->t_plane;
+				if (r->closest_cap < 0.0 || r->t_plane < r->closest_cap)
+					r->closest_cap = r->t_plane;
 		}
 		i++;
 	}
@@ -139,7 +139,7 @@ int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
 
     r.discriminant = find_discriminant(&r, ray , object);
     r.t_side = -1.0;
-	r.t_cap = -1.0;
+	r.closest_cap = -1.0;
     if (r.discriminant >= 0.0)
 	{
     	find_t1(&r, ray, object);

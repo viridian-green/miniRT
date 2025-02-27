@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/27 13:04:04 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:37:27 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s)
 
 int	ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
 {
+	t_vector	oc;
 	t_vector	normal;
 	double		denom;
-	t_vector	oc;
 
 	normal = object.pl.orientation;
 	denom = vc_dot(ray.direction, normal);
@@ -86,23 +86,21 @@ int	ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
 	return (0);
 }
 
-void is_cap_or_side_closer(t_results *r, t_object *object,  double *t,  t_scene *s, t_ray ray)
+void	is_cap_or_side_closer(t_results *r, t_object *object, double *t, t_scene *s, t_ray ray)
 {
-	if (r->t_cylinder >= 0.0 && (r->t_cap < 0.0 || r->t_cylinder < r->t_cap))
-    {
-		*t = r->t_cylinder;
-        s->intersec.t = *t;
-        s->intersec.point = vectorize_t(ray, *t);
-        {
-			r->center_to_point = vc_subtract(s->intersec.point, object->cy.center);
-            r->projected = vc_subtract(r->center_to_point, vc_mult_scalar(r->axis, vc_dot(r->center_to_point, r->axis)));
-            s->intersec.normal = vc_normalize(r->projected);
-        }
-        s->intersec.color = object->cy.color;
-    }
-	else if (r->t_cap >= 0.0)
+	if (r->closest_side >= 0.0 && (r->closest_cap < 0.0 || r->closest_side < r->closest_cap))
 	{
-		*t = r->t_cap;
+		*t = r->closest_side;
+		s->intersec.t = *t;
+		s->intersec.point = vectorize_t(ray, *t);
+		r->center_to_point = vc_subtract(s->intersec.point, object->cy.center);
+		r->projected = vc_subtract(r->center_to_point, vc_mult_scalar(r->axis, vc_dot(r->center_to_point, r->axis)));
+		s->intersec.normal = vc_normalize(r->projected);
+		s->intersec.color = object->cy.color;
+	}
+	else if (r->closest_cap >= 0.0)
+	{
+		*t = r->closest_cap;
 		s->intersec.t = *t;
 		s->intersec.point = vectorize_t(ray, *t);
 		s->intersec.normal = r->axis;
@@ -112,40 +110,39 @@ void is_cap_or_side_closer(t_results *r, t_object *object,  double *t,  t_scene 
 	}
 }
 
-double find_t1(t_results result, t_ray ray, t_object object)
-{
-	result.sqrt_discriminant = sqrt(result.discriminant);
-	t_vector axis = vc_normalize(object.cy.orientation);
-    result.t1 = (-result.b - result.sqrt_discriminant) / (2.0 * result.a);
-    if (result.t1 >= 0.0)
-    {
-        t_vector intersection1 = vc_add(ray.origin, vc_mult_scalar(ray.direction, result.t1));
-        double height1 = vc_dot(vc_subtract(intersection1, object.cy.center), axis);
-        if (height1 >= -object.cy.height / 2.0 && height1 <= object.cy.height / 2.0)
-            return result.t1;
-    }
-    return -1.0;
-}
 
-double find_t2(t_results result, t_ray ray, t_object object, double t_cylinder)
+void find_t1(t_results *r, t_ray ray, t_object object)
+{
+	t_vector intersection1;
+	double height1;
+
+	r->sqrt_discriminant = sqrt(r->discriminant);
+	t_vector axis = vc_normalize(object.cy.orientation);
+    r->t1 = (-r->b - r->sqrt_discriminant) / (2.0 * r->a);
+    if (r->t1 >= 0.0)
+    {
+        intersection1 = vc_add(ray.origin, vc_mult_scalar(ray.direction, r->t1));
+        height1 = vc_dot(vc_subtract(intersection1, object.cy.center), axis);
+        if (height1 >= -object.cy.height / 2.0 && height1 <= object.cy.height / 2.0)
+            r->closest_side = r->t1;
+    }
+}
+void find_t2(t_results *r, t_ray ray, t_object object, double t_cylinder)
 {
 	t_vector axis;
 	t_vector intersection2;
 	double height2;
 
 	axis = vc_normalize(object.cy.orientation);
-    result.t2 = (-result.b + result.sqrt_discriminant) / (2.0 * result.a);
-    if (result.t2 >= 0.0)
+    r->t2 = (-r->b + r->sqrt_discriminant) / (2.0 * r->a);
+    if (r->t2 >= 0.0)
     {
-        intersection2 = vc_add(ray.origin, vc_mult_scalar(ray.direction, result.t2));
+        intersection2 = vc_add(ray.origin, vc_mult_scalar(ray.direction, r->t2));
         height2 = vc_dot(vc_subtract(intersection2, object.cy.center), axis);
         if (height2 >= -object.cy.height / 2.0 && height2 <= object.cy.height / 2.0)
-        {
-            if (t_cylinder < 0.0 || result.t2 < t_cylinder)
-                return result.t2;
-        }
+            if (t_cylinder < 0.0 || r->t2 < t_cylinder)
+				r->closest_side = r->t2;
     }
-    return (t_cylinder);
 }
 void quadratic_equation_coefs(t_results *r, t_object object)
 {
@@ -172,45 +169,48 @@ double find_discriminant(t_results *r, t_ray ray, t_object object)
 
 /*
 In this function we loop through the top and bottom caps.
-For each cap, we compute the intersection with the cap's plane.
+For each cap, we compute the intersection with the ray
+and store it in t_cap.
 */
-void intersections_caps(t_results *r, t_ray ray, t_object object)
+void	intersections_caps(t_results *r, t_ray ray, t_object object)
 {
-	t_vector p;
-	int i;
+	t_vector	p;
+	double		intersect_cap;
+	int			i;
 
 	r->bottom_cap = vc_subtract(object.cy.center, vc_mult_scalar(r->axis, object.cy.height / 2.0));
 	i = 0;
 	while (i < 2)
-    {
-        if (i == 0)
+	{
+		if (i == 0)
 			r->curr_cap = r->bottom_cap;
-        else
+		else
 			r->curr_cap = r->top_cap;
-        double t_plane = vc_dot(vc_subtract(r->curr_cap, ray.origin), r->axis) / vc_dot(ray.direction, r->axis);
-        if (t_plane >= 0.0)
-        {
-			p = vc_add(ray.origin, vc_mult_scalar(ray.direction, t_plane));
-            if (vc_length(vc_subtract(p, r->curr_cap)) <= r->radius)
-				if (r->t_cap < 0.0 || t_plane < r->t_cap)
-					r->t_cap = t_plane;
-        }
+		intersect_cap = vc_dot(vc_subtract(r->curr_cap, ray.origin), r->axis) / vc_dot(ray.direction, r->axis);
+		if (intersect_cap >= 0.0)
+		{
+			p = vc_add(ray.origin, vc_mult_scalar(ray.direction, intersect_cap));
+			if (vc_length(vc_subtract(p, r->curr_cap)) <= r->radius)
+				if (r->closest_cap < 0.0 || intersect_cap < r->closest_cap)
+					r->closest_cap = intersect_cap;
+		}
 		i++;
-    }
+	}
 }
 
 int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
 {
-	t_results result = {0};
-    result.discriminant = find_discriminant(&result, ray , object);
-    result.t_cylinder = -1.0;
-	result.t_cap = -1.0;
-    if (result.discriminant >= 0.0)
+	t_results	r;
+
+	r.discriminant = find_discriminant(&r, ray , object);
+	r.closest_side = -1.0;
+	r.closest_cap = -1.0;
+	if (r.discriminant >= 0.0)
 	{
-    result.t_cylinder = find_t1(result, ray, object);
-    result.t_cylinder = find_t2(result, ray, object, result.t_cylinder);
+	find_t1(&r, ray, object);
+	find_t2(&r, ray, object, r.closest_side);
 	}
-	intersections_caps(&result, ray, object);
-	is_cap_or_side_closer(&result, &object, t, s, ray);
-    return 0;
+	intersections_caps(&r, ray, object);
+	is_cap_or_side_closer(&r, &object, t, s, ray);
+	return 0;
 }
