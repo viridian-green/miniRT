@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/27 15:17:16 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:29:21 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,33 +80,6 @@ void	ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s)
 				s->intersec.normal = normal;
 			s->intersec.color = object.pl.color;
 		}
-	}
-}
-
-void	is_cap_or_side_closer(t_results *r, t_object *object, \
-	double *t, t_scene *s)
-{
-	if (r->closest_side >= 0.0 && (r->closest_cap < 0.0 || \
-		r->closest_side < r->closest_cap))
-	{
-		*t = r->closest_side;
-		s->intersec.t = *t;
-		s->intersec.point = vectorize_t(s->ray, *t);
-		r->center_to_point = vc_subtract(s->intersec.point, object->cy.center);
-		r->projected = vc_subtract(r->center_to_point, \
-			vc_mult_scalar(r->axis, vc_dot(r->center_to_point, r->axis)));
-		s->intersec.normal = vc_normalize(r->projected);
-		s->intersec.color = object->cy.color;
-	}
-	else if (r->closest_cap >= 0.0)
-	{
-		*t = r->closest_cap;
-		s->intersec.t = *t;
-		s->intersec.point = vectorize_t(s->ray, *t);
-		s->intersec.normal = r->axis;
-		if (vc_dot(s->ray.direction, r->axis) > 0.0)
-			s->intersec.normal = vc_mult_scalar(r->axis, -1.0);
-		s->intersec.color = object->cy.color;
 	}
 }
 
@@ -208,6 +181,35 @@ void	intersections_caps(t_results *r, t_ray ray, t_object object)
 	}
 }
 
+
+void	is_cap_or_side_closer(t_results *r, t_object *object, \
+	double *t, t_scene *s)
+{
+	if (r->closest_side >= 0.0 && (r->closest_cap < 0.0 || \
+		r->closest_side < r->closest_cap))
+	{
+		*t = r->closest_side;
+		s->intersec.t = *t;
+		s->intersec.point = vectorize_t(s->ray, *t);
+		r->center_to_point = vc_subtract(s->intersec.point, object->cy.center);
+		r->projected = vc_subtract(r->center_to_point, \
+			vc_mult_scalar(r->axis, vc_dot(r->center_to_point, r->axis)));
+		s->intersec.normal = vc_normalize(r->projected);
+		s->intersec.color = object->cy.color;
+	}
+	else if (r->closest_cap >= 0.0)
+	{
+		*t = r->closest_cap;
+		s->intersec.t = *t;
+		s->intersec.point = vectorize_t(s->ray, *t);
+		s->intersec.normal = r->axis;
+		if (vc_dot(s->ray.direction, r->axis) > 0.0)
+			s->intersec.normal = vc_mult_scalar(r->axis, -1.0);
+		s->intersec.color = object->cy.color;
+	}
+}
+
+
 void	ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
 {
 	t_results	r;
@@ -221,5 +223,6 @@ void	ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s)
 		find_t2(&r, ray, object, r.closest_side);
 	}
 	intersections_caps(&r, ray, object);
+	s->ray = ray;
 	is_cap_or_side_closer(&r, &object, t, s);
 }
