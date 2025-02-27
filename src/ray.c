@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:37:21 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/27 11:58:52 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:48:14 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,27 +150,27 @@ double find_t2(t_results result, t_ray ray, t_object object, double t_cylinder)
     }
     return (t_cylinder);
 }
-double find_discriminant(t_results *result , t_ray r, t_object object)
+void quadratic_equation_coefs(t_results *r, t_object object)
 {
-    double radius;
-    double dot_dir_axis;
-    double dot_oc_axis;
-	t_vector top_cap;
-	t_vector oc_perp;
-	double c;
+	r->radius = object.cy.diameter / 2.0;
+	r->a = vc_dot(r->dir_perp, r->dir_perp);
+	r->b = 2.0 * vc_dot(r->oc_perp, r->dir_perp);
+	r->c = vc_dot(r->oc_perp,r->oc_perp) - r->radius * r->radius;
+}
+double find_discriminant(t_results *r, t_ray ray, t_object object)
+{
+	double	dot_dir_axis;
+	double	dot_oc_axis;
 
-	result->oc = vc_subtract(r.origin, object.cy.center);
-	result->axis = vc_normalize(object.cy.orientation);
-	radius = object.cy.diameter / 2.0;
-	dot_dir_axis = vc_dot(r.direction, result->axis);
-	dot_oc_axis = vc_dot(result->oc, result->axis);
-    top_cap = vc_add(object.cy.center, vc_mult_scalar(result->axis, object.cy.height / 2.0));
-	oc_perp = vc_subtract(result->oc, vc_mult_scalar(result->axis, dot_oc_axis));
-    t_vector dir_perp = vc_subtract(r.direction, vc_mult_scalar(result->axis, dot_dir_axis));
-	result->a = vc_dot(dir_perp, dir_perp);
-    result->b = 2.0 * vc_dot(oc_perp, dir_perp);
-    c = vc_dot(oc_perp, oc_perp) - radius * radius;
-	return (result->b * result->b - 4.0 * result->a * c);
+	r->oc = vc_subtract(ray.origin, object.cy.center);
+	r->axis = vc_normalize(object.cy.orientation);
+	dot_dir_axis = vc_dot(ray.direction, r->axis);
+	dot_oc_axis = vc_dot(r->oc, r->axis);
+	r->top_cap = vc_add(object.cy.center, vc_mult_scalar(r->axis, object.cy.height / 2.0));
+	r->oc_perp = vc_subtract(r->oc, vc_mult_scalar(r->axis, dot_oc_axis));
+	r->dir_perp = vc_subtract(ray.direction, vc_mult_scalar(r->axis, dot_dir_axis));
+	quadratic_equation_coefs(r, object);
+	return (r->b * r->b - 4.0 * r->a * r->c);
 }
 
 void intersections_caps(t_results *result, t_ray ray, t_object object)
