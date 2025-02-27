@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/27 14:27:53 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:24:03 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define STRUCTURES_H
 
 # include "../libs/MLX42/include/MLX42/MLX42.h"
-
 
 typedef struct s_vector
 {
@@ -85,14 +84,12 @@ typedef struct s_cy
 typedef struct s_intersec
 {
 	double			t;
-	t_vector			point;
-	t_vector			normal;
+	t_vector		point;
+	t_vector		normal;
 	t_color			color;
 	char			type;
 	struct s_object	*self;
 }	t_intersec;
-
-
 
 //type 1 = sphere, type 2 = plane, type 3 = cylinder
 typedef struct s_object
@@ -104,7 +101,6 @@ typedef struct s_object
 	struct s_object	*next;
 }	t_object;
 
-//understand the attributes of the viewport
 typedef struct s_viewp
 {
 	double		width;
@@ -127,36 +123,34 @@ typedef struct s_scene
 	double		canvas_width;
 	t_viewp		vp;
 	t_object	*object;
-	t_intersec intersec;
-	t_ray ray;
+	t_intersec	intersec;
+	t_ray		ray;
 }	t_scene;
 
-typedef struct s_results{
-	t_vector oc;
-    double a;
-	t_vector axis;
-    double b;
-	t_vector oc_perp;
-	double dot_oc_axis;
-	double sqrt_discriminant;
-    double closest_side;
-	double closest_cap;
-	double t_plane;
-	t_vector curr_cap;
-	double t_cyl_side;
-	double t1;
-	double t2;
-	double radius;
-	t_vector bottom_cap;
-	t_vector top_cap;
-	t_vector dir_perp;
-	double discriminant;
-	double c;
-	t_vector center_to_point;
-    t_vector projected;
-} t_results;
-
-
+typedef struct s_results
+{
+	t_vector	oc;
+	double		a;
+	t_vector	axis;
+	double		b;
+	t_vector	oc_perp;
+	double		dot_oc_axis;
+	double		sqrt_discriminant;
+	double		closest_side;
+	double		closest_cap;
+	double		t_plane;
+	t_vector	curr_cap;
+	double		t_cyl_side;
+	double		t1;
+	double		t2;
+	double		radius;
+	t_vector	bottom_cap;
+	t_vector	top_cap;
+	t_vector	dir_perp;
+	double		discriminant;
+	double		c;
+	t_vector	center_to_point;
+	t_vector	projected;
+}	t_results;
 
 #endif
-

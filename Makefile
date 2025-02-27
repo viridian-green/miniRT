@@ -23,6 +23,7 @@ SRCS = 	src/main.c \
 		src/checks.c \
 		src/color_op.c \
 		src/color.c \
+		src/cylinder_utils.c \
 		src/free_error_handling.c \
 		src/init.c \
 		src/intersection.c \
