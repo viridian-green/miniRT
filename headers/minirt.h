@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/25 16:21:25 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:17:38 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,9 @@ void		scalarize_pixels(t_scene *s);
 void		create_viewport(t_scene *s);
 
 //Intersections
-double	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s);
-int ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s);
-int ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s);
+void	ray_intersects_sp(t_ray ray, t_object object, double *t, t_scene *s);
+void ray_intersects_cy(t_ray ray, t_object object, double *t, t_scene *s);
+void ray_intersects_pl(t_ray ray, t_object object, double *t, t_scene *s);
 
 t_ray	create_ray(double p_x, double p_y, t_vector origin, t_scene *scene);
 
