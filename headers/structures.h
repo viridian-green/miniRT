@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:11:01 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/27 12:55:55 by ademarti         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:59:17 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ typedef struct s_results{
 	t_vector dir_perp;
 	double discriminant;
 	double c;
+	t_vector center_to_point;
+    t_vector projected;
 } t_results;
 
 
