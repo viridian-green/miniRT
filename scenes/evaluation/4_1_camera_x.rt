@@ -14,4 +14,4 @@ sp  -1,1,0   1   255,0,0
 #pl  -6,0,0   1,0,0   0,255,0
 
 # Cylinder: Coordinates, Normal of axis, Diameter, Height, Color
-cy  -2,-1,0   0,1,0   1   1   0,0,255
+cy  -1.5,-1,0   0,1,0   1   1   255,0,0

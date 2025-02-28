@@ -1,0 +1,8 @@
+# Ambient lighting: Ratio, Color
+A   1.0       255,255,255
+
+# Camera: Coordinates, Direction, FOV
+C              0,1,-3    0,0,1    90
+
+# Plane: Coordinates, Normal, Color
+pl        0,-1,0   0,1,0   255,0,0

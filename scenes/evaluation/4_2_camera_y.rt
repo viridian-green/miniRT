@@ -5,4 +5,4 @@ C      0,1,0      0,-1,0        75
 L -2,8,15 1.0 255,255,255
 
 # Sphere: Coordinates, Diameter, Color
-sp           -1,-2,0   1   255,0,0
+sp 0,0,0 0.5 255,0,0
