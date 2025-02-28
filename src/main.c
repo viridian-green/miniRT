@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:10:52 by ademarti          #+#    #+#             */
-/*   Updated: 2025/02/27 16:07:39 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:47:04 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ int	main(int ac, char **av)
 {
 	t_scene	*scene;
 
-	if (ac != 2)
-		perror("Error. Please enter the config file as argument.");
+	if (ac != 2 || validate_name(av[1]))
+		free_exit("Error. Please enter the scene (*.RT) argument.\n", \
+					NULL, 1);
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
 		free_exit("Memory allocation error.", scene, 1);

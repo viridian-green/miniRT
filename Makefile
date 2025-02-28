@@ -1,4 +1,4 @@
-NAME = minirt
+NAME = miniRT
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
@@ -34,6 +34,7 @@ SRCS = 	src/main.c \
 		src/parse_camera.c \
 		src/parse_light.c \
 		src/parse_objects.c \
+		src/parsing_utils.c \
 		src/parsing.c \
 		src/ray.c \
 		src/shadow.c \

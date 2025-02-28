@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:33:59 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/25 16:34:47 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:45:28 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,24 @@ int	validate_numeric_value(char *str)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_strcmp(char*s1, char*s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] == s2[i] && (s1[i] || s2[i]))
+		i++;
+	return (s1[i] - s2[i]);
+}
+
+int	validate_name(char*str)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	if (len > 3 && !ft_strcmp(str + len - 3, ".rt"))
+		return (0);
+	return (1);
 }

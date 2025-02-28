@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:52:56 by mrabelo-          #+#    #+#             */
-/*   Updated: 2025/02/27 16:22:25 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:43:06 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef void	(*t_hookfunc)(void* param);
 //checks_2
 int			validate_line_format(char **split_line, int expected_params);
 int			validate_numeric_value(char *str);
+int			ft_strcmp(char*s1, char*s2);
+int			validate_name(char*str);
 
 //checks
 int			validate_orientation(t_vector *vector);
@@ -139,10 +141,15 @@ void		parse_plane(char *line, t_scene *scene);
 void		parse_sphere(char *line, t_scene *scene);
 void		parse_cylinder(char *line, t_scene *scene);
 
+//parsing_utils
+void		handle_ambience(char *line, t_scene *scene, int *counts);
+void		handle_camera(char *line, t_scene *scene, int *counts);
+void		handle_light(char *line, t_scene *scene, int *counts);
+
 //parsing
 char		*normalize_whitespace(char *line);
 int			skip_lines(char *line);
-void		handle_line(char *line, t_scene *scene);
+void		handle_line(char *line, t_scene *scene, int *counts);
 void		parse_file(int fd, t_scene *scene);
 int			parsing(char *config_file, t_scene *scene);
 

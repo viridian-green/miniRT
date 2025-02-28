@@ -2,10 +2,10 @@
 A   1.0       255,255,255
 
 # Camera: Coordinates, Direction, FOV
-C              0,0,-3    0,0,1    90
+C             0,0,-3    0,0,1    90
 
 # Light: Coordinates, Brightness, Color
-L -2,8,15 1.0 255,255,255
+L					-2,8,15 1.0 255,255,255
 
 # Sphere: Coordinates, Diameter, Color
 sp             0,0,0      1   255,0,0
