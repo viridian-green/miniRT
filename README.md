@@ -16,8 +16,10 @@ Proper memory management to avoid leaks.
 No unexpected crashes (segmentation faults, bus errors, etc.).
 Uses a Makefile with standard rules (all, clean, fclean, re).
 Compilation & Execution
+
 To compile the project, use:
 make
+
 To run the ray tracer with a scene file:
 
 ./miniRT scenes/example.rt
